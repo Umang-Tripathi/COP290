@@ -21,11 +21,6 @@
     
 
 }
-#trash{
-    position:absolute;
-    top:0px;
-    left:0px;
-}
 .hero-container img {
     position :absolute;
     height: 300%;
@@ -33,3 +28,29 @@
     top : -20px;
     left: -20px;
 }
+#trash{
+    position:absolute;
+    top:0px;
+    left:0px;
+}
+.trash-container img {
+    position :absolute;
+    height: 300%;
+    width: 300%;
+    top : -20px;
+    left: -20px;
+}
+
+#monster{
+    position:absolute;
+    top:0px;
+    left:0px;
+}
+.monster-container img {
+    position :absolute;
+    height: 300%;
+    width: 300%;
+    top : -20px;
+    left: -20px;
+}
+

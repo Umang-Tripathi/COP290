@@ -1,25 +1,19 @@
 const hero=document.getElementById("hero");
 const trash_container=document.getElementById("trash");
+const monsters_container=document.getElementById("monsters");
 var w=false;
 var a=false;
 var s=false;
 var d=false;
 var trash=[];
+var monster=[];
+
 var width = window.innerWidth;
 var height = window.innerHeight;
 var hero_y=100;
 var hero_x=300;
 var is_hero_holding=false;
-/* var trash_number=0;
-var trash_posn_x=width/2-10;
-var trash_posn_y=height/2-10;
-var trash_dir_x=1;
-var trash_dir_y=1;
-var trash_speed=0; */
 
-
-//var trash_holded=true;
-//console.log(width,height)
 document.addEventListener('keydown', (event) => {
     if(event.key=='w'){
         w=true;
@@ -72,9 +66,14 @@ window.addEventListener("click", (event) => {
 
 timerID=setInterval(update_game,10);
 var time_left_for_new_trash=500;
+var time_left_for_new_monsters=500;
 var number_of_trashes=0;
+var number_of_monsters=0;
+
 function update_game(){
     time_left_for_new_trash-=1;
+    time_left_for_new_monsters-=1;
+
     if(time_left_for_new_trash==0 && number_of_trashes<10){
         number_of_trashes+=1;
         var new_trash_id=number_of_trashes+"trash";
@@ -104,15 +103,71 @@ function update_game(){
         
         trash.push(temp_trash);
         trash_container.appendChild(m);
-        time_left_for_new_trash=Math.floor((Math.random()*100)+500)
+        time_left_for_new_trash=Math.floor((Math.random()*100)+500);
 
     }
     else if(time_left_for_new_trash==0){
-        time_left_for_new_trash=Math.floor((Math.random()*100)+500)w
+        time_left_for_new_trash=Math.floor((Math.random()*100)+500);
+    }
+    if(time_left_for_new_monsters==0 && number_of_monsters<10){
+        number_of_monsters+=1;
+        var new_monsters_id=number_of_monsters+"monster";
+        
+        
+        let m=document.createElement("div");
+        m.style.position="absolute";
+        m.style.height="40px";
+        m.style.width="40px";
+        let xx=0;
+        let yy=0;
+        if(Math.random()>0.5){
+            if(Math.random()>0.5){
+                xx=Math.floor(Math.random()*width);;
+                yy=-(Math.floor(Math.random()*100));;
+            }
+            else{
+                xx=Math.floor(Math.random()*width);;
+                yy=height+(Math.floor(Math.random()*100));;
+            }
+        }
+        else{
+            if(Math.random()>0.5){
+                yy=Math.floor(Math.random()*height);;
+                xx=-(Math.floor(Math.random()*100));;
+            }
+            else{
+                yy=Math.floor(Math.random()*height);;
+                xx=width+(Math.floor(Math.random()*100));;
+            }
+
+        }
+        
+        console.log(xx,yy);
+        
+
+        m.style.top=yy+"px";
+        m.style.left=xx+"px";
+        m.style.border="1px solid";
+        m.style.borderColor="red";
+        m.style.userSelect="none";
+        m.id=new_monsters_id;
+
+        var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,dir_x:1,dir_y:1,speed:0,type:1,holded:false}
+        
+        monster.push(temp_monsters);
+        monsters_container.appendChild(m);
+        time_left_for_new_monsters=Math.floor((Math.random()*100)+500);
+
+    }
+    else if(time_left_for_new_monsters==0){
+        time_left_for_new_monsters=Math.floor((Math.random()*100)+500);
     }
     
     update_position_of_hero()
+    update_position_of_monsters()
     update_trash_posn()
+    check_collison_monster_with_trash()
+    check_collison_monster_with_hero()
 }
 function update_trash_posn(){
     for(let i=0;i<trash.length;i++){
@@ -279,4 +334,13 @@ function move_trash_with_player(i){
     let tetrash=document.getElementById(trash[i].trash_id);
     tetrash.style.top=trash[i].posn_y+"px";
     tetrash.style.left=trash[i].posn_x+"px";
+}
+function update_position_of_monsters(){
+
+}
+function check_collison_monster_with_hero(){
+
+}
+function check_collison_monster_with_trash(){
+
 }
