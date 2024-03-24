@@ -1,0 +1,31 @@
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+#invisible_box{
+    position:absolute;
+    height: 30vh;
+    width:30vw;
+    top:35vh;
+    left:35vw;
+    border:10px solid;
+    
+    border-color: rgb(104, 104, 104);
+}
+#hero{
+    position:absolute;
+    height: 10px;
+    width:  10px;
+    top:49vh;
+    left:49vw;
+    border:10px solid;
+    
+    border-color: rgb(104, 104, 104);
+}
+.hero-container img {
+    psoition :absolute;
+    height: 200%;
+    width: 200%;
+    top : -100px;
+    left: -10px;
+}

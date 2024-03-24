@@ -1,0 +1,77 @@
+const hero=document.getElementById("hero")
+var w=false;
+var a=false;
+var s=false;
+var d=false;
+var width = window.innerWidth;
+var height = window.innerHeight;
+
+//console.log(width,height)
+document.addEventListener('keydown', (event) => {
+    if(event.key=='w'){
+        w=true;
+    }
+    else if(event.key=='a'){
+        a=true;
+    }
+    else if(event.key=='s'){
+        s=true;
+    }
+    else if(event.key=='d'){
+        d=true;
+    }
+   
+});
+document.addEventListener('keyup', (event) => {
+    if(event.key=='w'){
+        w=false;
+    }
+    else if(event.key=='a'){
+        a=false;
+    }
+    else if(event.key=='s'){
+        s=false;
+    }
+    else if(event.key=='d'){
+        d=false;
+    }
+    
+});
+var hero_y=100;
+var hero_x=300;
+timerID=setInterval(update_game,10);
+function update_game(){
+    update_position_of_hero()
+}
+function update_position_of_hero(){
+    
+    if(w){
+        document.getElementById("hero_s").style.visibility="hidden";
+        hero_y-=2;
+         
+    }
+    else if(a){
+        document.getElementById("hero_s").style.visibility="hidden";
+        hero_x-=2;
+
+    }
+    else if(d){
+        document.getElementById("hero_s").style.visibility="hidden";
+        hero_x+=2;
+        
+    }
+    else if(s){
+        document.getElementById("hero_s").style.visibility="visible";
+        hero_y+=2;
+
+    }
+    
+
+        
+    
+    
+    
+    hero.style.top=hero_y+'px';
+    hero.style.left=hero_x+'px';
+    
+}
