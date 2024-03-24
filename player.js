@@ -372,6 +372,46 @@ function check_collison_monster_with_hero(){
 }
 function check_collison_monster_with_trash(){
 
+    for(let i=0;i<monster.length;i++){
+        
+        
+        for(let j=0;j<trash.length;j++){
+            if(trash[j].speed!=0 && Math.abs(trash[j].posn_x-monster[i].posn_x)<20 && Math.abs(trash[j].posn_y-monster[i].posn_y)<20){
+                let monster_removed=document.getElementById(monster[i].monster_id);
+                monster_removed.remove();
+                let trash_removed=document.getElementById(trash[j].trash_id);
+                trash_removed.remove();
+                temp_trash=[]
+                temp_monster=[]
+                for(let t=0;t<trash.length;t++){
+                    if(t!=j){
+                        temp_trash.push(trash[t]);
+                    }
+                    
+                }
+                for(let t=0;t<monster.length;t++){
+                    if(t!=i){
+                        temp_monster.push(monster[t]);
+                    }
+                }
+                monster=[]
+                trash=[];
+                for(let t=0;t<temp_trash.length;t++){
+                    trash.push(temp_trash[t]);
+                    
+                    
+                }
+                for(let t=0;t<temp_monster.length;t++){
+                    monster.push(temp_monster[t]);
+                    
+                }
+                
+                return;
+            }
+            
+        }
+        
+    }
 }
 function end_game(){
     clearInterval(timerID);
