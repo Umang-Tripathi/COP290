@@ -152,7 +152,7 @@ function update_game(){
         m.style.userSelect="none";
         m.id=new_monsters_id;
 
-        var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,dir_x:1,dir_y:1,speed:0,type:1,holded:false}
+        var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:2,type:1,holded:false}
         
         monster.push(temp_monsters);
         monsters_container.appendChild(m);
@@ -336,7 +336,17 @@ function move_trash_with_player(i){
     tetrash.style.left=trash[i].posn_x+"px";
 }
 function update_position_of_monsters(){
+    for(let i=0;i<monster.length;i++){
+        
+        let dx = hero_x-monster[i].posn_x;
+        let dy = hero_y-monster[i].posn_y;
+        monster[i].posn_x=monster[i].posn_x+(dx/Math.sqrt(dx*dx+dy*dy))*monster[i].speed;
+        monster[i].posn_y=monster[i].posn_y+(dy/Math.sqrt(dx*dx+dy*dy))*monster[i].speed;
+        let mm=document.getElementById(monster[i].monster_id);
+        mm.style.top=monster[i].posn_y+"px";
+        mm.style.left=monster[i].posn_x+"px";
 
+    }
 }
 function check_collison_monster_with_hero(){
 
