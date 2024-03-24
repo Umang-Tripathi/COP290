@@ -44,32 +44,108 @@ function update_game(){
     update_position_of_hero()
 }
 function update_position_of_hero(){
-    
-    if(w){
+    //console.log(w,a,s,d)
+    if( w && a ){
+
+        document.getElementById("hero_wd").style.visibility="hidden";
+        document.getElementById("hero_as").style.visibility="hidden";
+        document.getElementById("hero_sd").style.visibility="hidden";
+        document.getElementById("hero_aw").style.visibility="visible";
+        document.getElementById("hero_w").style.visibility="hidden";
+        document.getElementById("hero_a").style.visibility="hidden";
         document.getElementById("hero_s").style.visibility="hidden";
+        document.getElementById("hero_d").style.visibility="hidden";
+        hero_y-=2;
+        hero_x-=2;
+    }
+    else if( s && a ){
+        document.getElementById("hero_wd").style.visibility="hidden";
+        document.getElementById("hero_as").style.visibility="visible";
+        document.getElementById("hero_sd").style.visibility="hidden";
+        document.getElementById("hero_aw").style.visibility="hidden";
+        document.getElementById("hero_w").style.visibility="hidden";
+        document.getElementById("hero_a").style.visibility="hidden";
+        document.getElementById("hero_s").style.visibility="hidden";
+        document.getElementById("hero_d").style.visibility="hidden";
+        hero_y+=2;
+        hero_x-=2;
+    }
+    else if( w && d ){
+        document.getElementById("hero_wd").style.visibility="visible";
+        document.getElementById("hero_as").style.visibility="hidden";
+        document.getElementById("hero_sd").style.visibility="hidden";
+        document.getElementById("hero_aw").style.visibility="hidden";
+        document.getElementById("hero_w").style.visibility="hidden";
+        document.getElementById("hero_a").style.visibility="hidden";
+        document.getElementById("hero_s").style.visibility="hidden";
+        document.getElementById("hero_d").style.visibility="hidden";
+        hero_y-=2;
+        hero_x+=2;
+
+
+    }
+    else if( s && d){
+        document.getElementById("hero_wd").style.visibility="hidden";
+        document.getElementById("hero_as").style.visibility="hidden";
+        document.getElementById("hero_sd").style.visibility="visible";
+        document.getElementById("hero_aw").style.visibility="hidden";
+        document.getElementById("hero_w").style.visibility="hidden";
+        document.getElementById("hero_a").style.visibility="hidden";
+        document.getElementById("hero_s").style.visibility="hidden";
+        document.getElementById("hero_d").style.visibility="hidden";
+        hero_y+=2;
+        hero_x+=2;
+    }
+
+    else if(w && !a && !s && !d ){
+        document.getElementById("hero_wd").style.visibility="hidden";
+        document.getElementById("hero_as").style.visibility="hidden";
+        document.getElementById("hero_sd").style.visibility="hidden";
+        document.getElementById("hero_aw").style.visibility="hidden";
+        document.getElementById("hero_w").style.visibility="visible";
+        document.getElementById("hero_a").style.visibility="hidden";
+        document.getElementById("hero_s").style.visibility="hidden";
+        document.getElementById("hero_d").style.visibility="hidden";
         hero_y-=2;
          
     }
-    else if(a){
+    else if(!w && a && !s && !d){
+        document.getElementById("hero_wd").style.visibility="hidden";
+        document.getElementById("hero_as").style.visibility="hidden";
+        document.getElementById("hero_sd").style.visibility="hidden";
+        document.getElementById("hero_aw").style.visibility="hidden";
+        document.getElementById("hero_w").style.visibility="hidden";
+        document.getElementById("hero_a").style.visibility="visible";
         document.getElementById("hero_s").style.visibility="hidden";
+        document.getElementById("hero_d").style.visibility="hidden";
         hero_x-=2;
 
     }
-    else if(d){
+    else if(!w && !a && !s && d){
+        document.getElementById("hero_wd").style.visibility="hidden";
+        document.getElementById("hero_as").style.visibility="hidden";
+        document.getElementById("hero_sd").style.visibility="hidden";
+        document.getElementById("hero_aw").style.visibility="hidden";
+        document.getElementById("hero_w").style.visibility="hidden";
+        document.getElementById("hero_a").style.visibility="hidden";
         document.getElementById("hero_s").style.visibility="hidden";
+        document.getElementById("hero_d").style.visibility="visible";
         hero_x+=2;
         
     }
-    else if(s){
+    else if(!w && !a && s && !d){
+        document.getElementById("hero_wd").style.visibility="hidden";
+        document.getElementById("hero_as").style.visibility="hidden";
+        document.getElementById("hero_sd").style.visibility="hidden";
+        document.getElementById("hero_aw").style.visibility="hidden";
+        document.getElementById("hero_w").style.visibility="hidden";
+        document.getElementById("hero_a").style.visibility="hidden";
         document.getElementById("hero_s").style.visibility="visible";
+        document.getElementById("hero_d").style.visibility="hidden";
         hero_y+=2;
 
     }
-    
 
-        
-    
-    
     
     hero.style.top=hero_y+'px';
     hero.style.left=hero_x+'px';

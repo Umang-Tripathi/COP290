@@ -18,14 +18,12 @@
     width:  10px;
     top:49vh;
     left:49vw;
-    border:10px solid;
-    
-    border-color: rgb(104, 104, 104);
+
 }
 .hero-container img {
-    psoition :absolute;
-    height: 200%;
-    width: 200%;
-    top : -100px;
-    left: -10px;
+    position :absolute;
+    height: 400%;
+    width: 400%;
+    top : -15px;
+    left: -15px;
 }
