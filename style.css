@@ -33,7 +33,7 @@
     top:0px;
     left:0px;
 }
-.trash-container img {
+.trash-container div > img {
     position :absolute;
     height: 300%;
     width: 300%;
@@ -46,7 +46,7 @@
     top:0px;
     left:0px;
 }
-.monster-container img {
+.monster-container div > img {
     position :absolute;
     height: 300%;
     width: 300%;

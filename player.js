@@ -98,7 +98,19 @@ function update_game(){
         m.style.borderColor="red";
         m.style.userSelect="none";
         m.id=new_trash_id;
+        let type_of_trash=Math.floor(Math.random()*4);
+        if(type_of_trash==0){
 
+        }
+        else if(type_of_trash==1){
+
+        }
+        else if(type_of_trash==2){
+            
+        }
+        else if(type_of_trash==3){
+            
+        }
         var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:1,holded:false}
         
         trash.push(temp_trash);
