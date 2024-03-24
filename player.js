@@ -342,9 +342,23 @@ function update_position_of_monsters(){
         let dy = hero_y-monster[i].posn_y;
         monster[i].posn_x=monster[i].posn_x+(dx/Math.sqrt(dx*dx+dy*dy))*monster[i].speed;
         monster[i].posn_y=monster[i].posn_y+(dy/Math.sqrt(dx*dx+dy*dy))*monster[i].speed;
-        let mm=document.getElementById(monster[i].monster_id);
-        mm.style.top=monster[i].posn_y+"px";
-        mm.style.left=monster[i].posn_x+"px";
+        var do_it=true;
+        for(let j=0;j<monster.length;j++){
+            if(j!=i){
+                if(Math.abs(monster[j].posn_x-monster[i].posn_x)<40 && Math.abs(monster[j].posn_y-monster[i].posn_y)<40){
+                    do_it=false;
+                    monster[i].posn_x=monster[i].posn_x-(dx/Math.sqrt(dx*dx+dy*dy))*monster[i].speed;
+                    monster[i].posn_y=monster[i].posn_y-(dy/Math.sqrt(dx*dx+dy*dy))*monster[i].speed;
+                    break;
+                }
+            }
+        }
+        if(do_it){
+            let mm=document.getElementById(monster[i].monster_id);
+            mm.style.top=monster[i].posn_y+"px";
+            mm.style.left=monster[i].posn_x+"px";
+        }
+        
 
     }
 }
