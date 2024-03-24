@@ -23,12 +23,8 @@
 }
 #trash{
     position:absolute;
-    height: 20px;
-    width:  20px;
-    top:49svh;
-    left:49vw;
-    border: 1px solid;
-    border-color: brown;
+    top:0px;
+    left:0px;
 }
 .hero-container img {
     position :absolute;
