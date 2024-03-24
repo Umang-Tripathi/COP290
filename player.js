@@ -363,8 +363,16 @@ function update_position_of_monsters(){
     }
 }
 function check_collison_monster_with_hero(){
-
+    for(let i=0;i<monster.length;i++){
+        if(Math.abs(hero_x-monster[i].posn_x)<20 && Math.abs(hero_y-monster[i].posn_y)<20){
+            end_game();
+            return ;
+        }
+    }
 }
 function check_collison_monster_with_trash(){
 
+}
+function end_game(){
+    clearInterval(timerID);
 }
