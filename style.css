@@ -2,16 +2,7 @@
     display: flex;
     justify-content: space-between;
 }
-#invisible_box{
-    position:absolute;
-    height: 30vh;
-    width:30vw;
-    top:35vh;
-    left:35vw;
-    border:10px solid;
-    
-    border-color: rgb(104, 104, 104);
-}
+
 #hero{
     position:absolute;
     height: 20px;
@@ -46,11 +37,11 @@
     top:0px;
     left:0px;
 }
-.monster-container div > img {
+.monsters-container div > img {
     position :absolute;
     height: 300%;
     width: 300%;
-    top : -20px;
-    left: -20px;
+    top : -40px;
+    left: -40px;
 }
 
