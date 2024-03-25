@@ -89,7 +89,7 @@ function update_game(){
         m.style.width="20px";
         let xx=Math.floor(Math.random()*width);
         let yy=Math.floor(Math.random()*height);
-        console.log(xx,yy);
+        //console.log(xx,yy);
         while(xx>hero_x-80 && xx<hero_x+80 && yy>hero_y-80 && yy<hero_y+80){
             //console.log(xx,yy)
             xx=Math.floor(Math.random()*width);
@@ -227,7 +227,7 @@ function update_game(){
 
         }
         
-        console.log(xx,yy);
+        //console.log(xx,yy);
         
 
         m.style.top=yy+"px";
@@ -243,6 +243,11 @@ function update_game(){
             kk.src="./images/monsters/yellow_dustbin.png";
             kk.id=new_monsters_id+"img"
             m.appendChild(kk);
+            let kk2=document.createElement("img");
+            kk2.src="./images/monsters/yellow_rev.png";
+            kk2.id=new_monsters_id+"imgr"
+            m.appendChild(kk2);
+            //console.log("yellow");
             var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:1,type:0,holded:false}
             monster.push(temp_monsters);
             monsters_container.appendChild(m);
@@ -253,6 +258,11 @@ function update_game(){
             kk.src="./images/monsters/black_dustbin.png";
             kk.id=new_monsters_id+"img"
             m.appendChild(kk);
+            let kk2=document.createElement("img");
+            kk2.src="./images/monsters/black_rev.png";
+            kk2.id=new_monsters_id+"imgr"
+            m.appendChild(kk2);
+            //console.log("black");
             var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:1,type:1,holded:false}
             monster.push(temp_monsters);
             monsters_container.appendChild(m);
@@ -263,6 +273,11 @@ function update_game(){
             kk.src="./images/monsters/white_dustbin.png";
             kk.id=new_monsters_id+"img"
             m.appendChild(kk);
+            //console.log("white");
+            let kk2=document.createElement("img");
+            kk2.src="./images/monsters/white_rev.png";
+            kk2.id=new_monsters_id+"imgr"
+            m.appendChild(kk2);
             var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:1.5,type:2,holded:false}
             monster.push(temp_monsters);
             monsters_container.appendChild(m);
@@ -273,6 +288,11 @@ function update_game(){
             kk.src="./images/monsters/blue_dustbin.png";
             kk.id=new_monsters_id+"img"
             m.appendChild(kk);
+            let kk2=document.createElement("img");
+            kk2.src="./images/monsters/blue_rev.png";
+            kk2.id=new_monsters_id+"imgr"
+            m.appendChild(kk2);
+            //console.log("blue");
             var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:1.5,type:3,holded:false}
             monster.push(temp_monsters);
             monsters_container.appendChild(m);
@@ -283,6 +303,11 @@ function update_game(){
             kk.src="./images/monsters/green_dustbin.png";
             kk.id=new_monsters_id+"img"
             m.appendChild(kk);
+            let kk2=document.createElement("img");
+            kk2.src="./images/monsters/green_rev.png";
+            kk2.id=new_monsters_id+"imgr"
+            m.appendChild(kk2);
+            //console.log("green");
             var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:2,type:4,holded:false}
             monster.push(temp_monsters);
             monsters_container.appendChild(m);
@@ -293,6 +318,11 @@ function update_game(){
             kk.src="./images/monsters/red_dustbin.png";
             kk.id=new_monsters_id+"img"
             m.appendChild(kk);
+            let kk2=document.createElement("img");
+            kk2.src="./images/monsters/red_rev.png";
+            kk2.id=new_monsters_id+"imgr"
+            m.appendChild(kk2);
+            //console.log("red");
             var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:2,type:5,holded:false}
             monster.push(temp_monsters);
             monsters_container.appendChild(m);
@@ -509,6 +539,23 @@ function update_position_of_monsters(){
             }
         }
         if(do_it){
+            if(dx>0){
+                
+                let sm1=monster[i].monster_id+"img";
+                let m1=document.getElementById(sm1);
+                m1.style.visibility="hidden";
+                let sm2=monster[i].monster_id+"imgr";
+                let m2=document.getElementById(sm2);
+                m2.style.visibility="visible";
+            }
+            else{
+                let sm1=monster[i].monster_id+"imgr";
+                let m1=document.getElementById(sm1);
+                m1.style.visibility="hidden";
+                let sm2=monster[i].monster_id+"img";
+                let m2=document.getElementById(sm2);
+                m2.style.visibility="visible";
+            }
             let mm=document.getElementById(monster[i].monster_id);
             mm.style.top=monster[i].posn_y+"px";
             mm.style.left=monster[i].posn_x+"px";
@@ -535,6 +582,8 @@ function check_collison_monster_with_trash(){
                 }
                 let monster_removed_img=document.getElementById(monster[i].monster_id+"img");
                 monster_removed_img.remove();
+                let monster_removed_img2=document.getElementById(monster[i].monster_id+"imgr");
+                monster_removed_img2.remove();
                 let monster_removed=document.getElementById(monster[i].monster_id);
                 monster_removed.remove();
                 let trash_removed_img=document.getElementById(trash[j].trash_id+"img");
