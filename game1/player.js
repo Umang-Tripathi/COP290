@@ -48,6 +48,7 @@ document.addEventListener('keyup', (event) => {
 });
 
 window.addEventListener("click", (event) => {
+    
     for(let i=0;i<trash.length;i++){
         if(trash[i].holded){
             mousePos = { x: event.clientX, y: event.clientY };
@@ -372,18 +373,23 @@ function move_trash(i){
     if(trash[i].posn_x<0){
         trash[i].posn_x=0;
         trash[i].dir_x=-trash[i].dir_x;
+        shakeImage()
+            
     }
     if(trash[i].posn_x>width){
         trash[i].posn_x=width;
         trash[i].dir_x=-trash[i].dir_x;
+        shakeImage()
     }
     if(trash[i].posn_y<0){
         trash[i].posn_y=0;
         trash[i].dir_y=-trash[i].dir_y;
+        shakeImage()
     }
     if(trash[i].posn_y>height){
         trash[i].posn_y=height;
         trash[i].dir_y=-trash[i].dir_y;
+        shakeImage()
     }
     
     
@@ -626,4 +632,13 @@ function check_collison_monster_with_trash(){
 }
 function end_game(){
     clearInterval(timerID);
+}
+
+function shakeImage() {
+    var image = document.getElementById("background");
+    image.classList.add("shake-image");
+
+    setTimeout(function() {
+        image.classList.remove("shake-image");
+    }, 500); 
 }
