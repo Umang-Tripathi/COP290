@@ -1,3 +1,6 @@
+body {
+    overflow: hidden; /* Hide scrollbars */
+}
 .flex-container {
     display: flex;
     justify-content: space-between;
@@ -31,6 +34,17 @@
     top : -20px;
     left: -20px;
 }
+#lives{
+    position :absolute;
+    top:10px;
+    left:20px;
+}
+.lives-container img {
+    position :relative;
+    height: 40px;
+    width: 40px;
+    
+}
 
 #monster{
     position:absolute;
@@ -44,4 +58,5 @@
     top : -40px;
     left: -40px;
 }
+
 

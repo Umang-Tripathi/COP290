@@ -7,7 +7,8 @@ var s=false;
 var d=false;
 var trash=[];
 var monster=[];
-
+var hearts = 10
+var prev_hearts=10;
 var width = window.innerWidth;
 var height = window.innerHeight;
 var hero_y=100;
@@ -15,6 +16,7 @@ var hero_x=300;
 var is_hero_holding=false;
 
 document.addEventListener('keydown', (event) => {
+    //console.log(event.key)
     if(event.key=='w'){
         w=true;
     }
@@ -96,8 +98,8 @@ function update_game(){
 
         m.style.top=yy+"px";
         m.style.left=xx+"px";
-        m.style.border="1px solid";
-        m.style.borderColor="red";
+        /* m.style.border="1px solid";
+        m.style.borderColor="red"; */
         m.style.userSelect="none";
         m.id=new_trash_id;
         let type_of_trash=Math.floor(Math.random()*6);
@@ -107,7 +109,7 @@ function update_game(){
             kk.src="./images/trash/glass/glass"+choose+".png";
             //console.log("./trash/glass/glass"+choose)
             kk.id=new_trash_id+"img"
-            var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:0,holded:false}
+            var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:0,holded:false,angle:0}
         
             trash.push(temp_trash);
             trash_container.appendChild(m);
@@ -120,7 +122,7 @@ function update_game(){
             let kk=document.createElement("img");
             kk.src="./images/trash/metal/metal"+choose+".png";
             //console.log("./trash/glass/glass"+choose)
-            var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:1,holded:false}
+            var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:1,holded:false,angle:0}
             kk.id=new_trash_id+"img"
             trash.push(temp_trash);
             trash_container.appendChild(m);
@@ -133,7 +135,7 @@ function update_game(){
             let kk=document.createElement("img");
             kk.src="./images/trash/paper/paper"+choose+".png";
             //console.log(".images/trash/glass/glass"+choose)
-            var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:2,holded:false}
+            var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:2,holded:false,angle:0}
             kk.id=new_trash_id+"img"
             trash.push(temp_trash);
             trash_container.appendChild(m);
@@ -146,7 +148,7 @@ function update_game(){
             let kk=document.createElement("img");
             kk.src="./images/trash/plastic/plastic"+choose+".png";
             //console.log("./trash/glass/glass"+choose)
-            var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:3,holded:false}
+            var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:3,holded:false,angle:0}
             kk.id=new_trash_id+"img"
             trash.push(temp_trash);
             trash_container.appendChild(m);
@@ -159,7 +161,7 @@ function update_game(){
             let kk=document.createElement("img");
             kk.src="./images/trash/organic/org"+choose+".png";
             //console.log("./trash/glass/glass"+choose)
-            var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:4,holded:false}
+            var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:4,holded:false,angle:0}
             kk.id=new_trash_id+"img"
             trash.push(temp_trash);
             trash_container.appendChild(m);
@@ -176,7 +178,7 @@ function update_game(){
             m.appendChild(kk);
            
             //console.log("./trash/glass/glass"+choose)
-            var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:5,holded:false}
+            var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:5,holded:false,angle:0}
             
             trash.push(temp_trash);
             trash_container.appendChild(m);
@@ -230,8 +232,8 @@ function update_game(){
 
         m.style.top=yy+"px";
         m.style.left=xx+"px";
-        m.style.border="1px solid";
-        m.style.borderColor="red";
+        /* m.style.border="1px solid";
+        m.style.borderColor="red"; */
         m.style.userSelect="none";
         m.id=new_monsters_id;
         let rr=Math.floor(Math.random()*6);
@@ -259,6 +261,7 @@ function update_game(){
         else if(rr==2){
             let kk=document.createElement("img");
             kk.src="./images/monsters/white_dustbin.png";
+            kk.id=new_monsters_id+"img"
             m.appendChild(kk);
             var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:1.5,type:2,holded:false}
             monster.push(temp_monsters);
@@ -307,6 +310,16 @@ function update_game(){
     update_trash_posn()
     check_collison_monster_with_trash()
     check_collison_monster_with_hero()
+    if(prev_hearts!=hearts){
+        if(hearts==0){
+            end_game();
+        }
+        prev_hearts=hearts;
+        for(let i=prev_hearts+1;i<=10;i++){
+            let hr = document.getElementById("l"+i);
+            hr.style.visibility="hidden";
+        }
+    }
 }
 function update_trash_posn(){
     for(let i=0;i<trash.length;i++){
@@ -322,6 +335,7 @@ function update_trash_posn(){
 function move_trash(i){
     
     trash[i].speed-=0.1;
+    
     trash[i].speed=Math.max(trash[i].speed,0);
     trash[i].posn_x+=(trash[i].dir_x)*trash[i].speed;
     trash[i].posn_y+=(trash[i].dir_y)*trash[i].speed;
@@ -347,6 +361,8 @@ function move_trash(i){
     
     tetrash.style.top=trash[i].posn_y+"px";
     tetrash.style.left=trash[i].posn_x+"px";
+    trash[i].angle+=trash[i].speed*2;
+    tetrash.style.rotate=(trash[i].angle)+"deg";
 
 }
 function update_position_of_hero(){
@@ -514,6 +530,9 @@ function check_collison_monster_with_trash(){
     for(let i=0;i<monster.length;i++){
         for(let j=0;j<trash.length;j++){
             if(trash[j].speed!=0 && Math.abs(trash[j].posn_x-monster[i].posn_x)<20 && Math.abs(trash[j].posn_y-monster[i].posn_y)<20){
+                if(trash[j].type!=monster[i].type){
+                    hearts-=1;
+                }
                 let monster_removed_img=document.getElementById(monster[i].monster_id+"img");
                 monster_removed_img.remove();
                 let monster_removed=document.getElementById(monster[i].monster_id);
