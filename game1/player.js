@@ -513,7 +513,22 @@ function update_position_of_hero(){
         }
         
     }
-    
+    if(hero_y>height){
+        hero_y=height;
+
+    }
+    if(hero_y<0){
+        hero_y=0;
+        
+    }
+    if(hero_x>width){
+        hero_x=width;
+
+    }
+    if(hero_x<0){
+        hero_x=0;
+        
+    }
     hero.style.top=hero_y+'px';
     hero.style.left=hero_x+'px';
     
