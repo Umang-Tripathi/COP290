@@ -8,11 +8,11 @@
 }
 #hero{
     position: absolute;
-    top:4px;
-    left:304px;
-    height:16px;
-    width:16px;
-    background-color: #1589FF;
+    top:0px;
+    left:300px;
+    height:20px;
+    width:20px;
+    
 
 }
 #monsters{
@@ -93,4 +93,11 @@
 
     
     
+}
+.hero-container img{
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:150%;
+    height:150%;
 }

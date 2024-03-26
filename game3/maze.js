@@ -47,8 +47,8 @@ for(let i=0;i<size_of_maze;i++){
 var monsterID=[];
 var monsterX=[];
 var monsterY=[];
-let x=320;
-let y=20;
+let x=300;
+let y=0;
 var monsterNumber=0;
 var monsteradj=[];
 var coinx=0;
@@ -288,21 +288,54 @@ window.addEventListener("keydown",(value)=>{
     let defaultx=x;
     let defaulty=y;
     if(value.key=='w'){
+        let a1=document.getElementById("hero_w");
+        a1.style.visibility="visible";
+        let a2=document.getElementById("hero_a");
+        a2.style.visibility="hidden";
+        let a3=document.getElementById("hero_s");
+        a3.style.visibility="hidden";
+        let a4=document.getElementById("hero_d");
+        a4.style.visibility="hidden";
+
         y-=40;
     }
     else if(value.key=='a'){
+        let a1=document.getElementById("hero_w");
+        a1.style.visibility="hidden";
+        let a2=document.getElementById("hero_a");
+        a2.style.visibility="visible";
+        let a3=document.getElementById("hero_s");
+        a3.style.visibility="hidden";
+        let a4=document.getElementById("hero_d");
+        a4.style.visibility="hidden";
         x-=40;
     }
     else if(value.key=='s'){
+        let a1=document.getElementById("hero_w");
+        a1.style.visibility="hidden";
+        let a2=document.getElementById("hero_a");
+        a2.style.visibility="hidden";
+        let a3=document.getElementById("hero_s");
+        a3.style.visibility="visible";
+        let a4=document.getElementById("hero_d");
+        a4.style.visibility="hidden";
         y+=40;
     }
     else if(value.key=='d'){
+        let a1=document.getElementById("hero_w");
+        a1.style.visibility="hidden";
+        let a2=document.getElementById("hero_a");
+        a2.style.visibility="hidden";
+        let a3=document.getElementById("hero_s");
+        a3.style.visibility="hidden";
+        let a4=document.getElementById("hero_d");
+        a4.style.visibility="visible";
         x+=40;   
     }
-    if(movable(Math.floor((x-320)/40),Math.floor((y-20)/40),Math.floor((defaultx-320)/40),Math.floor((defaulty-20)/40))){
+    if(movable(Math.floor((x-300)/40),Math.floor((y)/40),Math.floor((defaultx-300)/40),Math.floor((defaulty)/40))){
         hero.style.top=y+"px";
         hero.style.left=x+"px";
-        if(Math.floor((x-320)/40)==coinx && Math.floor((y-20)/40)==coiny){
+        if(Math.floor((x-300)/40)==coinx && Math.floor((y)/40)==coiny){
             document.getElementById("coin").remove();
             createCoin();
         }
@@ -324,8 +357,8 @@ function createCoin(){
     coin.style.width="20px";
     coin.style.position="absolute";
     coin.style.backgroundColor="#FFD700";
-    coin.style.top=(coiny*40+20)+"px";
-    coin.style.left=(coinx*40+320)+"px";
+    coin.style.top=(coiny*40+0)+"px";
+    coin.style.left=(coinx*40+300)+"px";
     coin.style.borderRadius="20px";
     monsters.appendChild(coin);
 }
@@ -344,8 +377,8 @@ function createmonster(){
     monster.style.width="20px";
     monster.style.position="absolute";
     monster.style.backgroundColor="#BC13FE";
-    monster.style.top=(monsterX[monsterNumber-1]*40+20)+"px";
-    monster.style.left=(monsterY[monsterNumber-1]*40+320)+"px";
+    monster.style.top=(monsterX[monsterNumber-1]*40)+"px";
+    monster.style.left=(monsterY[monsterNumber-1]*40+300)+"px";
     monsters.appendChild(monster);
 }
 function movable(y,x,b,a){
@@ -487,8 +520,8 @@ function updateMaze(){
     //console.log(adj)
 }
 function shortest_path(){
-    let b=Math.floor((x-320)/40);
-    let a=Math.floor((y-20)/40);
+    let b=Math.floor((x-300)/40);
+    let a=Math.floor((y)/40);
     let r=new Stack();
     let distance=[];
     let visited=[]
@@ -543,8 +576,8 @@ function shortest_path(){
         monsterY[i]=mb;
         //console.log(dlete,d,ma,mb)
         let element=document.getElementById(monsterID[i])
-        element.style.top=(ma*40+20)+"px";
-        element.style.left=(mb*40+320)+"px";
+        element.style.top=(ma*40)+"px";
+        element.style.left=(mb*40+300)+"px";
 
     }
     check_kill();
@@ -559,7 +592,7 @@ function shortest_path(){
 }
 function check_kill(){
     for(let i=0;i<monsterX.length;i++){
-        if(monsterY[i]==Math.floor((x-320)/40) && monsterX[i]==Math.floor((y-20)/40)){
+        if(monsterY[i]==Math.floor((x-300)/40) && monsterX[i]==Math.floor((y)/40)){
             clearInterval(timer1);
             clearInterval(timerCreateNewMonster);
             hero.style.visibility="hidden";
