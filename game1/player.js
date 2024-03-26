@@ -14,7 +14,30 @@ var height = window.innerHeight;
 var hero_y=100;
 var hero_x=300;
 var is_hero_holding=false;
+const gameOverSound = new Audio('audio_files/game_over1.wav');
+const shake_ground_Sound = new Audio('audio_files/shaking1.mp3');
+const trash_throw_Sound = new Audio('audio_files/trash_throw.mp3');
+const heart_reduce_Sound = new Audio('audio_files/heart_reduce.wav');
+const point_scored_Sound = new Audio('audio_files/point_scored.mp3');
+function playGameOverSound() {
+    gameOverSound.play();
+}
 
+function playshake_ground_Sound() {
+    shake_ground_Sound.play();
+}
+
+function playtrash_throw_Sound() {
+    trash_throw_Sound.play();
+}
+
+function playheart_reduce_Sound() {
+    heart_reduce_Sound.play();
+}
+
+function playpoint_scored_Sound() {
+    point_scored_Sound.play();
+}
 document.addEventListener('keydown', (event) => {
     //console.log(event.key)
     if(event.key=='w'){
@@ -51,6 +74,7 @@ window.addEventListener("click", (event) => {
     
     for(let i=0;i<trash.length;i++){
         if(trash[i].holded){
+            playtrash_throw_Sound();
             mousePos = { x: event.clientX, y: event.clientY };
             let dx=mousePos.x-trash[i].posn_x;
             let dy=mousePos.y-trash[i].posn_y;
@@ -599,7 +623,11 @@ function check_collison_monster_with_trash(){
         for(let j=0;j<trash.length;j++){
             if(trash[j].speed!=0 && Math.abs(trash[j].posn_x-monster[i].posn_x)<20 && Math.abs(trash[j].posn_y-monster[i].posn_y)<20){
                 if(trash[j].type!=monster[i].type){
+                    playheart_reduce_Sound();
                     hearts-=1;
+                }
+                else{
+                    playpoint_scored_Sound();
                 }
                 let monster_removed_img=document.getElementById(monster[i].monster_id+"img");
                 monster_removed_img.remove();
@@ -646,10 +674,12 @@ function check_collison_monster_with_trash(){
     }
 }
 function end_game(){
+    playGameOverSound();
     clearInterval(timerID);
 }
 
 function shakeImage() {
+    playshake_ground_Sound();
     var image = document.getElementById("background");
     image.classList.add("shake-image");
 
