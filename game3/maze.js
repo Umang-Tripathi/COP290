@@ -47,7 +47,7 @@ for(let i=0;i<size_of_maze;i++){
 var monsterID=[];
 var monsterX=[];
 var monsterY=[];
-let x=308;
+let x=320;
 let y=20;
 var monsterNumber=0;
 var monsteradj=[];
@@ -299,10 +299,10 @@ window.addEventListener("keydown",(value)=>{
     else if(value.key=='d'){
         x+=40;   
     }
-    if(movable(Math.floor((x-308)/40),Math.floor((y-20)/40),Math.floor((defaultx-308)/40),Math.floor((defaulty-20)/40))){
+    if(movable(Math.floor((x-320)/40),Math.floor((y-20)/40),Math.floor((defaultx-320)/40),Math.floor((defaulty-20)/40))){
         hero.style.top=y+"px";
         hero.style.left=x+"px";
-        if(Math.floor((x-308)/40)==coinx && Math.floor((y-20)/40)==coiny){
+        if(Math.floor((x-320)/40)==coinx && Math.floor((y-20)/40)==coiny){
             document.getElementById("coin").remove();
             createCoin();
         }
@@ -325,7 +325,7 @@ function createCoin(){
     coin.style.position="absolute";
     coin.style.backgroundColor="#FFD700";
     coin.style.top=(coiny*40+20)+"px";
-    coin.style.left=(coinx*40+308)+"px";
+    coin.style.left=(coinx*40+320)+"px";
     coin.style.borderRadius="20px";
     monsters.appendChild(coin);
 }
@@ -345,7 +345,7 @@ function createmonster(){
     monster.style.position="absolute";
     monster.style.backgroundColor="#BC13FE";
     monster.style.top=(monsterX[monsterNumber-1]*40+20)+"px";
-    monster.style.left=(monsterY[monsterNumber-1]*40+308)+"px";
+    monster.style.left=(monsterY[monsterNumber-1]*40+320)+"px";
     monsters.appendChild(monster);
 }
 function movable(y,x,b,a){
@@ -391,7 +391,9 @@ function updateMaze(){
             }
             if(noduplicate){
                 let temp=document.getElementById("H("+newmaze[i][0]+","+newmaze[i][1]+")img");
-                temp.remove();
+                if(temp!=null){
+                    temp.remove();
+                }
                 let log_image=document.createElement('img');
                 log_image.id="H("+newmaze[i][0]+","+newmaze[i][1]+")img_log";
                 log_image.src="./images/walls/log.png";
@@ -413,8 +415,12 @@ function updateMaze(){
                 }
             }
             if(noduplicate){
+                
                 let temp=document.getElementById("H("+newmaze[i][0]+","+newmaze[i][1]+")img");
-                temp.remove();
+                if(temp!=null){
+                    temp.remove();
+                }
+                
                 let log_image=document.createElement('img');
                 log_image.id="H("+newmaze[i][0]+","+newmaze[i][1]+")img_log";
                 log_image.src="./images/walls/log.png";
@@ -437,11 +443,13 @@ function updateMaze(){
             }
             if(noduplicate){
                 let temp=document.getElementById("V("+newmaze[i][0]+","+newmaze[i][1]+")img");
-                temp.remove();
+                if(temp!=null){
+                    temp.remove();
+                }
                 let log_image=document.createElement('img');
                 log_image.id="V("+newmaze[i][0]+","+newmaze[i][1]+")img_log";
                 log_image.src="./images/walls/log.png";
-                let temp2=document.getElementById("H("+newmaze[i][0]+","+newmaze[i][1]+")");
+                let temp2=document.getElementById("V("+newmaze[i][0]+","+newmaze[i][1]+")");
                 temp2.appendChild(log_image);
                 adj[newmaze[i][0]][newmaze[i][1]].push(newmaze[i][0]+(newmaze[i][1]-1)*size_of_maze);
                 adj[newmaze[i][0]][newmaze[i][1]-1].push(newmaze[i][0]+newmaze[i][1]*size_of_maze);
@@ -460,11 +468,13 @@ function updateMaze(){
             }
             if(noduplicate){
                 let temp=document.getElementById("V("+newmaze[i][0]+","+newmaze[i][1]+")img");
-                temp.remove();
+                if(temp!=null){
+                    temp.remove();
+                }
                 let log_image=document.createElement('img');
                 log_image.id="V("+newmaze[i][0]+","+newmaze[i][1]+")img_log";
                 log_image.src="./images/walls/log.png";
-                let temp2=document.getElementById("H("+newmaze[i][0]+","+newmaze[i][1]+")");
+                let temp2=document.getElementById("V("+newmaze[i][0]+","+newmaze[i][1]+")");
                 temp2.appendChild(log_image);
                 adj[newmaze[i][0]][newmaze[i][1]].push(newmaze[i][0]+(newmaze[i][1]+1)*size_of_maze);
                 adj[newmaze[i][0]][newmaze[i][1]+1].push(newmaze[i][0]+newmaze[i][1]*size_of_maze);
@@ -477,7 +487,7 @@ function updateMaze(){
     //console.log(adj)
 }
 function shortest_path(){
-    let b=Math.floor((x-308)/40);
+    let b=Math.floor((x-320)/40);
     let a=Math.floor((y-20)/40);
     let r=new Stack();
     let distance=[];
@@ -534,7 +544,7 @@ function shortest_path(){
         //console.log(dlete,d,ma,mb)
         let element=document.getElementById(monsterID[i])
         element.style.top=(ma*40+20)+"px";
-        element.style.left=(mb*40+308)+"px";
+        element.style.left=(mb*40+320)+"px";
 
     }
     check_kill();
@@ -549,7 +559,7 @@ function shortest_path(){
 }
 function check_kill(){
     for(let i=0;i<monsterX.length;i++){
-        if(monsterY[i]==Math.floor((x-308)/40) && monsterX[i]==Math.floor((y-20)/40)){
+        if(monsterY[i]==Math.floor((x-320)/40) && monsterX[i]==Math.floor((y-20)/40)){
             clearInterval(timer1);
             clearInterval(timerCreateNewMonster);
             hero.style.visibility="hidden";
