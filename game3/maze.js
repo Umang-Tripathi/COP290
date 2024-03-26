@@ -51,8 +51,8 @@ let x=300;
 let y=0;
 var monsterNumber=0;
 var monsteradj=[];
-var coinx=0;
-var coiny=0;
+var trashx=0;
+var trashy=0;
 
 const Background_Music = new Audio('./audio_files/game_bg_game_back4.mp3');
 function playBackground_Music() {
@@ -279,7 +279,7 @@ var timer1=null;
 start.addEventListener("click",()=>{
     instructions.style.visibility="hidden"
     start.style.visibility="hidden";
-    createCoin();
+    createtrash();
     createmonster();
     timer1=setInterval(shortest_path,500)
     shortest_path();
@@ -340,9 +340,9 @@ window.addEventListener("keydown",(value)=>{
     if(movable(Math.floor((x-300)/40),Math.floor((y)/40),Math.floor((defaultx-300)/40),Math.floor((defaulty)/40))){
         hero.style.top=y+"px";
         hero.style.left=x+"px";
-        if(Math.floor((x-300)/40)==coinx && Math.floor((y)/40)==coiny){
-            document.getElementById("coin").remove();
-            createCoin();
+        if(Math.floor((x-300)/40)==trashx && Math.floor((y)/40)==trashy){
+            document.getElementById("trash").remove();
+            createtrash();
         }
 
     }
@@ -353,19 +353,19 @@ window.addEventListener("keydown",(value)=>{
 
     }
 })
-function createCoin(){
-    let coin=document.createElement('div');
-    coin.id="coin";
-    coinx=(Math.floor(Math.random()*size_of_maze));
-    coiny=(Math.floor(Math.random()*size_of_maze));
-    coin.style.height="20px";
-    coin.style.width="20px";
-    coin.style.position="absolute";
-    coin.style.backgroundColor="#FFD700";
-    coin.style.top=(coiny*40+0)+"px";
-    coin.style.left=(coinx*40+300)+"px";
-    coin.style.borderRadius="20px";
-    monsters.appendChild(coin);
+function createtrash(){
+    let trash=document.createElement('div');
+    trash.id="trash";
+    trashx=(Math.floor(Math.random()*size_of_maze));
+    trashy=(Math.floor(Math.random()*size_of_maze));
+    trash.style.height="20px";
+    trash.style.width="20px";
+    trash.style.position="absolute";
+    trash.style.backgroundColor="#FFD700";
+    trash.style.top=(trashy*40+0)+"px";
+    trash.style.left=(trashx*40+300)+"px";
+    trash.style.borderRadius="20px";
+    monsters.appendChild(trash);
 }
 function createmonster(){
     if(monsterNumber>size_of_maze){
