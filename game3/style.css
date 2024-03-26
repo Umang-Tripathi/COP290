@@ -1,3 +1,6 @@
+body {
+    overflow: hidden; /* Hide scrollbars */
+}
 #maze_area{
     position: absolute;
     top:0px;

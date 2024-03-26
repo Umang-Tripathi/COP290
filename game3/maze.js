@@ -7,8 +7,14 @@ var size_of_maze=13;
 
 
 const mazeArea=document.getElementById("maze_area");
+let width = window.innerWidth;
+width=Math.floor(width/2);
+width=(width-(width%30))
+width=(width-size_of_maze*30);
+mazeArea.style.left=width+"px";
 const start=document.getElementById('start');
 const hero=document.getElementById('hero');
+hero.style.left=width+"px";
 const monsters=document.getElementById('monsters');
 const instructions=document.getElementById("instructions");
 const reset=document.getElementById('reset');
@@ -21,6 +27,7 @@ instructions.style.height=(size_of_maze*60-30)+"px";
 document.getElementById("textprompt").style.top=(((size_of_maze*60-30)-250)/2)+"px";
 document.getElementById("textprompt").style.left=(((size_of_maze*60-30)-250)/2)+"px";
 mazeArea.style.backgroundColor="lightgreen"
+
 var maze=[];
 var visit=[]
 let create_trash_timeout;
@@ -49,14 +56,16 @@ for(let i=0;i<size_of_maze;i++){
 var monsterID=[];
 var monsterX=[];
 var monsterY=[];
-let x=300;
+let x=width;
 let y=0;
 var monsterNumber=0;
 var monsteradj=[];
 var trashx=0;
 var trashy=0;
+var NOT_died=true;
 
 const Background_Music = new Audio('./audio_files/game_bg_game_back4.mp3');
+const end_game_Music = new Audio('./audio_files/game_over2.mp3');
 function playBackground_Music() {
     Background_Music.play();
     Background_Music.setAttribute('autoplay', 'autoplay');
@@ -293,127 +302,133 @@ start.addEventListener("click",()=>{
 
 })
 window.addEventListener("keydown",(value)=>{
-    let defaultx=x;
-    let defaulty=y;
-    if(value.key=='w'){
-        let a1=document.getElementById("hero_w");
-        a1.style.visibility="visible";
-        let a2=document.getElementById("hero_a");
-        a2.style.visibility="hidden";
-        let a3=document.getElementById("hero_s");
-        a3.style.visibility="hidden";
-        let a4=document.getElementById("hero_d");
-        a4.style.visibility="hidden";
+    if(NOT_died){
+        let defaultx=x;
+        let defaulty=y;
+        if(value.key=='w'){
+            let a1=document.getElementById("hero_w");
+            a1.style.visibility="visible";
+            let a2=document.getElementById("hero_a");
+            a2.style.visibility="hidden";
+            let a3=document.getElementById("hero_s");
+            a3.style.visibility="hidden";
+            let a4=document.getElementById("hero_d");
+            a4.style.visibility="hidden";
 
-        y-=60;
-    }
-    else if(value.key=='a'){
-        let a1=document.getElementById("hero_w");
-        a1.style.visibility="hidden";
-        let a2=document.getElementById("hero_a");
-        a2.style.visibility="visible";
-        let a3=document.getElementById("hero_s");
-        a3.style.visibility="hidden";
-        let a4=document.getElementById("hero_d");
-        a4.style.visibility="hidden";
-        x-=60;
-    }
-    else if(value.key=='s'){
-        let a1=document.getElementById("hero_w");
-        a1.style.visibility="hidden";
-        let a2=document.getElementById("hero_a");
-        a2.style.visibility="hidden";
-        let a3=document.getElementById("hero_s");
-        a3.style.visibility="visible";
-        let a4=document.getElementById("hero_d");
-        a4.style.visibility="hidden";
-        y+=60;
-    }
-    else if(value.key=='d'){
-        let a1=document.getElementById("hero_w");
-        a1.style.visibility="hidden";
-        let a2=document.getElementById("hero_a");
-        a2.style.visibility="hidden";
-        let a3=document.getElementById("hero_s");
-        a3.style.visibility="hidden";
-        let a4=document.getElementById("hero_d");
-        a4.style.visibility="visible";
-        x+=60;   
-    }
-    if(movable(Math.floor((x-300)/60),Math.floor((y)/60),Math.floor((defaultx-300)/60),Math.floor((defaulty)/60))){
-        hero.style.top=y+"px";
-        hero.style.left=x+"px";
-        if(Math.floor((x-300)/60)==trashx && Math.floor((y)/60)==trashy){
-            document.getElementById("trash("+trashx+","+trashy+")"+"_img").remove();
-            document.getElementById("trash("+trashx+","+trashy+")").remove();
-            clearTimeout(create_trash_timeout);
-            clearTimeout(create_monster_timeout);
-            createtrash();
+            y-=60;
         }
+        else if(value.key=='a'){
+            let a1=document.getElementById("hero_w");
+            a1.style.visibility="hidden";
+            let a2=document.getElementById("hero_a");
+            a2.style.visibility="visible";
+            let a3=document.getElementById("hero_s");
+            a3.style.visibility="hidden";
+            let a4=document.getElementById("hero_d");
+            a4.style.visibility="hidden";
+            x-=60;
+        }
+        else if(value.key=='s'){
+            let a1=document.getElementById("hero_w");
+            a1.style.visibility="hidden";
+            let a2=document.getElementById("hero_a");
+            a2.style.visibility="hidden";
+            let a3=document.getElementById("hero_s");
+            a3.style.visibility="visible";
+            let a4=document.getElementById("hero_d");
+            a4.style.visibility="hidden";
+            y+=60;
+        }
+        else if(value.key=='d'){
+            let a1=document.getElementById("hero_w");
+            a1.style.visibility="hidden";
+            let a2=document.getElementById("hero_a");
+            a2.style.visibility="hidden";
+            let a3=document.getElementById("hero_s");
+            a3.style.visibility="hidden";
+            let a4=document.getElementById("hero_d");
+            a4.style.visibility="visible";
+            x+=60;   
+        }
+        if(movable(Math.floor((x-width)/60),Math.floor((y)/60),Math.floor((defaultx-width)/60),Math.floor((defaulty)/60))){
+            hero.style.top=y+"px";
+            hero.style.left=x+"px";
+            if(Math.floor((x-width)/60)==trashx && Math.floor((y)/60)==trashy){
+                document.getElementById("trash("+trashx+","+trashy+")"+"_img").remove();
+                document.getElementById("trash("+trashx+","+trashy+")").remove();
+                clearTimeout(create_trash_timeout);
+                clearTimeout(create_monster_timeout);
+                createtrash();
+            }
 
-    }
-    else{
-        x=defaultx;
-        y=defaulty;
+        }
+        else{
+            x=defaultx;
+            y=defaulty;
 
 
+        }
     }
 })
 function createtrash(){
-
-    let trash=document.createElement('div');
+    if(NOT_died){
+        let trash=document.createElement('div');
+        trashx=(Math.floor(Math.random()*size_of_maze));
+        trashy=(Math.floor(Math.random()*size_of_maze));
+        trash.id="trash("+trashx+","+trashy+")";
+        trash.style.height="30px";
+        trash.style.width="30px";
+        trash.style.position="absolute";
+        
+        let trash_img=document.createElement("img");
+        trash_img.id="trash("+trashx+","+trashy+")"+"_img";
+        let gg=Math.floor(Math.random()*4)
+        trash_img.src="./images/trash/garb"+gg+".png";
+        trash.style.top=(trashy*60+0)+"px";
+        trash.style.left=(trashx*60+width)+"px";
+        
+        trash.appendChild(trash_img);
+        monsters.appendChild(trash);
+        create_monster_timeout=setTimeout(createmonster,7000);
+    }
     
-    trashx=(Math.floor(Math.random()*size_of_maze));
-    trashy=(Math.floor(Math.random()*size_of_maze));
-    trash.id="trash("+trashx+","+trashy+")";
-    trash.style.height="30px";
-    trash.style.width="30px";
-    trash.style.position="absolute";
-    
-    let trash_img=document.createElement("img");
-    trash_img.id="trash("+trashx+","+trashy+")"+"_img";
-    let gg=Math.floor(Math.random()*4)
-    trash_img.src="./images/trash/garb"+gg+".png";
-    trash.style.top=(trashy*60+0)+"px";
-    trash.style.left=(trashx*60+300)+"px";
-    
-    trash.appendChild(trash_img);
-    monsters.appendChild(trash);
-    create_monster_timeout=setTimeout(createmonster,13000);
 }
 function createmonster(){
-    let j=trashx;
-    let i=trashy;
-    let t3=document.getElementById("trash("+j+","+i+")");
-    if(t3==null){
-        return ;
-    }
-    //console.log(i,j)
-    
-    let monster=document.createElement('div');
-    monsterNumber+=1;
-    monsterX.push(i);
-    monsterY.push(j);
-    monsterID.push("monster"+monsterNumber);
-    monster.id="monster"+monsterNumber;
-    monster.style.height="30px";
-    monster.style.width="30px";
-    monster.style.position="absolute";
-    
-    monster.style.top=(monsterX[monsterNumber-1]*60)+"px";
-    monster.style.left=(monsterY[monsterNumber-1]*60+300)+"px";
-    let mm = document.createElement("img");
-    mm.id="IMGmonster"+monsterNumber;
-    mm.src="./images/monster/monster.png";
-    
-    monster.appendChild(mm);
-    monsters.appendChild(monster);
-    let t1=document.getElementById("trash("+trashx+","+trashy+")"+"_img");
-    t1.remove();
-    let t2=document.getElementById("trash("+trashx+","+trashy+")");
-    t2.remove();
+    if(NOT_died){
+        let j=trashx;
+        let i=trashy;
+        let t3=document.getElementById("trash("+j+","+i+")");
+        if(t3==null){
+            return ;
+        }
+        //console.log(i,j)
+        
+        let monster=document.createElement('div');
+        monsterNumber+=1;
+        monsterX.push(i);
+        monsterY.push(j);
+        monsterID.push("monster"+monsterNumber);
+        monster.id="monster"+monsterNumber;
+        monster.style.height="30px";
+        monster.style.width="30px";
+        monster.style.position="absolute";
+        
+        monster.style.top=(monsterX[monsterNumber-1]*60)+"px";
+        monster.style.left=(monsterY[monsterNumber-1]*60+width)+"px";
+        let mm = document.createElement("img");
+        mm.id="IMGmonster"+monsterNumber;
+        mm.src="./images/monster/monster.png";
+        
+        monster.appendChild(mm);
+        monsters.appendChild(monster);
+        let t1=document.getElementById("trash("+trashx+","+trashy+")"+"_img");
+        t1.remove();
+        let t2=document.getElementById("trash("+trashx+","+trashy+")");
+        t2.remove();
 
-    create_trash_timeout=setTimeout(createtrash,3000);
+        create_trash_timeout=setTimeout(createtrash,4000);
+    }
+    
 }
 function movable(y,x,b,a){
     if(x<0 || x>size_of_maze-1 || y<0 || y>size_of_maze-1 ){
@@ -554,7 +569,7 @@ function updateMaze(){
     //console.log(adj)
 }
 function shortest_path(){
-    let b=Math.floor((x-300)/60);
+    let b=Math.floor((x-width)/60);
     let a=Math.floor((y)/60);
     let r=new Stack();
     let distance=[];
@@ -611,7 +626,7 @@ function shortest_path(){
         //console.log(dlete,d,ma,mb)
         let element=document.getElementById(monsterID[i])
         element.style.top=(ma*60)+"px";
-        element.style.left=(mb*60+300)+"px";
+        element.style.left=(mb*60+width)+"px";
 
     }
     check_kill();
@@ -626,20 +641,24 @@ function shortest_path(){
 }
 function check_kill(){
     for(let i=0;i<monsterX.length;i++){
-        if(monsterY[i]==Math.floor((x-300)/60) && monsterX[i]==Math.floor((y)/60)){
+        if(monsterY[i]==Math.floor((x-width)/60) && monsterX[i]==Math.floor((y)/60)){
             clearInterval(timer1);
             clearInterval(timerCreateNewMonster);
             hero.style.visibility="hidden";
             Background_Music.pause();
-            reset.style.visibility="visible";
-            mazeArea.style.backgroundColor="#FFCCCB"
+            NOT_died=false;
+            end_game_Music.play();
+            setTimeout(()=>reset.style.visibility="visible",4000)
+    
+            //mazeArea.style.backgroundColor="#FFCCCB"
+
             return;
 
         }
     }
 }
 reset.addEventListener("click",()=>{
-
+    NOT_died=true;
     window.location.reload();
 })
 
