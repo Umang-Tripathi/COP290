@@ -14,12 +14,12 @@ const instructions=document.getElementById("instructions");
 const reset=document.getElementById('reset');
 reset.style.visibility="hidden";
 start.style.visibility="hidden";
-mazeArea.style.width=(size_of_maze*20-4)+"px";
-mazeArea.style.height=(size_of_maze*20-4)+"px";
-instructions.style.width=(size_of_maze*20-4)+"px";
-instructions.style.height=(size_of_maze*20-4)+"px";
-document.getElementById("textprompt").style.top=(((size_of_maze*20-4)-250)/2)+"px";
-document.getElementById("textprompt").style.left=(((size_of_maze*20-4)-250)/2)+"px";
+mazeArea.style.width=(size_of_maze*40-8)+"px";
+mazeArea.style.height=(size_of_maze*40-8)+"px";
+instructions.style.width=(size_of_maze*40-8)+"px";
+instructions.style.height=(size_of_maze*40-8)+"px";
+document.getElementById("textprompt").style.top=(((size_of_maze*40-8)-250)/2)+"px";
+document.getElementById("textprompt").style.left=(((size_of_maze*40-8)-250)/2)+"px";
 mazeArea.style.backgroundColor="lightgreen"
 var maze=[];
 var visit=[]
@@ -28,10 +28,10 @@ for(let i=0;i<size_of_maze;i++){
     let tempy=[];
     for(let j=0;j<size_of_maze;j++){
         tempy.push(0);
-        let tempdir=[1,2,3,4];
+        let tempdir=[1,2,3,8];
         let dir=[]
         let c=0;
-        while(c<4){
+        while(c<8){
             let choose=Math.floor(Math.random()*tempdir.length);
             dir.push(tempdir[choose]);
             tempdir.splice(choose,1);
@@ -47,8 +47,8 @@ for(let i=0;i<size_of_maze;i++){
 var monsterID=[];
 var monsterX=[];
 var monsterY=[];
-let x=304;
-let y=4;
+let x=308;
+let y=8;
 var monsterNumber=0;
 var monsteradj=[];
 var coinx=0;
@@ -81,8 +81,8 @@ for(let i=0;i<size_of_maze;i++){
         element.style.height="16px";
         element.style.width="16px";
         element.style.position="absolute";
-        element.style.top=(i*20)+"px";
-        element.style.left=(j*20)+"px";
+        element.style.top=(i*40)+"px";
+        element.style.left=(j*40)+"px";
         element.style.backgroundColor="black";
         element.id="("+i+","+j+")";
 
@@ -100,10 +100,10 @@ for(let i=0;i<size_of_maze;i++){
     for(let j=0;j<size_of_maze-1;j++){
         element=document.createElement('div');
         element.style.height="16px";
-        element.style.width="4px";
+        element.style.width="8px";
         element.style.position="absolute";
-        element.style.top=(i*20)+"px";
-        element.style.left=(j*20+16)+"px";
+        element.style.top=(i*40)+"px";
+        element.style.left=(j*40+32)+"px";
         element.style.backgroundColor="black";
         element.id="V("+i+","+j+")";
         
@@ -116,8 +116,8 @@ for(let i=0;i<size_of_maze-1;i++){
         element.style.height="4px";
         element.style.width="16px";
         element.style.position="absolute";
-        element.style.top=(i*20+16)+"px";
-        element.style.left=(j*20)+"px";
+        element.style.top=(i*40+32)+"px";
+        element.style.left=(j*40)+"px";
         element.style.backgroundColor="black";
         element.id="H("+i+","+j+")";
         
@@ -130,8 +130,8 @@ for(let i=0;i<size_of_maze-1;i++){
         element.style.height="4px";
         element.style.width="4px";
         element.style.position="absolute";
-        element.style.top=(i*20+16)+"px";
-        element.style.left=(j*20+16)+"px";
+        element.style.top=(i*40+32)+"px";
+        element.style.left=(j*40+32)+"px";
         element.style.backgroundColor="black";
         element.id="B("+i+","+j+")";
         
@@ -232,7 +232,7 @@ var timerID=setInterval(()=>{
             
             
         }
-        else if(maze[s%size_of_maze][Math.floor(s/size_of_maze)][k]==4){
+        else if(maze[s%size_of_maze][Math.floor(s/size_of_maze)][k]==8){
             if(Math.floor(s/size_of_maze)+1>size_of_maze-1){
                 continue;
             }
@@ -278,21 +278,21 @@ window.addEventListener("keydown",(value)=>{
     let defaultx=x;
     let defaulty=y;
     if(value.key=='w'){
-        y-=20;
+        y-=40;
     }
     else if(value.key=='a'){
-        x-=20;
+        x-=40;
     }
     else if(value.key=='s'){
-        y+=20;
+        y+=40;
     }
     else if(value.key=='d'){
-        x+=20;   
+        x+=40;   
     }
-    if(movable(Math.floor((x-304)/20),Math.floor((y-4)/20),Math.floor((defaultx-304)/20),Math.floor((defaulty-4)/20))){
+    if(movable(Math.floor((x-308)/40),Math.floor((y-8)/40),Math.floor((defaultx-308)/40),Math.floor((defaulty-8)/40))){
         hero.style.top=y+"px";
         hero.style.left=x+"px";
-        if(Math.floor((x-304)/20)==coinx && Math.floor((y-4)/20)==coiny){
+        if(Math.floor((x-308)/40)==coinx && Math.floor((y-8)/40)==coiny){
             document.getElementById("coin").remove();
             createCoin();
         }
@@ -314,8 +314,8 @@ function createCoin(){
     coin.style.width="16px";
     coin.style.position="absolute";
     coin.style.backgroundColor="#FFD700";
-    coin.style.top=(coiny*20+4)+"px";
-    coin.style.left=(coinx*20+304)+"px";
+    coin.style.top=(coiny*40+8)+"px";
+    coin.style.left=(coinx*40+308)+"px";
     coin.style.borderRadius="8px";
     monsters.appendChild(coin);
 }
@@ -334,8 +334,8 @@ function createmonster(){
     monster.style.width="16px";
     monster.style.position="absolute";
     monster.style.backgroundColor="#BC13FE";
-    monster.style.top=(monsterX[monsterNumber-1]*20+4)+"px";
-    monster.style.left=(monsterY[monsterNumber-1]*20+304)+"px";
+    monster.style.top=(monsterX[monsterNumber-1]*40+8)+"px";
+    monster.style.left=(monsterY[monsterNumber-1]*40+308)+"px";
     monsters.appendChild(monster);
 }
 function movable(y,x,b,a){
@@ -370,7 +370,7 @@ function updateMaze(){
     //console.log(newmaze)
 
     for(let i=0;i<newmaze.length;i++){
-        let dir=Math.floor((Math.random()*4));
+        let dir=Math.floor((Math.random()*8));
         if(dir==0){
             let noduplicate=true;
             for(let k=0;k<adj[newmaze[i][0]][newmaze[i][1]].length;k++){
@@ -442,8 +442,8 @@ function updateMaze(){
     //console.log(adj)
 }
 function shortest_path(){
-    let b=Math.floor((x-304)/20);
-    let a=Math.floor((y-4)/20);
+    let b=Math.floor((x-308)/40);
+    let a=Math.floor((y-8)/40);
     let r=new Stack();
     let distance=[];
     let visited=[]
@@ -498,8 +498,8 @@ function shortest_path(){
         monsterY[i]=mb;
         //console.log(dlete,d,ma,mb)
         let element=document.getElementById(monsterID[i])
-        element.style.top=(ma*20+4)+"px";
-        element.style.left=(mb*20+304)+"px";
+        element.style.top=(ma*40+8)+"px";
+        element.style.left=(mb*40+308)+"px";
 
     }
     check_kill();
@@ -514,7 +514,7 @@ function shortest_path(){
 }
 function check_kill(){
     for(let i=0;i<monsterX.length;i++){
-        if(monsterY[i]==Math.floor((x-304)/20) && monsterX[i]==Math.floor((y-4)/20)){
+        if(monsterY[i]==Math.floor((x-308)/40) && monsterX[i]==Math.floor((y-8)/40)){
             clearInterval(timer1);
             clearInterval(timerCreateNewMonster);
             hero.style.visibility="hidden";
