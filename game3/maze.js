@@ -23,6 +23,8 @@ document.getElementById("textprompt").style.left=(((size_of_maze*40-20)-250)/2)+
 mazeArea.style.backgroundColor="lightgreen"
 var maze=[];
 var visit=[]
+let create_trash_timeout;
+let create_monster_timeout;
 for(let i=0;i<size_of_maze;i++){
     let temp=[];
     let tempy=[];
@@ -343,7 +345,8 @@ window.addEventListener("keydown",(value)=>{
         if(Math.floor((x-300)/40)==trashx && Math.floor((y)/40)==trashy){
             document.getElementById("trash("+trashx+","+trashy+")"+"_img").remove();
             document.getElementById("trash("+trashx+","+trashy+")").remove();
-            clearTimeout();
+            clearTimeout(create_trash_timeout);
+            clearTimeout(create_monster_timeout);
             createtrash();
         }
 
@@ -368,13 +371,14 @@ function createtrash(){
     
     let trash_img=document.createElement("img");
     trash_img.id="trash("+trashx+","+trashy+")"+"_img";
-    trash_img.src="./images/trash/trash.png";
+    let gg=Math.floor(Math.random()*4)
+    trash_img.src="./images/trash/garb"+gg+".png";
     trash.style.top=(trashy*40+0)+"px";
     trash.style.left=(trashx*40+300)+"px";
     
     trash.appendChild(trash_img);
     monsters.appendChild(trash);
-    setTimeout(createmonster,15000);
+    create_monster_timeout=setTimeout(createmonster,15000);
 }
 function createmonster(){
     let j=trashx;
@@ -408,7 +412,7 @@ function createmonster(){
     let t2=document.getElementById("trash("+trashx+","+trashy+")");
     t2.remove();
 
-    setTimeout(createtrash,5000);
+    create_trash_timeout=setTimeout(createtrash,5000);
 }
 function movable(y,x,b,a){
     if(x<0 || x>size_of_maze-1 || y<0 || y>size_of_maze-1 ){
