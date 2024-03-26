@@ -1,7 +1,9 @@
 const player1=document.getElementById("player1");
 
+timerplayer2=setInterval(move_player2,10);
+
 timerplayer1=setInterval(move_player1,10);
-    
+  
 var rotation_player1=0;
 var x1=32;
 var y1=38;
@@ -16,15 +18,7 @@ var speed2=0;
 var move2=false;
 var timerplayer2=null;
 
-const ball=document.getElementById("ball");
-var ball_posn_x=39;
-var ball_posn_y=38;
-var ball_dir_x=0;
-var ball_dir_y=0;
-var ball_speed=0;
-var timerball=null;
-var points2=0;
-var points1=0;
+
 
 document.addEventListener("keydown",(value)=>{
     if(value.key=="a"){
@@ -104,4 +98,54 @@ function move_player1(){
 
     }
 }
+function move_player2(){
+    if(move2){
+        speed2+=0.005;
+        if(speed2>4){
+            speed2=4
+        }
 
+        x2+=speed2*Math.cos(rotation_player2*Math.PI/180);
+        y2+=speed2*Math.sin(rotation_player2*Math.PI/180);
+        if(x2<0){
+            speed2=-Math.min(0.3,speed2);
+            x2=0;
+            rotation_player2+=10;
+            player2.style.transform="rotate("+rotation_player2+"deg)";
+
+        }
+        else if(x2>78){
+            speed2=-Math.min(0.3,speed2);
+            x2=78;
+            rotation_player2+=10;
+            player2.style.transform="rotate("+rotation_player2+"deg)";
+        }
+        if(y2<0){
+            speed2=-Math.min(0.3,speed2);
+            y2=0;
+            rotation_player2+=10;
+            player2.style.transform="rotate("+rotation_player2+"deg)";
+
+        }
+        else if(y2>76){
+            speed2=-Math.min(0.3,speed2)
+            y2=76;
+            rotation_player2+=10;
+            player2.style.transform="rotate("+rotation_player2+"deg)";
+        }
+        player2.style.top=y2+"vh";
+        player2.style.left=x2+"vw";
+
+
+
+
+
+    }
+    else{
+        speed2=0
+        rotation_player2+=1;
+
+        player2.style.transform="rotate("+rotation_player2+"deg)";
+
+    }
+}
