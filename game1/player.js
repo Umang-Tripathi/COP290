@@ -79,6 +79,7 @@ window.addEventListener("click", (event) => {
     
     for(let i=0;i<trash.length;i++){
         if(trash[i].holded){
+            clearTimeout(moving_trash_with_player);
             playtrash_throw_Sound();
             mousePos = { x: event.clientX, y: event.clientY };
             let dx=mousePos.x-trash[i].posn_x;
@@ -91,7 +92,12 @@ window.addEventListener("click", (event) => {
             }
             trash[i].holded=false;
             is_hero_holding=false;
+            let helper=document.getElementById("helper");
+            helper.style.visibility="hidden";
+            holding_type=-1;
+            helper_visible=false;
         }
+        
     }
     
 });
@@ -104,6 +110,9 @@ var number_of_trashes=0;
 var total_trashes_now=0;
 var number_of_monsters=0;
 var total_monsters_now=0;
+let moving_trash_with_player;
+let helper_visible=false;
+let holding_type=-1;
 
 function update_game(){
 
@@ -387,10 +396,21 @@ function update_game(){
 function update_trash_posn(){
     for(let i=0;i<trash.length;i++){
         if(trash[i].holded){
+            if(!helper_visible){
+                moving_trash_with_player=setTimeout(help_player,3000);
+                helper_visible=true;
+                holding_type=trash[i].type;
+                console.log(trash[i].type);
+                console.log(holding_type);
+            }
+            
+
             move_trash_with_player(i)
             return;
         }
         else{
+            helper_visible=false;
+            holding_type=-1;
             move_trash(i);
         }
     }
@@ -696,4 +716,41 @@ function shakeImage() {
         bg.classList.remove("shake-image");
     }, 500); 
    
+}
+function help_player(){
+
+    // console.log(holding_type);
+    
+    if(holding_type==0){
+        let helper=document.getElementById("helper");
+        helper.src="./images/help/cloud_yellow.png";
+        helper.style.visibility="visible";
+    }
+    else if(holding_type==1){
+        let helper=document.getElementById("helper");
+        helper.src="./images/help/cloud_black.png";
+        helper.style.visibility="visible";
+    }
+    else if(holding_type==2){
+        let helper=document.getElementById("helper");
+        helper.src="./images/help/cloud_white.png";
+        helper.style.visibility="visible";
+    }
+    else if(holding_type==3){
+        let helper=document.getElementById("helper");
+        helper.src="./images/help/cloud_blue.png";
+        helper.style.visibility="visible";
+    }
+    else if(holding_type==4){
+        let helper=document.getElementById("helper");
+        helper.src="./images/help/cloud_green.png";
+        helper.style.visibility="visible";
+    }
+    else if(holding_type==5){
+        let helper=document.getElementById("helper");
+        helper.src="./images/help/cloud_red.png";
+        helper.style.visibility="visible";
+    }
+
+    
 }
