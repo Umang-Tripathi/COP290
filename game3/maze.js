@@ -280,11 +280,11 @@ start.addEventListener("click",()=>{
     instructions.style.visibility="hidden"
     start.style.visibility="hidden";
     createtrash();
-    createmonster();
+    //createmonster();
     timer1=setInterval(shortest_path,500)
     shortest_path();
     playBackground_Music()
-    timerCreateNewMonster=setInterval(createmonster,10000)
+    //timerCreateNewMonster=setInterval(createmonster,10000)
    
     
 
@@ -341,7 +341,9 @@ window.addEventListener("keydown",(value)=>{
         hero.style.top=y+"px";
         hero.style.left=x+"px";
         if(Math.floor((x-300)/40)==trashx && Math.floor((y)/40)==trashy){
-            document.getElementById("trash").remove();
+            document.getElementById("trash("+trashx+","+trashy+")"+"_img").remove();
+            document.getElementById("trash("+trashx+","+trashy+")").remove();
+            clearTimeout();
             createtrash();
         }
 
@@ -354,28 +356,39 @@ window.addEventListener("keydown",(value)=>{
     }
 })
 function createtrash(){
+
     let trash=document.createElement('div');
-    trash.id="trash";
+    
     trashx=(Math.floor(Math.random()*size_of_maze));
     trashy=(Math.floor(Math.random()*size_of_maze));
+    trash.id="trash("+trashx+","+trashy+")";
     trash.style.height="20px";
     trash.style.width="20px";
     trash.style.position="absolute";
     trash.style.backgroundColor="#FFD700";
+    let trash_img=document.createElement("img");
+    trash_img.id="trash("+trashx+","+trashy+")"+"_img";
+    trash_img.src="./images/trash/trash.png";
     trash.style.top=(trashy*40+0)+"px";
     trash.style.left=(trashx*40+300)+"px";
     trash.style.borderRadius="20px";
+    trash.appendChild(trash_img);
     monsters.appendChild(trash);
+    setTimeout(createmonster,15000);
 }
 function createmonster(){
-    if(monsterNumber>size_of_maze){
-        clearInterval(timerCreateNewMonster);
-        return;
+    let j=trashx;
+    let i=trashy;
+    let t3=document.getElementById("trash("+j+","+i+")");
+    if(t3==null){
+        return ;
     }
+    //console.log(i,j)
+    
     let monster=document.createElement('div');
     monsterNumber+=1;
-    monsterX.push(Math.floor(Math.random()*size_of_maze));
-    monsterY.push(Math.floor(Math.random()*size_of_maze));
+    monsterX.push(i);
+    monsterY.push(j);
     monsterID.push("monster"+monsterNumber);
     monster.id="monster"+monsterNumber;
     monster.style.height="20px";
@@ -390,6 +403,12 @@ function createmonster(){
     
     monster.appendChild(mm);
     monsters.appendChild(monster);
+    let t1=document.getElementById("trash("+trashx+","+trashy+")"+"_img");
+    t1.remove();
+    let t2=document.getElementById("trash("+trashx+","+trashy+")");
+    t2.remove();
+
+    createtrash();
 }
 function movable(y,x,b,a){
     if(x<0 || x>size_of_maze-1 || y<0 || y>size_of_maze-1 ){
