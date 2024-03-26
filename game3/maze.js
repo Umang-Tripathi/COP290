@@ -413,7 +413,7 @@ function updateMaze(){
     //console.log(newmaze)
 
     for(let i=0;i<newmaze.length;i++){
-        let dir=Math.floor((Math.random()*10));
+        let dir=Math.floor((Math.random()*4));
         if(dir==0){
             let noduplicate=true;
             for(let k=0;k<adj[newmaze[i][0]][newmaze[i][1]].length;k++){
@@ -449,15 +449,15 @@ function updateMaze(){
             }
             if(noduplicate){
                 
-                let temp=document.getElementById("H("+newmaze[i][0]+","+newmaze[i][1]+")img");
+                let temp=document.getElementById("H("+(newmaze[i][0]-1)+","+newmaze[i][1]+")img");
                 if(temp!=null){
                     temp.remove();
                 }
                 
                 let log_image=document.createElement('img');
-                log_image.id="H("+newmaze[i][0]+","+newmaze[i][1]+")img_log";
+                log_image.id="H("+(newmaze[i][0]-1)+","+newmaze[i][1]+")img_log";
                 log_image.src="./images/walls/log.png";
-                let temp2=document.getElementById("H("+newmaze[i][0]+","+newmaze[i][1]+")");
+                let temp2=document.getElementById("H("+(newmaze[i][0]-1)+","+newmaze[i][1]+")");
                 temp2.appendChild(log_image);
             adj[newmaze[i][0]][newmaze[i][1]].push(newmaze[i][0]-1+newmaze[i][1]*size_of_maze);
             adj[newmaze[i][0]-1][newmaze[i][1]].push(newmaze[i][0]+newmaze[i][1]*size_of_maze);
@@ -475,14 +475,14 @@ function updateMaze(){
                 }
             }
             if(noduplicate){
-                let temp=document.getElementById("V("+newmaze[i][0]+","+newmaze[i][1]+")img");
+                let temp=document.getElementById("V("+newmaze[i][0]+","+(newmaze[i][1]-1)+")img");
                 if(temp!=null){
                     temp.remove();
                 }
                 let log_image=document.createElement('img');
-                log_image.id="V("+newmaze[i][0]+","+newmaze[i][1]+")img_log";
+                log_image.id="V("+newmaze[i][0]+","+(newmaze[i][1]-1)+")img_log";
                 log_image.src="./images/walls/log.png";
-                let temp2=document.getElementById("V("+newmaze[i][0]+","+newmaze[i][1]+")");
+                let temp2=document.getElementById("V("+newmaze[i][0]+","+(newmaze[i][1]-1)+")");
                 temp2.appendChild(log_image);
                 adj[newmaze[i][0]][newmaze[i][1]].push(newmaze[i][0]+(newmaze[i][1]-1)*size_of_maze);
                 adj[newmaze[i][0]][newmaze[i][1]-1].push(newmaze[i][0]+newmaze[i][1]*size_of_maze);
