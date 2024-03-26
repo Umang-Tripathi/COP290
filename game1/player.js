@@ -19,6 +19,11 @@ const shake_ground_Sound = new Audio('audio_files/shaking1.mp3');
 const trash_throw_Sound = new Audio('audio_files/trash_throw.mp3');
 const heart_reduce_Sound = new Audio('audio_files/heart_reduce.wav');
 const point_scored_Sound = new Audio('audio_files/point_scored.mp3');
+const background_music = new Audio('audio_files/game_back2.mp3');
+function play_background_music() {
+    background_music.play();
+    background_music.setAttribute('autoplay', 'autoplay');
+}
 function playGameOverSound() {
     gameOverSound.play();
 }
@@ -91,6 +96,7 @@ window.addEventListener("click", (event) => {
     
 });
 
+play_background_music()
 timerID=setInterval(update_game,10);
 var time_left_for_new_trash=400;
 var time_left_for_new_monsters=500;
@@ -98,7 +104,9 @@ var number_of_trashes=0;
 var total_trashes_now=0;
 var number_of_monsters=0;
 var total_monsters_now=0;
+
 function update_game(){
+
     time_left_for_new_trash-=1;
     time_left_for_new_monsters-=1;
 
@@ -674,6 +682,7 @@ function check_collison_monster_with_trash(){
     }
 }
 function end_game(){
+    background_music.pause();
     playGameOverSound();
     clearInterval(timerID);
 }

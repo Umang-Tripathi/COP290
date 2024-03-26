@@ -54,7 +54,12 @@ var monsteradj=[];
 var coinx=0;
 var coiny=0;
 
+const Background_Music = new Audio('./audio_files/game_bg_game_back4.mp3');
+function playBackground_Music() {
+    Background_Music.play();
+    Background_Music.setAttribute('autoplay', 'autoplay');
 
+}
 class Stack {
 	constructor(){
 		this.items = [];
@@ -278,7 +283,7 @@ start.addEventListener("click",()=>{
     createmonster();
     timer1=setInterval(shortest_path,500)
     shortest_path();
-    
+    playBackground_Music()
     timerCreateNewMonster=setInterval(createmonster,10000)
    
     
@@ -376,9 +381,14 @@ function createmonster(){
     monster.style.height="20px";
     monster.style.width="20px";
     monster.style.position="absolute";
-    monster.style.backgroundColor="#BC13FE";
+    
     monster.style.top=(monsterX[monsterNumber-1]*40)+"px";
     monster.style.left=(monsterY[monsterNumber-1]*40+300)+"px";
+    let mm = document.createElement("img");
+    mm.id="IMGmonster"+monsterNumber;
+    mm.src="./images/monster/monster.png";
+    
+    monster.appendChild(mm);
     monsters.appendChild(monster);
 }
 function movable(y,x,b,a){
@@ -596,7 +606,7 @@ function check_kill(){
             clearInterval(timer1);
             clearInterval(timerCreateNewMonster);
             hero.style.visibility="hidden";
-
+            Background_Music.pause();
             reset.style.visibility="visible";
             mazeArea.style.backgroundColor="#FFCCCB"
             return;
