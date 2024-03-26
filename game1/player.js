@@ -303,7 +303,7 @@ function update_game(){
             kk2.src="./images/monsters/white_rev.png";
             kk2.id=new_monsters_id+"imgr"
             m.appendChild(kk2);
-            var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:1.5,type:2,holded:false}
+            var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:1.25,type:2,holded:false}
             monster.push(temp_monsters);
             monsters_container.appendChild(m);
             time_left_for_new_monsters=Math.floor((Math.random()*100)+500);
@@ -318,7 +318,7 @@ function update_game(){
             kk2.id=new_monsters_id+"imgr"
             m.appendChild(kk2);
             //console.log("blue");
-            var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:1.5,type:3,holded:false}
+            var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:1.25,type:3,holded:false}
             monster.push(temp_monsters);
             monsters_container.appendChild(m);
             time_left_for_new_monsters=Math.floor((Math.random()*100)+500);
@@ -333,7 +333,7 @@ function update_game(){
             kk2.id=new_monsters_id+"imgr"
             m.appendChild(kk2);
             //console.log("green");
-            var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:2,type:4,holded:false}
+            var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:1.5,type:4,holded:false}
             monster.push(temp_monsters);
             monsters_container.appendChild(m);
             time_left_for_new_monsters=Math.floor((Math.random()*100)+500);
@@ -348,7 +348,7 @@ function update_game(){
             kk2.id=new_monsters_id+"imgr"
             m.appendChild(kk2);
             //console.log("red");
-            var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:2,type:5,holded:false}
+            var temp_monsters= {posn_x : xx , posn_y : yy,monster_id :new_monsters_id,speed:1.5,type:5,holded:false}
             monster.push(temp_monsters);
             monsters_container.appendChild(m);
             time_left_for_new_monsters=Math.floor((Math.random()*100)+500);
@@ -680,10 +680,11 @@ function end_game(){
 
 function shakeImage() {
     playshake_ground_Sound();
-    var image = document.getElementById("background");
-    image.classList.add("shake-image");
+    var bg = document.getElementById("background");
+    bg.classList.add("shake-image");
 
     setTimeout(function() {
-        image.classList.remove("shake-image");
+        bg.classList.remove("shake-image");
     }, 500); 
+   
 }
