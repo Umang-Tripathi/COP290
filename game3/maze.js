@@ -365,13 +365,13 @@ function createtrash(){
     trash.style.height="20px";
     trash.style.width="20px";
     trash.style.position="absolute";
-    trash.style.backgroundColor="#FFD700";
+    
     let trash_img=document.createElement("img");
     trash_img.id="trash("+trashx+","+trashy+")"+"_img";
     trash_img.src="./images/trash/trash.png";
     trash.style.top=(trashy*40+0)+"px";
     trash.style.left=(trashx*40+300)+"px";
-    trash.style.borderRadius="20px";
+    
     trash.appendChild(trash_img);
     monsters.appendChild(trash);
     setTimeout(createmonster,15000);
@@ -408,7 +408,7 @@ function createmonster(){
     let t2=document.getElementById("trash("+trashx+","+trashy+")");
     t2.remove();
 
-    createtrash();
+    setTimeout(createtrash,5000);
 }
 function movable(y,x,b,a){
     if(x<0 || x>size_of_maze-1 || y<0 || y>size_of_maze-1 ){
