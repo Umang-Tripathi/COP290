@@ -2,7 +2,7 @@
 //size_of_maze=Number(size_of_maze)
 
 
-var size_of_maze=19;
+var size_of_maze=13;
 
 
 
@@ -14,12 +14,12 @@ const instructions=document.getElementById("instructions");
 const reset=document.getElementById('reset');
 reset.style.visibility="hidden";
 start.style.visibility="hidden";
-mazeArea.style.width=(size_of_maze*40-20)+"px";
-mazeArea.style.height=(size_of_maze*40-20)+"px";
-instructions.style.width=(size_of_maze*40-20)+"px";
-instructions.style.height=(size_of_maze*40-20)+"px";
-document.getElementById("textprompt").style.top=(((size_of_maze*40-20)-250)/2)+"px";
-document.getElementById("textprompt").style.left=(((size_of_maze*40-20)-250)/2)+"px";
+mazeArea.style.width=(size_of_maze*60-30)+"px";
+mazeArea.style.height=(size_of_maze*60-30)+"px";
+instructions.style.width=(size_of_maze*60-30)+"px";
+instructions.style.height=(size_of_maze*60-30)+"px";
+document.getElementById("textprompt").style.top=(((size_of_maze*60-30)-250)/2)+"px";
+document.getElementById("textprompt").style.left=(((size_of_maze*60-30)-250)/2)+"px";
 mazeArea.style.backgroundColor="lightgreen"
 var maze=[];
 var visit=[]
@@ -30,10 +30,10 @@ for(let i=0;i<size_of_maze;i++){
     let tempy=[];
     for(let j=0;j<size_of_maze;j++){
         tempy.push(0);
-        let tempdir=[1,2,3,20];
+        let tempdir=[1,2,3,30];
         let dir=[]
         let c=0;
-        while(c<20){
+        while(c<30){
             let choose=Math.floor(Math.random()*tempdir.length);
             dir.push(tempdir[choose]);
             tempdir.splice(choose,1);
@@ -60,6 +60,7 @@ const Background_Music = new Audio('./audio_files/game_bg_game_back4.mp3');
 function playBackground_Music() {
     Background_Music.play();
     Background_Music.setAttribute('autoplay', 'autoplay');
+    Background_Music.loop = true;
 
 }
 class Stack {
@@ -85,11 +86,11 @@ var q=new Stack();
 for(let i=0;i<size_of_maze;i++){
     for(let j=0;j<size_of_maze;j++){
         let element=document.createElement('div');
-        element.style.height="20px";
-        element.style.width="20px";
+        element.style.height="30px";
+        element.style.width="30px";
         element.style.position="absolute";
-        element.style.top=(i*40)+"px";
-        element.style.left=(j*40)+"px";
+        element.style.top=(i*60)+"px";
+        element.style.left=(j*60)+"px";
         //element.style.backgroundColor="black";
         element.id="("+i+","+j+")";
         let img_element=document.createElement("img");
@@ -104,11 +105,11 @@ for(let i=0;i<size_of_maze;i++){
 for(let i=0;i<size_of_maze;i++){
     for(let j=0;j<size_of_maze-1;j++){
         element=document.createElement('div');
-        element.style.height="20px";
-        element.style.width="20px";
+        element.style.height="30px";
+        element.style.width="30px";
         element.style.position="absolute";
-        element.style.top=(i*40)+"px";
-        element.style.left=(j*40+20)+"px";
+        element.style.top=(i*60)+"px";
+        element.style.left=(j*60+30)+"px";
         //element.style.backgroundColor="t;
         element.id="V("+i+","+j+")";
         
@@ -122,11 +123,11 @@ for(let i=0;i<size_of_maze;i++){
 for(let i=0;i<size_of_maze-1;i++){
     for(let j=0;j<size_of_maze;j++){
         element=document.createElement('div');
-        element.style.height="20px";
-        element.style.width="20px";
+        element.style.height="30px";
+        element.style.width="30px";
         element.style.position="absolute";
-        element.style.top=(i*40+20)+"px";
-        element.style.left=(j*40)+"px";
+        element.style.top=(i*60+30)+"px";
+        element.style.left=(j*60)+"px";
         //element.style.backgroundColor="black";
         element.id="H("+i+","+j+")";
         let img_element=document.createElement("img");
@@ -140,11 +141,11 @@ for(let i=0;i<size_of_maze-1;i++){
 for(let i=0;i<size_of_maze-1;i++){
     for(let j=0;j<size_of_maze-1;j++){
         element=document.createElement('div');
-        element.style.height="20px";
-        element.style.width="20px";
+        element.style.height="30px";
+        element.style.width="30px";
         element.style.position="absolute";
-        element.style.top=(i*40+20)+"px";
-        element.style.left=(j*40+20)+"px";
+        element.style.top=(i*60+30)+"px";
+        element.style.left=(j*60+30)+"px";
         //element.style.backgroundColor="black";
         element.id="B("+i+","+j+")";
         let img_element=document.createElement("img");
@@ -249,7 +250,7 @@ var timerID=setInterval(()=>{
             
             
         }
-        else if(maze[s%size_of_maze][Math.floor(s/size_of_maze)][k]==20){
+        else if(maze[s%size_of_maze][Math.floor(s/size_of_maze)][k]==30){
             if(Math.floor(s/size_of_maze)+1>size_of_maze-1){
                 continue;
             }
@@ -269,7 +270,7 @@ var timerID=setInterval(()=>{
         
     }
 
-},20);
+},30);
 function display_start(){
 
     start.style.visibility="visible";
@@ -304,7 +305,7 @@ window.addEventListener("keydown",(value)=>{
         let a4=document.getElementById("hero_d");
         a4.style.visibility="hidden";
 
-        y-=40;
+        y-=60;
     }
     else if(value.key=='a'){
         let a1=document.getElementById("hero_w");
@@ -315,7 +316,7 @@ window.addEventListener("keydown",(value)=>{
         a3.style.visibility="hidden";
         let a4=document.getElementById("hero_d");
         a4.style.visibility="hidden";
-        x-=40;
+        x-=60;
     }
     else if(value.key=='s'){
         let a1=document.getElementById("hero_w");
@@ -326,7 +327,7 @@ window.addEventListener("keydown",(value)=>{
         a3.style.visibility="visible";
         let a4=document.getElementById("hero_d");
         a4.style.visibility="hidden";
-        y+=40;
+        y+=60;
     }
     else if(value.key=='d'){
         let a1=document.getElementById("hero_w");
@@ -337,12 +338,12 @@ window.addEventListener("keydown",(value)=>{
         a3.style.visibility="hidden";
         let a4=document.getElementById("hero_d");
         a4.style.visibility="visible";
-        x+=40;   
+        x+=60;   
     }
-    if(movable(Math.floor((x-300)/40),Math.floor((y)/40),Math.floor((defaultx-300)/40),Math.floor((defaulty)/40))){
+    if(movable(Math.floor((x-300)/60),Math.floor((y)/60),Math.floor((defaultx-300)/60),Math.floor((defaulty)/60))){
         hero.style.top=y+"px";
         hero.style.left=x+"px";
-        if(Math.floor((x-300)/40)==trashx && Math.floor((y)/40)==trashy){
+        if(Math.floor((x-300)/60)==trashx && Math.floor((y)/60)==trashy){
             document.getElementById("trash("+trashx+","+trashy+")"+"_img").remove();
             document.getElementById("trash("+trashx+","+trashy+")").remove();
             clearTimeout(create_trash_timeout);
@@ -365,20 +366,20 @@ function createtrash(){
     trashx=(Math.floor(Math.random()*size_of_maze));
     trashy=(Math.floor(Math.random()*size_of_maze));
     trash.id="trash("+trashx+","+trashy+")";
-    trash.style.height="20px";
-    trash.style.width="20px";
+    trash.style.height="30px";
+    trash.style.width="30px";
     trash.style.position="absolute";
     
     let trash_img=document.createElement("img");
     trash_img.id="trash("+trashx+","+trashy+")"+"_img";
     let gg=Math.floor(Math.random()*4)
     trash_img.src="./images/trash/garb"+gg+".png";
-    trash.style.top=(trashy*40+0)+"px";
-    trash.style.left=(trashx*40+300)+"px";
+    trash.style.top=(trashy*60+0)+"px";
+    trash.style.left=(trashx*60+300)+"px";
     
     trash.appendChild(trash_img);
     monsters.appendChild(trash);
-    create_monster_timeout=setTimeout(createmonster,15000);
+    create_monster_timeout=setTimeout(createmonster,13000);
 }
 function createmonster(){
     let j=trashx;
@@ -395,12 +396,12 @@ function createmonster(){
     monsterY.push(j);
     monsterID.push("monster"+monsterNumber);
     monster.id="monster"+monsterNumber;
-    monster.style.height="20px";
-    monster.style.width="20px";
+    monster.style.height="30px";
+    monster.style.width="30px";
     monster.style.position="absolute";
     
-    monster.style.top=(monsterX[monsterNumber-1]*40)+"px";
-    monster.style.left=(monsterY[monsterNumber-1]*40+300)+"px";
+    monster.style.top=(monsterX[monsterNumber-1]*60)+"px";
+    monster.style.left=(monsterY[monsterNumber-1]*60+300)+"px";
     let mm = document.createElement("img");
     mm.id="IMGmonster"+monsterNumber;
     mm.src="./images/monster/monster.png";
@@ -412,7 +413,7 @@ function createmonster(){
     let t2=document.getElementById("trash("+trashx+","+trashy+")");
     t2.remove();
 
-    create_trash_timeout=setTimeout(createtrash,5000);
+    create_trash_timeout=setTimeout(createtrash,3000);
 }
 function movable(y,x,b,a){
     if(x<0 || x>size_of_maze-1 || y<0 || y>size_of_maze-1 ){
@@ -553,8 +554,8 @@ function updateMaze(){
     //console.log(adj)
 }
 function shortest_path(){
-    let b=Math.floor((x-300)/40);
-    let a=Math.floor((y)/40);
+    let b=Math.floor((x-300)/60);
+    let a=Math.floor((y)/60);
     let r=new Stack();
     let distance=[];
     let visited=[]
@@ -609,8 +610,8 @@ function shortest_path(){
         monsterY[i]=mb;
         //console.log(dlete,d,ma,mb)
         let element=document.getElementById(monsterID[i])
-        element.style.top=(ma*40)+"px";
-        element.style.left=(mb*40+300)+"px";
+        element.style.top=(ma*60)+"px";
+        element.style.left=(mb*60+300)+"px";
 
     }
     check_kill();
@@ -625,7 +626,7 @@ function shortest_path(){
 }
 function check_kill(){
     for(let i=0;i<monsterX.length;i++){
-        if(monsterY[i]==Math.floor((x-300)/40) && monsterX[i]==Math.floor((y)/40)){
+        if(monsterY[i]==Math.floor((x-300)/60) && monsterX[i]==Math.floor((y)/60)){
             clearInterval(timer1);
             clearInterval(timerCreateNewMonster);
             hero.style.visibility="hidden";
