@@ -6,8 +6,11 @@ var size_of_maze=13;
 
 
 
+
 const mazeArea=document.getElementById("maze_area");
 let width = window.innerWidth;
+let height= window.innerHeight;
+size_of_maze=Math.floor(height/60);
 width=Math.floor(width/2);
 width=(width-(width%30))
 width=(width-size_of_maze*30);

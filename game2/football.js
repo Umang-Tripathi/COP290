@@ -318,7 +318,7 @@ function collision(){
     }
     else{
         if(Math.abs(x1-ball_posn_x)<2 && Math.abs(y1-ball_posn_y)<2){
-            ball_speed=max(1,ball_speed);
+            ball_speed=max(2,ball_speed);
             
             speed1=-Math.min(0.1,1);
             
@@ -326,7 +326,7 @@ function collision(){
             ball_dir_y=Math.sin(rotation_player1*Math.PI/180);
         }
         else if(Math.abs(x2-ball_posn_x)<2 && Math.abs(y2-ball_posn_y)<2){
-            ball_speed=max(1,ball_speed);
+            ball_speed=max(2,ball_speed);
             speed2=-Math.min(0.1,1);
             ball_dir_x=(Math.cos(rotation_player2*Math.PI/180)-ball_dir_x)/2;
             ball_dir_y=(Math.sin(rotation_player2*Math.PI/180)-ball_dir_y)/2;
