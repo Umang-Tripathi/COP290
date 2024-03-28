@@ -59,6 +59,10 @@ function update_match(){
     ball_dir_x=0;
     ball_dir_y=0;
     ball_speed=0;
+    player1.style.top=y1+"vh";
+    player1.style.left=x1+"vw";
+    player2.style.top=y2+"vh";
+    player2.style.left=x2+"vw";
 
 }
 
@@ -94,10 +98,13 @@ function move_player1(){
     if(move1){
         
         speed1+=0.007;
-        speed1=Math.min(3,speed1);
+        speed1=Math.min(2.6,speed1);
 
         x1+=speed1*Math.cos(rotation_player1*Math.PI/180);
         y1+=speed1*Math.sin(rotation_player1*Math.PI/180);
+        if(Math.abs(x1-x2)<2 && Math.abs(y1-y2)<2){
+            speed1=-Math.min(0.3,speed1);
+        }
         if(x1<0){
             speed1=-Math.min(0.3,speed1);
             x1=0;
@@ -143,10 +150,13 @@ function move_player1(){
 function move_player2(){
     if(move2){
         speed2+=0.007;
-        speed2=Math.min(3,speed2);
+        speed2=Math.min(2.6,speed2);
 
         x2+=speed2*Math.cos(rotation_player2*Math.PI/180);
         y2+=speed2*Math.sin(rotation_player2*Math.PI/180);
+        if(Math.abs(x1-x2)<2 && Math.abs(y1-y2)<2){
+            speed2=-Math.min(0.3,speed2);
+        }
         if(x2<0){
             speed2=-Math.min(0.3,speed2);
             x2=0;
