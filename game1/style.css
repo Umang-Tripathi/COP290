@@ -186,10 +186,10 @@ body {
 }
 #reset{
     position: absolute;
-    top:100px;
-    left:90px;
+    top:150px;
+    left:80px;
     height:40px;
-    width:120px;
+    width:100px;
     background-image: url("./images/misclaneous/reset.png");
     background-size: 100% 100%;
     border-radius: 30px;
