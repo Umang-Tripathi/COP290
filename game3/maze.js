@@ -480,8 +480,14 @@ function updateMaze(){
                 temp.push(j);
                 newmaze.push(temp);
             }
-            let ran=Math.floor(Math.random()*4);;
-            if(ran==0 && adj[i][j].length==1){
+            let ran=Math.floor(Math.random()*10);;
+            if(ran<=3 && adj[i][j].length==1){
+                let temp=[];
+                temp.push(i);
+                temp.push(j);
+                newmaze.push(temp);
+            }
+            if(ran==1 && adj[i][j].length==3){
                 let temp=[];
                 temp.push(i);
                 temp.push(j);
