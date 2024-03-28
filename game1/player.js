@@ -14,8 +14,9 @@ var width = window.innerWidth;
 var height = window.innerHeight;
 var hero_y=(49/100)*height;
 var hero_x=(49/100)*width;
-
+var score=0;
 var is_hero_holding=false;
+var time_now=0;
 const instructions=document.getElementById("instructions");
 const reset=document.getElementById('reset');
 const start=document.getElementById('start');
@@ -31,12 +32,35 @@ start.addEventListener("click",()=>{
     play_background_music()
     timerID=setInterval(update_game,10);
     instructions.style.visibility="hidden";
+    timer_display=setInterval(update_time,1000);
 })
 reset.addEventListener("click",()=>{
     window.location.reload();
 })
 
+function update_time(){
+    time_now+=1;
+    let minutes=Math.floor(time_now/60);
+    let seconds=time_now%60;
+    if(seconds<10){
+        if(minutes<10){
+            document.getElementById("timer").innerHTML="0"+minutes+":"+"0"+seconds;
+        }
+        else{
+            document.getElementById("timer").innerHTML=minutes+":"+"0"+seconds;
+        }
+    }
+    else{
+        if(minutes<10){
+            document.getElementById("timer").innerHTML="0"+minutes+":"+seconds;
+        }
+        else{
+            document.getElementById("timer").innerHTML=minutes+":"+seconds;
+        }
 
+    }
+
+}
 function play_background_music() {
     background_music.play();
     background_music.setAttribute('autoplay', 'autoplay');
@@ -145,13 +169,13 @@ function update_game(){
         m.style.position="absolute";
         m.style.height="20px";
         m.style.width="20px";
-        let xx=Math.floor(Math.random()*width);
-        let yy=Math.floor(Math.random()*height);
+        let xx=Math.floor(Math.random()*(width*0.9))+width*0.05;
+        let yy=Math.floor(Math.random()*(height*0.9))+height*0.05;
         //console.log(xx,yy);
         while(xx>hero_x-80 && xx<hero_x+80 && yy>hero_y-80 && yy<hero_y+80){
             //console.log(xx,yy)
-            xx=Math.floor(Math.random()*width);
-            yy=Math.floor(Math.random()*height);
+            xx=Math.floor(Math.random()*(width*0.9))+width*0.05;
+            yy=Math.floor(Math.random()*(height*0.9))+height*0.05;
         }
 
         m.style.top=yy+"px";
@@ -671,6 +695,8 @@ function check_collison_monster_with_trash(){
                     hearts-=1;
                 }
                 else{
+                    score++;
+                    document.getElementById("score").innerHTML=score;
                     playpoint_scored_Sound();
                 }
                 let monster_removed_img=document.getElementById(monster[i].monster_id+"img");
@@ -721,6 +747,7 @@ function end_game(){
     background_music.pause();
     playGameOverSound();
     clearInterval(timerID);
+    clearInterval(timer_display);
     reset.style.visibility="visible";
 }
 
