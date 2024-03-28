@@ -293,8 +293,8 @@ function display_start(){
 var timerCreateNewMonster=null;
 var timer1=null;
 var points=0;
-var display_timer=null;
-
+let display_timer=setInterval(change_timer,1000);
+var counter=-1;
 //createmonster();
 start.addEventListener("click",()=>{
     instructions.style.visibility="hidden"
@@ -371,8 +371,11 @@ window.addEventListener("keydown",(value)=>{
                 pp.innerHTML=points;
                 createtrash();
                 console.log("r1");
-                clearInterval(display_timer);
-                counter=4;
+                
+                
+                
+                
+                counter=5;
                 
                 document.getElementById("timer").innerHTML="0";
 
@@ -406,8 +409,9 @@ function createtrash(){
         
         trash.appendChild(trash_img);
         monsters.appendChild(trash);
-        console.log("n");
-        display_timer=setInterval(change_timer, 1000);
+        counter=5;
+        
+        
         create_monster_timeout=setTimeout(createmonster,5000);
     }
     
@@ -670,9 +674,7 @@ function check_kill(){
         if(monsterY[i]==Math.floor((x-width)/60) && monsterX[i]==Math.floor((y)/60)){
             clearInterval(timer1);
             clearInterval(timerCreateNewMonster);
-            if(display_timer!=null){
-                clearInterval(display_timer);
-            }
+            counter=-1;
             
             hero.style.visibility="hidden";
             Background_Music.pause();
@@ -691,22 +693,23 @@ reset.addEventListener("click",()=>{
     NOT_died=true;
     window.location.reload();
 })
-var counter=4;
+
 function change_timer(){
     
     
 
-    if(counter==0){
-        document.getElementById("timer").innerHTML=counter;
-        console.log("r3");
-        if(display_timer!=null){
-            clearInterval(display_timer);
-        }
-        counter=4;
-    }
-    document.getElementById("timer").innerHTML=counter;
+    if(counter==-1){
+        document.getElementById("timer").innerHTML=0;
 
-    counter-=1;
+    }
+    else{
+        document.getElementById("timer").innerHTML=counter;
+        counter-=1;
+        
+    }
+    
+
+    
 }
    
 
