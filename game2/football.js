@@ -201,7 +201,7 @@ function move_player2(){
 }
 function move_ball(){
     collision();
-    ball_speed-=0.01;
+    ball_speed-=0.007;
     ball_speed=Math.max(ball_speed,0);
 
     ball_posn_x+=(ball_dir_x)*ball_speed;
@@ -302,14 +302,34 @@ function move_ball(){
 function collision(){
     if(ball_speed<1){
         if(Math.abs(x1-ball_posn_x)<2 && Math.abs(y1-ball_posn_y)<2){
-            ball_speed=3*speed1;
+            ball_speed=2*speed1;
+            
+            speed1=-Math.min(0.1,1);
+            
             ball_dir_x=Math.cos(rotation_player1*Math.PI/180);
             ball_dir_y=Math.sin(rotation_player1*Math.PI/180);
         }
         else if(Math.abs(x2-ball_posn_x)<2 && Math.abs(y2-ball_posn_y)<2){
-            ball_speed=3*speed2;
+            ball_speed=2*speed2;
+            speed2=-Math.min(0.1,1);
             ball_dir_x=Math.cos(rotation_player2*Math.PI/180);
             ball_dir_y=Math.sin(rotation_player2*Math.PI/180);
+        }
+    }
+    else{
+        if(Math.abs(x1-ball_posn_x)<2 && Math.abs(y1-ball_posn_y)<2){
+            ball_speed=max(1,ball_speed);
+            
+            speed1=-Math.min(0.1,1);
+            
+            ball_dir_x=Math.cos(rotation_player1*Math.PI/180);
+            ball_dir_y=Math.sin(rotation_player1*Math.PI/180);
+        }
+        else if(Math.abs(x2-ball_posn_x)<2 && Math.abs(y2-ball_posn_y)<2){
+            ball_speed=max(1,ball_speed);
+            speed2=-Math.min(0.1,1);
+            ball_dir_x=(Math.cos(rotation_player2*Math.PI/180)-ball_dir_x)/2;
+            ball_dir_y=(Math.sin(rotation_player2*Math.PI/180)-ball_dir_y)/2;
         }
     }
 }
