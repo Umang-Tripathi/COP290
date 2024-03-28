@@ -1,6 +1,7 @@
 const hero=document.getElementById("hero");
 const trash_container=document.getElementById("trash");
 const monsters_container=document.getElementById("monsters");
+
 var w=false;
 var a=false;
 var s=false;
@@ -11,15 +12,31 @@ var hearts = 10
 var prev_hearts=10;
 var width = window.innerWidth;
 var height = window.innerHeight;
-var hero_y=100;
-var hero_x=300;
+var hero_y=(49/100)*height;
+var hero_x=(49/100)*width;
+
 var is_hero_holding=false;
+const instructions=document.getElementById("instructions");
+const reset=document.getElementById('reset');
+const start=document.getElementById('start');
+reset.style.visibility="hidden";
+
 const gameOverSound = new Audio('audio_files/game_over1.wav');
 const shake_ground_Sound = new Audio('audio_files/shaking1.mp3');
 const trash_throw_Sound = new Audio('audio_files/trash_throw.mp3');
 const heart_reduce_Sound = new Audio('audio_files/heart_reduce.wav');
 const point_scored_Sound = new Audio('audio_files/point_scored.mp3');
 const background_music = new Audio('audio_files/game_back2.mp3');
+start.addEventListener("click",()=>{
+    play_background_music()
+    timerID=setInterval(update_game,10);
+    instructions.style.visibility="hidden";
+})
+reset.addEventListener("click",()=>{
+    window.location.reload();
+})
+
+
 function play_background_music() {
     background_music.play();
     background_music.setAttribute('autoplay', 'autoplay');
@@ -102,8 +119,7 @@ window.addEventListener("click", (event) => {
     
 });
 
-play_background_music()
-timerID=setInterval(update_game,10);
+
 var time_left_for_new_trash=400;
 var time_left_for_new_monsters=500;
 var number_of_trashes=0;
@@ -705,6 +721,7 @@ function end_game(){
     background_music.pause();
     playGameOverSound();
     clearInterval(timerID);
+    reset.style.visibility="visible";
 }
 
 function shakeImage() {
