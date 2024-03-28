@@ -457,6 +457,13 @@ function updateMaze(){
                 temp.push(j);
                 newmaze.push(temp);
             }
+            let ran=Math.floor(Math.random()*4);;
+            if(ran==0 && adj[i][j].length==1){
+                let temp=[];
+                temp.push(i);
+                temp.push(j);
+                newmaze.push(temp);
+            }
         }
     }
     //console.log(newmaze)
