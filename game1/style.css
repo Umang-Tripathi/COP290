@@ -84,7 +84,7 @@ body {
 }
 #left_tree{
     position: absolute;
-    right:-5vw;
+    left:-1vw;
     top:10px;
     width:80px;
     

@@ -9,36 +9,45 @@
 </head>
 <body >
     <div id="background" class="flex-container">
-
         
-        <div id="maze_area" class="maze-container"></div>
-        <div id="hero" class="hero-container">
-            <img src="./images/hero/hero_w.png" id="hero_w">
-            <img src="./images/hero/hero_a.png" id="hero_a">
-            <img src="./images/hero/hero_s.png" id="hero_s">
-            <img src="./images/hero/hero_d.png" id="hero_d">
+        <div id="cheap_way_to_shift_everything_down">
 
-        </div>
-        <div id="monsters" class ="monster-container"></div>
-        <div id="instructions">
-            <div id="textprompt">
-                <div id="heading">
-                    <label>Instructions:<br></label><br>
-                </div>
-                <br>
-                <ul>
-                    <li>use WASD to move</li>
-                    <li>purple blobs cant pass<br> through grey walls but you can</li>
-                    <li>eat golden coins</li>
-                    <li>dont let blobs touch you</li>
-
-
-                </ul>
-                <button id="start">START</button>
-                <button id="reset">RESTART</button>
+            
+            <div id="maze_area" class="maze-container"></div>
+            <div id="hero" class="hero-container">
+                <img src="./images/hero/hero_w.png" id="hero_w">
+                <img src="./images/hero/hero_a.png" id="hero_a">
+                <img src="./images/hero/hero_s.png" id="hero_s">
+                <img src="./images/hero/hero_d.png" id="hero_d">
 
             </div>
+            <div id="monsters" class ="monster-container"></div>
+            <div id="instructions">
+                <div id="textprompt">
+                    <div id="heading">
+                        <label>Instructions:<br></label><br>
+                    </div>
+                    <br>
+                    <ul>
+                        <li>use WASD to move</li>
+                        <li>purple blobs cant pass<br> through grey walls but you can</li>
+                        <li>eat golden coins</li>
+                        <li>dont let blobs touch you</li>
+
+
+                    </ul>
+                    <button id="start"></button>
+                    <button id="reset">RESTART</button>
+
+                </div>
+            </div>
         </div>
+        <div id="game_data">
+            <p id="timer">0</p>
+            <p id="score">0</p>
+
+        </div>
+        
     </div>
     <script src="maze.js"></script>
 </body>

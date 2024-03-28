@@ -25,6 +25,8 @@ reset.style.visibility="hidden";
 start.style.visibility="hidden";
 mazeArea.style.width=(size_of_maze*60-30)+"px";
 mazeArea.style.height=(size_of_maze*60-30)+"px";
+instructions.style.top=0+"px";
+instructions.style.left=(width)+"px";
 instructions.style.width=(size_of_maze*60-30)+"px";
 instructions.style.height=(size_of_maze*60-30)+"px";
 document.getElementById("textprompt").style.top=(((size_of_maze*60-30)-250)/2)+"px";
@@ -290,6 +292,9 @@ function display_start(){
 }
 var timerCreateNewMonster=null;
 var timer1=null;
+var points=0;
+var display_timer=null;
+
 //createmonster();
 start.addEventListener("click",()=>{
     instructions.style.visibility="hidden"
@@ -361,7 +366,16 @@ window.addEventListener("keydown",(value)=>{
                 document.getElementById("trash("+trashx+","+trashy+")").remove();
                 clearTimeout(create_trash_timeout);
                 clearTimeout(create_monster_timeout);
+                points+=1;
+                let pp=document.getElementById("score");
+                pp.innerHTML=points;
                 createtrash();
+                console.log("r1");
+                clearInterval(display_timer);
+                counter=4;
+                
+                document.getElementById("timer").innerHTML="0";
+
             }
 
         }
@@ -392,7 +406,9 @@ function createtrash(){
         
         trash.appendChild(trash_img);
         monsters.appendChild(trash);
-        create_monster_timeout=setTimeout(createmonster,7000);
+        console.log("n");
+        display_timer=setInterval(change_timer, 1000);
+        create_monster_timeout=setTimeout(createmonster,5000);
     }
     
 }
@@ -429,7 +445,7 @@ function createmonster(){
         let t2=document.getElementById("trash("+trashx+","+trashy+")");
         t2.remove();
 
-        create_trash_timeout=setTimeout(createtrash,4000);
+        create_trash_timeout=setTimeout(createtrash,3000);
     }
     
 }
@@ -654,12 +670,16 @@ function check_kill(){
         if(monsterY[i]==Math.floor((x-width)/60) && monsterX[i]==Math.floor((y)/60)){
             clearInterval(timer1);
             clearInterval(timerCreateNewMonster);
+            if(display_timer!=null){
+                clearInterval(display_timer);
+            }
+            
             hero.style.visibility="hidden";
             Background_Music.pause();
             NOT_died=false;
             end_game_Music.play();
             setTimeout(()=>reset.style.visibility="visible",4000)
-    
+            
             //mazeArea.style.backgroundColor="#FFCCCB"
 
             return;
@@ -671,7 +691,23 @@ reset.addEventListener("click",()=>{
     NOT_died=true;
     window.location.reload();
 })
+var counter=4;
+function change_timer(){
+    
+    
 
+    if(counter==0){
+        document.getElementById("timer").innerHTML=counter;
+        console.log("r3");
+        if(display_timer!=null){
+            clearInterval(display_timer);
+        }
+        counter=4;
+    }
+    document.getElementById("timer").innerHTML=counter;
+
+    counter-=1;
+}
    
 
  
