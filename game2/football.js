@@ -1,4 +1,6 @@
 const player1=document.getElementById("player1");
+
+
 document.getElementById("start").addEventListener("click",()=>{
     timerplayer2=setInterval(move_player2,10);
     timerball=setInterval(move_ball,10);
@@ -7,6 +9,7 @@ document.getElementById("start").addEventListener("click",()=>{
     document.getElementById("INSTRUCTION").style.visibility="hidden";
     document.getElementById("ball").style.visibility="visible";
 })
+
 var rotation_player1=0;
 var x1=32;
 var y1=38;
@@ -30,6 +33,35 @@ var ball_speed=0;
 var timerball=null;
 var points2=0;
 var points1=0;
+function new_match(){
+    clearInterval(timerplayer2);
+    clearInterval(timerplayer1);
+    clearInterval(timerball);
+    setTimeout(update_match,5000);
+
+}
+function update_match(){
+    timerplayer2=setInterval(move_player2,10);
+    timerball=setInterval(move_ball,10);
+    timerplayer1=setInterval(move_player1,10);
+    rotation_player1=0;
+    x1=32;
+    y1=38;
+    speed1=0;
+    move1=false;
+    rotation_player2=180;
+    x2=46.2;
+    y2=38;
+    speed2=0;
+    move2=false;
+    ball_posn_x=39;
+    ball_posn_y=38;
+    ball_dir_x=0;
+    ball_dir_y=0;
+    ball_speed=0;
+
+}
+
 
 document.addEventListener("keydown",(value)=>{
     if(value.key=="a"){
@@ -60,10 +92,9 @@ document.addEventListener("keyup",(value)=>{
 
 function move_player1(){
     if(move1){
-        speed1+=0.005;
-        if(speed1>4){
-            speed1=4
-        }
+        
+        speed1+=0.007;
+        speed1=Math.min(3,speed1);
 
         x1+=speed1*Math.cos(rotation_player1*Math.PI/180);
         y1+=speed1*Math.sin(rotation_player1*Math.PI/180);
@@ -111,10 +142,8 @@ function move_player1(){
 }
 function move_player2(){
     if(move2){
-        speed2+=0.005;
-        if(speed2>4){
-            speed2=4
-        }
+        speed2+=0.007;
+        speed2=Math.min(3,speed2);
 
         x2+=speed2*Math.cos(rotation_player2*Math.PI/180);
         y2+=speed2*Math.sin(rotation_player2*Math.PI/180);
@@ -164,11 +193,13 @@ function move_ball(){
     collision();
     ball_speed-=0.01;
     ball_speed=Math.max(ball_speed,0);
+
     ball_posn_x+=(ball_dir_x)*ball_speed;
     ball_posn_y+=(ball_dir_y)*ball_speed;
     if(ball_posn_x<-5){
         points1+=1;
         document.getElementById("points1").innerHTML=points1;
+        new_match();
         ball_posn_x=-5;
         ball_dir_x=-ball_dir_x;
     }
@@ -186,6 +217,7 @@ function move_ball(){
             document.getElementById("points1").innerHTML=points1;
             ball_posn_x=39;
             ball_posn_y=38;
+            new_match();
 
         }
         
@@ -193,6 +225,7 @@ function move_ball(){
     else if(ball_posn_x>86){
         points2+=1;
         document.getElementById("points2").innerHTML=points2;
+        new_match();
         ball_posn_x=86;
         ball_dir_x=-ball_dir_x;
     }
@@ -208,6 +241,7 @@ function move_ball(){
         else if(ball_speed==0){
             points1+=1;
             document.getElementById("points2").innerHTML=points2;
+            new_match();
             ball_posn_x=39;
             ball_posn_y=38;
 
@@ -256,16 +290,17 @@ function move_ball(){
 
 }
 function collision(){
-    if(Math.abs(x1-ball_posn_x)<2 && Math.abs(y1-ball_posn_y)<2){
-        ball_speed=3*speed1;
-        ball_dir_x=Math.cos(rotation_player1*Math.PI/180);
-        ball_dir_y=Math.sin(rotation_player1*Math.PI/180);
+    if(ball_speed<1){
+        if(Math.abs(x1-ball_posn_x)<2 && Math.abs(y1-ball_posn_y)<2){
+            ball_speed=3*speed1;
+            ball_dir_x=Math.cos(rotation_player1*Math.PI/180);
+            ball_dir_y=Math.sin(rotation_player1*Math.PI/180);
+        }
+        else if(Math.abs(x2-ball_posn_x)<2 && Math.abs(y2-ball_posn_y)<2){
+            ball_speed=3*speed2;
+            ball_dir_x=Math.cos(rotation_player2*Math.PI/180);
+            ball_dir_y=Math.sin(rotation_player2*Math.PI/180);
+        }
     }
-    else if(Math.abs(x2-ball_posn_x)<2 && Math.abs(y2-ball_posn_y)<2){
-        ball_speed=3*speed2;
-        ball_dir_x=Math.cos(rotation_player2*Math.PI/180);
-        ball_dir_y=Math.sin(rotation_player2*Math.PI/180);
-    }
-
 }
 
