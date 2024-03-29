@@ -23,7 +23,7 @@ var y2=38;
 var speed2=0;
 var move2=false;
 var timerplayer2=null;
-
+document.getElementById("ballImg").src="./images/trash/can"+(Math.floor(Math.random()*10+1))+"-removebg-preview.png";
 const ball=document.getElementById("ball");
 var ball_posn_x=39;
 var ball_posn_y=38;
@@ -33,14 +33,20 @@ var ball_speed=0;
 var timerball=null;
 var points2=0;
 var points1=0;
+var current_rotation=0;
 function new_match(){
     clearInterval(timerplayer2);
     clearInterval(timerplayer1);
     clearInterval(timerball);
+    ;
     setTimeout(update_match,5000);
 
 }
 function update_match(){
+    document.getElementById("ballImg").src="./images/trash/can"+(Math.floor(Math.random()*10+1))+"-removebg-preview.png";
+    current_rotation=0
+    document.getElementById("ballImg").style.rotate=(current_rotation)+"deg";
+
     timerplayer2=setInterval(move_player2,10);
     timerball=setInterval(move_ball,10);
     timerplayer1=setInterval(move_player1,10);
@@ -203,14 +209,17 @@ function move_ball(){
     collision();
     ball_speed-=0.007;
     ball_speed=Math.max(ball_speed,0);
-
+    let temp_ball_posn_x=ball_posn_x;
+    let temp_ball_posn_y=ball_posn_y;
     ball_posn_x+=(ball_dir_x)*ball_speed;
     ball_posn_y+=(ball_dir_y)*ball_speed;
     if(ball_posn_x<-5){
         points1+=1;
+        ball_speed=0;
         document.getElementById("points1").innerHTML=points1;
         new_match();
-        ball_posn_x=-5;
+        
+        //ball_posn_x=-5;
         ball_dir_x=-ball_dir_x;
     }
     else if(ball_posn_x<0){
@@ -224,6 +233,7 @@ function move_ball(){
         }
         else if(ball_speed==0){
             points1+=1;
+            ball_speed=0;
             document.getElementById("points1").innerHTML=points1;
             ball_posn_x=39;
             ball_posn_y=38;
@@ -234,9 +244,10 @@ function move_ball(){
     }
     else if(ball_posn_x>86){
         points2+=1;
+        ball_speed=0;
         document.getElementById("points2").innerHTML=points2;
         new_match();
-        ball_posn_x=86;
+        //ball_posn_x=86;
         ball_dir_x=-ball_dir_x;
     }
     else if(ball_posn_x>76){
@@ -250,6 +261,7 @@ function move_ball(){
         }
         else if(ball_speed==0){
             points1+=1;
+            ball_speed=0;
             document.getElementById("points2").innerHTML=points2;
             new_match();
             ball_posn_x=39;
@@ -294,7 +306,10 @@ function move_ball(){
             ball_dir_y=-ball_dir_y;
         }
     } 
-    
+    if(ball_posn_x!=temp_ball_posn_x || ball_posn_y!=temp_ball_posn_y){
+        current_rotation+=10*ball_speed;
+        document.getElementById("ballImg").style.rotate=(current_rotation)+"deg";
+    }
     ball.style.top=ball_posn_y+"vh";
     ball.style.left=ball_posn_x+"vw";
 

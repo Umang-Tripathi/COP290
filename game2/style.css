@@ -4,9 +4,7 @@
     width:80vw;
     top:9vh;
     left:9.5vw;
-    border:1vh solid;
-    border-color: brown;
-
+    
 }
 #arena{
     height:100vh;
@@ -109,7 +107,7 @@
     top:38vh;
     left:39vw;
     visibility: hidden;
-    background-color:orange;
+   
 }
 #ballImg{
     position:absolute;
