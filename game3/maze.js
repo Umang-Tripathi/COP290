@@ -734,17 +734,18 @@ reset.addEventListener("click",()=>{
     NOT_died=true;
     window.location.reload();
 })
-
+let timer_hourglass=document.getElementById("timer_hourglass");
 function change_timer(){
     
     
 
-    if(counter==-1){
-        document.getElementById("timer").innerHTML=0;
-
+    if(counter<=0){
+        //document.getElementById("timer").innerHTML=0;
+        timer_hourglass.src="./images/misclaneous/1.png";
     }
     else{
-        document.getElementById("timer").innerHTML=counter;
+        timer_hourglass.src="./images/misclaneous/"+counter+".png";
+        //document.getElementById("timer").innerHTML=counter;
         counter-=1;
         
     }

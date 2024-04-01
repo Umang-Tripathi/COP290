@@ -220,7 +220,13 @@ body {
     border-color: transparent;
     border: 0px solid;
 }
-  
+#timer_hourglass{
+    position: absolute;
+    height:60px;
+    width:40px;
+    top:180px;
+    left:60px;
+}
 .hero-container img{
     position: absolute;
     top:0px;
