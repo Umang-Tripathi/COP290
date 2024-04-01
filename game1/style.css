@@ -1,6 +1,9 @@
 body {
     overflow: hidden; /* Hide scrollbars */
 }
+
+    
+
 #background{
     position: absolute;
     top:-10px;
@@ -36,6 +39,7 @@ body {
     width: 300%;
     top : -20px;
     left: -20px;
+    user-select: none;
 }
 #trash{
     position:absolute;
@@ -48,6 +52,7 @@ body {
     width: 300%;
     top : -20px;
     left: -20px;
+    user-select: none;
 }
 #lives{
     position :absolute;
@@ -58,6 +63,7 @@ body {
     position :relative;
     height: 40px;
     width: 40px;
+    user-select: none;
     
 }
 #trees{
@@ -109,6 +115,7 @@ body {
     width: 300%;
     top : -40px;
     left: -40px;
+    user-select: none;
 }
 
 
@@ -181,7 +188,7 @@ body {
     border-radius: 30px;
     background-color: transparent;
     border-color: transparent;
-    
+    user-select: none;
 
 }
 #reset{
@@ -195,7 +202,7 @@ body {
     border-radius: 30px;
     background-color: transparent;
     border-color: transparent;
-
+    user-select: none;
 }
 #game_data{
     position: absolute;
@@ -210,10 +217,103 @@ body {
 #score{
     position: absolute;
     top:0vh;
-    left:93vw;
+    left:85vw;
 }
 #timer{
     position:absolute;
     top:0vh;
     left:47vw;
 }
+#game_Setting_posn{
+    position :absolute;
+    top:5vh;
+    left:88vw;
+}   
+#settings{
+    position: absolute;
+    height:60px;
+    width:130px;
+    top:0px;
+    left:0px;
+
+    background-image: url("./images/misclaneous/settings.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+#game_settings{
+    position: absolute;
+    top:90px;
+    left:0px;
+    height:270px;
+    width:150px;
+
+    background-color: transparent;
+
+
+}
+#shift_down{
+    position:absolute;
+    top:30px;
+    left:0px;
+    height:240px;
+    width:150px;
+
+    background-color: transparent;
+
+}
+#play_audio{
+    height:60px;
+    width:60px;
+    top:330px;
+    left:15px;
+
+    background-image: url("./images/misclaneous/play_audio.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+#stop_audio{
+    height:60px;
+    width:60px;
+    top:320px;
+    left:15px;
+
+    background-image: url("./images/misclaneous/stop_audio.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+#reset2{
+    height:60px;
+    width:130px;
+    top:300px;
+    left:15px;
+
+    background-image: url("./images/misclaneous/reset.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+#quit{
+    height:60px;
+    width:130px;
+    top:300px;
+    left:15px;
+
+    background-image: url("./images/misclaneous/quit.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+  

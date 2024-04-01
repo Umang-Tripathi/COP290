@@ -434,13 +434,13 @@ function createtrash(){
         trash.style.height="30px";
         trash.style.width="30px";
         trash.style.position="absolute";
-        trash.style.animation="blink normal 2s infinite ease-in-out";
         let trash_img=document.createElement("img");
         trash_img.id="trash("+trashx+","+trashy+")"+"_img";
         let gg=Math.floor(Math.random()*4)
         trash_img.src="./images/trash/garb"+gg+".png";
         trash.style.top=(trashy*60+0)+"px";
         trash.style.left=(trashx*60+width)+"px";
+        trash_img.style.animation="blink normal 2s infinite ease-in-out";
         
         trash.appendChild(trash_img);
         monsters.appendChild(trash);

@@ -21,7 +21,12 @@ const instructions=document.getElementById("instructions");
 const reset=document.getElementById('reset');
 const start=document.getElementById('start');
 reset.style.visibility="hidden";
-
+let game_settings=document.getElementById("game_settings")
+let play_audio=document.getElementById("play_audio")
+let stop_audio=document.getElementById("stop_audio")
+let quit=document.getElementById("quit")
+let reset2=document.getElementById("reset2")
+game_settings.style.visibility="hidden"
 const gameOverSound = new Audio('audio_files/game_over1.wav');
 const shake_ground_Sound = new Audio('audio_files/shaking1.mp3');
 const trash_throw_Sound = new Audio('audio_files/trash_throw.mp3');
@@ -37,7 +42,38 @@ start.addEventListener("click",()=>{
 reset.addEventListener("click",()=>{
     window.location.reload();
 })
+settings.addEventListener("click",()=>{
+    if(game_settings.style.visibility=="hidden"){
+        game_settings.style.visibility="visible"
 
+    }
+    else{
+        game_settings.style.visibility="hidden";
+    }
+    
+})
+play_audio.addEventListener("click",()=>{
+    gameOverSound.volume=1;
+    shake_ground_Sound.volume=1;
+    trash_throw_Sound.volume=1;
+    heart_reduce_Sound.volume=1;
+    point_scored_Sound.volume=1;
+    background_music.volume=1;
+    end_game_Music.volume=1;
+
+})
+stop_audio.addEventListener("click",()=>{
+    gameOverSound.volume=0;
+    shake_ground_Sound.volume=0;
+    trash_throw_Sound.volume=0;
+    heart_reduce_Sound.volume=0;
+    point_scored_Sound.volume=0;
+    background_music.volume=0;
+    end_game_Music.volume=0;
+})
+reset2.addEventListener("click",()=>{
+    window.location.reload();
+})
 function update_time(){
     time_now+=1;
     let minutes=Math.floor(time_now/60);
