@@ -74,6 +74,9 @@ stop_audio.addEventListener("click",()=>{
 reset2.addEventListener("click",()=>{
     window.location.reload();
 })
+quit.addEventListener("click",()=>{
+    window.location.href = "/home";
+})
 function update_time(){
     time_now+=1;
     let minutes=Math.floor(time_now/60);

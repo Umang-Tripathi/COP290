@@ -102,7 +102,6 @@ def login_page():
 
 
 
-
 @app.route('/maze', methods=['GET','POST'])
 def maze_page():
     if 'user_id' in session:
@@ -147,9 +146,10 @@ def profile_page():
         user_id = session['user_id']
         user = db.session.get(User,user_id)
         max_score = db.session.query(db.func.max(Score.score)).filter(Score.user_id == user_id).scalar()
+        gloabal_max_score = db.session.query(db.func.max(Score.score)).scalar()
         if max_score is None:
-            max_score = " Lets play the first game !! "  # Set max_score to 0 if no scores found
-        return render_template('profile_page.html', str=UserName, max_score1=max_score)
+            max_score = " NA "  # Set max_score to 0 if no scores found
+        return render_template('profile_page.html', str=UserName, max_score1=max_score, gloabal_max_score=gloabal_max_score)
     else:
         return redirect(url_for('index'))
 
