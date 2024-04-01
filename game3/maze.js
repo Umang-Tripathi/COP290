@@ -32,6 +32,14 @@ instructions.style.height=(size_of_maze*60-30)+"px";
 document.getElementById("textprompt").style.top=(((size_of_maze*60-30)-250)/2)+"px";
 document.getElementById("textprompt").style.left=(((size_of_maze*60-30)-250)/2)+"px";
 mazeArea.style.backgroundColor="lightgreen"
+let game_settings=document.getElementById("game_settings")
+let play_audio=document.getElementById("play_audio")
+let stop_audio=document.getElementById("stop_audio")
+let quit=document.getElementById("quit")
+let reset2=document.getElementById("reset2")
+game_settings.style.visibility="hidden"
+
+const settings=document.getElementById("settings")
 
 var maze=[];
 var visit=[]
@@ -77,6 +85,30 @@ function playBackground_Music() {
     Background_Music.loop = true;
 
 }
+settings.addEventListener("click",()=>{
+    if(game_settings.style.visibility=="hidden"){
+        game_settings.style.visibility="visible"
+
+    }
+    else{
+        game_settings.style.visibility="hidden";
+    }
+    
+})
+play_audio.addEventListener("click",()=>{
+    Background_Music.volume=1;
+    end_game_Music.volume=1;
+})
+stop_audio.addEventListener("click",()=>{
+    Background_Music.volume=0;
+    end_game_Music.volume=0;
+})
+reset2.addEventListener("click",()=>{
+    NOT_died=true;
+    window.location.reload();
+})
+
+
 class Stack {
 	constructor(){
 		this.items = [];
@@ -96,6 +128,7 @@ class Stack {
         return this.items.length == 0;
     }
 }
+
 var q=new Stack();
 for(let i=0;i<size_of_maze;i++){
     for(let j=0;j<size_of_maze;j++){
@@ -324,6 +357,7 @@ window.addEventListener("keydown",(value)=>{
             a4.style.visibility="hidden";
 
             y-=60;
+            
         }
         else if(value.key=='a'){
             let a1=document.getElementById("hero_w");
@@ -383,6 +417,7 @@ window.addEventListener("keydown",(value)=>{
 
         }
         else{
+            check_kill();
             x=defaultx;
             y=defaulty;
 
@@ -399,7 +434,7 @@ function createtrash(){
         trash.style.height="30px";
         trash.style.width="30px";
         trash.style.position="absolute";
-        
+        trash.style.animation="blink normal 2s infinite ease-in-out";
         let trash_img=document.createElement("img");
         trash_img.id="trash("+trashx+","+trashy+")"+"_img";
         let gg=Math.floor(Math.random()*4)
