@@ -1,7 +1,9 @@
+
+let name
 const player1=document.getElementById("player1");
 
-
 document.getElementById("start").addEventListener("click",()=>{
+
     timerplayer2=setInterval(move_player2,10);
     timerball=setInterval(move_ball,10);
     timerplayer1=setInterval(move_player1,10);
@@ -74,8 +76,9 @@ function update_match(){
 
 
 document.addEventListener("keydown",(value)=>{
+    console.log(value.key)
     if(value.key=="a"){
-
+        
         move1=true;
 
     }
