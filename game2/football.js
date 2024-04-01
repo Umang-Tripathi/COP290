@@ -37,6 +37,13 @@ var timerball=null;
 var points2=0;
 var points1=0;
 var current_rotation=0;
+let game_settings=document.getElementById("game_settings")
+let play_audio=document.getElementById("play_audio")
+let stop_audio=document.getElementById("stop_audio")
+let quit=document.getElementById("quit")
+let reset2=document.getElementById("reset2")
+game_settings.style.visibility="hidden"
+
 const Background_Music = new Audio('./audio_files/crowd.mp3');
 const Hit1 = new Audio('./audio_files/hit1.mp3');
 const Hit2 = new Audio('./audio_files/hit2.mp3');
@@ -45,9 +52,45 @@ const start_noise = new Audio('./audio_files/start.mp3');
 const colide = new Audio("./audio_files/colide.mp3");
 const run1 = new Audio("./audio_files/run.mp3");
 const run2= new Audio("./audio_files/run.mp3");
+
+settings.addEventListener("click",()=>{
+    if(game_settings.style.visibility=="hidden"){
+        game_settings.style.visibility="visible"
+
+    }
+    else{
+        game_settings.style.visibility="hidden";
+    }
+    
+})
+play_audio.addEventListener("click",()=>{
+    colide.volume=1;
+    Hit1.volume=1;
+    Hit2.volume=1;
+    Hit3.volume=1;
+    Background_Music.volume=0.7;
+    start_noise.volume=1;
+    run1.volume=1;
+    run2.volume=1;
+    
+
+})
+stop_audio.addEventListener("click",()=>{
+    colide.volume=0;
+    Hit1.volume=0;
+    Hit2.volume=0;
+    Hit3.volume=0;
+    Background_Music.volume=0;
+    start_noise.volume=0;
+    run1.volume=0;
+    run2.volume=0;
+})
+reset2.addEventListener("click",()=>{
+    window.location.reload();
+})
 function playBackground_Music() {
     Background_Music.play();
-
+    Background_Music.volume=0.7
     Background_Music.loop = true;
 
 }
@@ -55,11 +98,13 @@ function new_match(){
     clearInterval(timerplayer2);
     clearInterval(timerplayer1);
     clearInterval(timerball);
-    ;
+
+    Background_Music.volume=1
     setTimeout(update_match,5000);
 
 }
 function update_match(){
+    Background_Music.volume=0.7
     document.getElementById("ballImg").src="./images/trash/can"+(Math.floor(Math.random()*10+1))+"-removebg-preview.png";
     current_rotation=0
     document.getElementById("ballImg").style.rotate=(current_rotation)+"deg";
@@ -170,7 +215,7 @@ function move_player1(){
     }
     else{
         speed1=0
-        rotation_player1+=1;
+        rotation_player1+=1.5;
 
         player1.style.transform="rotate("+rotation_player1+"deg)";
 
@@ -190,32 +235,32 @@ function move_player2(){
         if(x2<0){
             speed2=-Math.max(Math.min(0.3,speed2),0.1);
             x2=0;
-            rotation_player2+=10;
+            //rotation_player2+=10;
             colide.play();
-            player2.style.transform="rotate("+rotation_player2+"deg)";
+            /* player2.style.transform="rotate("+rotation_player2+"deg)"; */
 
         }
         else if(x2>78){
             speed2=-Math.max(Math.min(0.3,speed2),0.1);
             x2=78;
-            rotation_player2+=10;
+            //rotation_player2+=10;
             colide.play();
-            player2.style.transform="rotate("+rotation_player2+"deg)";
+            //player2.style.transform="rotate("+rotation_player2+"deg)";
         }
         if(y2<0){
             speed2=-Math.max(Math.min(0.3,speed2),0.1);
             y2=0;
-            rotation_player2+=10;
+            //rotation_player2+=10;
             colide.play();
-            player2.style.transform="rotate("+rotation_player2+"deg)";
+            //player2.style.transform="rotate("+rotation_player2+"deg)";
 
         }
         else if(y2>76){
             speed2=-Math.max(Math.min(0.3,speed2),0.1);
             y2=76;
-            rotation_player2+=10;
+            //rotation_player2+=10;
             colide.play();
-            player2.style.transform="rotate("+rotation_player2+"deg)";
+            //player2.style.transform="rotate("+rotation_player2+"deg)";
         }
         player2.style.top=y2+"vh";
         player2.style.left=x2+"vw";
@@ -227,7 +272,7 @@ function move_player2(){
     }
     else{
         speed2=0
-        rotation_player2+=1;
+        rotation_player2+=1.5;
 
         player2.style.transform="rotate("+rotation_player2+"deg)";
 
@@ -378,6 +423,7 @@ function collision(){
             ball_speed=2*speed1;
             
             speed1=-Math.min(0.1,1);
+            ball_speed=Math.max(1,ball_speed)
             let p=Math.floor(Math.random()*3)
             if(p==0){
                 Hit1.play();
@@ -394,6 +440,7 @@ function collision(){
         else if(Math.abs(x2-ball_posn_x)<2 && Math.abs(y2-ball_posn_y)<2){
             ball_speed=2*speed2;
             speed2=-Math.min(0.1,1);
+            ball_speed=Math.max(1,ball_speed)
             ball_dir_x=Math.cos(rotation_player2*Math.PI/180);
             ball_dir_y=Math.sin(rotation_player2*Math.PI/180);
             let p=Math.floor(Math.random()*3)
@@ -445,4 +492,6 @@ function collision(){
         }
     }
 }
+
+
 
