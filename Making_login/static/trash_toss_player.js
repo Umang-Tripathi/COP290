@@ -780,6 +780,32 @@ function check_collison_monster_with_trash(){
     }
 }
 function end_game(){
+
+
+
+    fetch('/trash_toss', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ score: score }),
+    })
+    .then(response => {
+        if (response.ok) {
+            // Handle success if needed
+            console.log('Score sent successfully');
+        } else {
+            // Handle error if needed
+            console.error('Failed to send score');
+        }
+    })
+    .catch(error => {
+        // Handle error if needed
+        console.error('Error:', error);
+    });
+
+
+
     background_music.pause();
     playGameOverSound();
     clearInterval(timerID);
@@ -835,3 +861,4 @@ function help_player(){
 
     
 }
+

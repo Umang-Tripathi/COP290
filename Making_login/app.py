@@ -1,21 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-import pandas as pd
-from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
-import time
-from jugaad_data.nse import stock_df
-import numpy as np
-from flask import Flask, request,render_template, redirect, jsonify
-import random
-
-
-
-UserName="DEFAULT"
-History=""
-Profit="NONE"
-
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Replace with your actual secret key
@@ -25,16 +11,30 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+
 # User Model
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     password_hash = db.Column(db.String(200), nullable=False)
-    
+    scores = db.relationship('Score', backref='user', lazy=True)
+
+
+# Score Model
+class Score(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    score = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+
+
 
 # Initialize Database within Application Context
 with app.app_context():
     db.create_all()
+
 
 @app.route('/')
 def index():
@@ -42,20 +42,25 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    try:
 
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+        if request.method == 'POST':
+            username = request.form['username']
+            password = request.form['password']
+            hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
-        new_user = User(username=username, password_hash=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-        
-        flash('Registration successful! Please login.')
-        return render_template('login_page.html')
+            new_user = User(username=username, password_hash=hashed_password)
+            db.session.add(new_user)
+            db.session.commit()
+            
+            flash('Registration successful! Please login.')
+            return render_template('login_page.html')
 
-    return render_template('register_page.html')
+        return render_template('register_page.html')
+    except:
+
+        flash('You have already registered, Please login.')
+        return render_template('register_page.html')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -76,12 +81,7 @@ def login():
         flash('Invalid username or password')
         return redirect(url_for('index'))
 
-@app.route('/dashboard')
-def dashboard():
-    if 'user_id' in session:
-        return render_template('welcome.html', username=session['username'])
-    else:
-        return redirect(url_for('index'))
+
 
 @app.route('/logout')
 def logout():
@@ -96,119 +96,11 @@ def home_page():
     else:
         return redirect(url_for('index'))
 
-
-# @app.route('/compare',methods = ['GET', 'POST','MULTIPEL'])
-# def compare_page():
-#     if 'user_id' in session:
-        
-    
-#         if request.method=='MULTIPEL':
-            
-#             stock_name = request.form['stock_name']
-#             no_of_years = int(request.form['no_of_years'])
-#             column_name = request.form['column_name']
-#             try:
-#                 db= retrieve_stock_data(stock_name,int(no_of_years))
-                
-        
-#                 x_values = db["DATE"].tolist()  
-#                 y_values = db[column_name].tolist()
-        
-#                 # Return the data as JSON
-#                 return jsonify({'x_values': x_values, 'y_values': y_values})
-#             except:
-#                 db = retrieve_stock_data("SBIN",int(no_of_years))
-#                 x_values = db["DATE"].tolist()  
-#                 y_values = db[column_name].tolist()
-        
-#                 # Return the data as JSON
-#                 return jsonify({'x_values': x_values, 'y_values': y_values})
-                
-#         return render_template('compare_page.html') 
-        
-#     else:
-#         return redirect(url_for('index'))
-
-@app.route('/profile',methods = ['GET', 'POST'])
-def profile_page():
-    if 'user_id' in session:
-        global History
-        global UserName
-        global Profit
-        History="<br><br><br>"+History
-       
-        return render_template('profile_page.html',str=UserName,history=History,Profit=Profit)
-    else:
-        return redirect(url_for('index'))
-        
 @app.route('/login',methods = ['GET', 'POST'])
 def login_page():
     return render_template('login_page.html')
 
-# @app.route('/filter',methods = ['VOLUME','GET','POST'])
-# def filter_page():
 
-#     if 'user_id' in session:
-#         if request.method=='POST':
-
-#             action = request.form['action']
-
-#             if (action=="compute_volume"):
-            
-#                 threshold=request.form['volume_threshold_name']           
-#                 s=Volume_Filter(int(threshold))           
-#                 h="VOLUME FILTER : Threshold="
-#                 h+=str(threshold  )
-
-#                 return render_template('filter_page.html',filter_data=s,HEDAING=h)
-        
-#             elif (action=="compute_price"):
-            
-#                 threshold=request.form['price_threshold_name']            
-#                 s=Price_filter(int(threshold))  
-#                 h="PRICE FILTER : Threshold="
-#                 h+=str(threshold  )       
-#                 return render_template('filter_page.html',filter_data=s,HEDAING=h)
-
-#             elif (action=="compute_range_52W"):
-            
-#                 threshold_minimum=request.form['range_52W_minimum_name']     
-#                 threshold_maximum=request.form['range_52W_maximum_name'] 
-#                 h="RANGE 52W FILTER : Minimum="
-#                 h+=str(threshold_minimum)  +" Maximum"+str(threshold_maximum)          
-#                 s=Range_52W_filter(int(threshold_minimum),int(threshold_maximum))        
-#                 return render_template('filter_page.html',filter_data=s,HEDAING=h)
-
-#             elif (action=="compute_Value"):
-            
-#                 threshold=request.form['Value_threshold_name']            
-#                 s=Value_filter(int(threshold)) 
-#                 h="VALUE FILTER : Threshold="
-#                 h+=str(threshold  )         
-#                 return render_template('filter_page.html',filter_data=s,HEDAING=h)
-
-#             elif (action=="compute_Average_Price"):
-            
-#                 threshold=request.form['Average_Price_threshold_name']            
-#                 s=Average_Price_filter(int(threshold))  
-#                 h="AVERAGE PRICE FILTER : Threshold="
-#                 h+=str(threshold  )        
-#                 return render_template('filter_page.html',filter_data=s,HEDAING=h)
-    
-#         return render_template('filter_page.html')
-
-#     else:
-#         return redirect(url_for('index'))
-
-# @app.route('/stocks', methods=['GET','POST','TRACK_RSI','ROLLING_MEAN','TRACK_EWM','TRACK_BB2','TRACK_BB1','TRACK_ATR'])
-
-
-@app.route('/trash_toss', methods=['GET','POST'])
-def main_page():
-    if 'user_id' in session:
-        return render_template('trash_toss.html')
-    else:
-        return redirect(url_for('index'))
 
 
 @app.route('/maze', methods=['GET','POST'])
@@ -226,107 +118,41 @@ def football_page():
     else:
         return redirect(url_for('index'))
 
-# def stock_page():
-#     if 'user_id' in session:
-#         if request.method == 'POST':
-#             stock_name = request.form['stock_name']
-#             no_of_years = request.form['no_of_years']
-#             column_name = request.form['column_name']
-    
-#             db= retrieve_stock_data(stock_name,int(no_of_years))
-            
-    
-#             x_values = db['DATE'].tolist()  
-#             y_values = db[column_name].tolist()
-    
-#             # Return the data as JSON
-#             return jsonify({'x_values': x_values, 'y_values': y_values})
-#         elif request.method == 'TRACK_RSI':
-            
-#             stock_name = request.form['stock_name']
-#             no_of_years = request.form['no_of_years']
-#             column_name = request.form['column_name']
-            
-#             db= track_RSI(stock_name,int(no_of_years))
-            
-    
-#             x_values = db['X'].tolist()  
-#             y_values = db['Y'].tolist()
-            
-#             # Return the data as JSON
-#             return jsonify({'x_values': x_values, 'y_values': y_values})
-#         elif request.method == 'ROLLING_MEAN':
-            
-#             stock_name = request.form['stock_name']
-#             no_of_years = request.form['no_of_years']
-#             column_name = request.form['column_name']
-            
-#             db= track_rolling_mean(stock_name,int(no_of_years))
-            
-    
-#             x_values = db['DATE'].tolist()  
-#             y_values = db['CP'].tolist()
-            
-#             # Return the data as JSON
-#             return jsonify({'x_values': x_values, 'y_values': y_values})
-#         elif request.method == 'TRACK_EWM':
-            
-#             stock_name = request.form['stock_name']
-#             no_of_years = request.form['no_of_years']
-#             column_name = request.form['column_name']
-            
-#             db= track_ewm(stock_name,int(no_of_years))
-            
-    
-#             x_values = db['X'].tolist()  
-#             y_values = db['Y'].tolist()
-            
-#             # Return the data as JSON
-#             return jsonify({'x_values': x_values, 'y_values': y_values})
-#         elif request.method == 'TRACK_BB1':
-            
-#             stock_name = request.form['stock_name']
-#             no_of_years = request.form['no_of_years']
-#             column_name = request.form['column_name']
-#             db= track_BB(stock_name,int(no_of_years))
-            
-    
-#             x_values = db['X'].tolist()  
-#             y_values = db['Y1'].tolist()
-            
-#             # Return the data as JSON
-#             return jsonify({'x_values': x_values, 'y_values': y_values})
-#         elif request.method == 'TRACK_BB2':
-            
-#             stock_name = request.form['stock_name']
-#             no_of_years = request.form['no_of_years']
-#             column_name = request.form['column_name']
-            
-#             db= track_BB(stock_name,int(no_of_years))
-            
-    
-#             x_values = db['X'].tolist()  
-#             y_values = db['Y2'].tolist()
-            
-#             # Return the data as JSON
-#             return jsonify({'x_values': x_values, 'y_values': y_values})
-#         elif request.method == 'TRACK_ATR':
-            
-#             stock_name = request.form['stock_name']
-#             no_of_years = request.form['no_of_years']
-#             column_name = request.form['column_name']
-            
-#             db= track_ATR(stock_name,int(no_of_years))
-            
-    
-#             x_values = db['X'].tolist()  
-#             y_values = db['Y'].tolist()
-            
-#             # Return the data as JSON
-#             return jsonify({'x_values': x_values, 'y_values': y_values})
-#         return render_template('stock_page.html')
-#     else:
-#         return redirect(url_for('index'))
+
+@app.route('/trash_toss', methods=['GET', 'POST'])
+def trash_toss():
+    if 'user_id' in session:
+        if request.method == 'POST':
+            # Here you should process the score sent from the JavaScript
+            # For example, you can retrieve the score from the request data
+            score = request.json.get('score')
+            print(score)
+            # if score is not None:   # Check if score is not None
+            user_id = session['user_id']
+            new_score = Score(score=score, user_id=user_id)
+            #print(new_score.score)
+            db.session.add(new_score)
+            db.session.commit()
+           # Do something with the score, like saving it to a database
+            return 'Score received successfully'  # Return a response to acknowledge successful receipt
+        return render_template('trash_toss.html')
+    else:
+        return redirect(url_for('index'))
+
+# Profile page
+@app.route('/profile')
+def profile_page():
+    if 'user_id' in session:
+        global UserName
+        user_id = session['user_id']
+        user = db.session.get(User,user_id)
+        max_score = db.session.query(db.func.max(Score.score)).filter(Score.user_id == user_id).scalar()
+        if max_score is None:
+            max_score = " Lets play the first game !! "  # Set max_score to 0 if no scores found
+        return render_template('profile_page.html', str=UserName, max_score1=max_score)
+    else:
+        return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
