@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="trash_toss_style.css">
+</head>
+<body >
+    <img src="./images/background/grass.jpg" id="background">
+
+    <div class="flex-container">
+        <div id="hero" class="hero-container">
+            <img src="./images/hero/hero_w.png" id="helper">
+            <img src="./images/hero/hero_w.png" id="hero_w">
+            <img src="./images/hero/hero_a.png" id="hero_a">
+            <img src="./images/hero/hero_s.png" id="hero_s">
+            <img src="./images/hero/hero_d.png" id="hero_d">
+            <img src="./images/hero/hero_as.png" id="hero_as">
+            <img src="./images/hero/hero_aw.png" id="hero_aw">
+            <img src="./images/hero/hero_sd.png" id="hero_sd">
+            <img src="./images/hero/hero_wd.png" id="hero_wd">
+        </div>
+        <div id="trash" class="trash-container">
+
+        </div>
+        <div id="monsters" class="monsters-container">
+
+        </div>
+        
+        <div id="trees">
+            <img src="./images/background/trees_h.png" id="up_tree">
+            <img src="./images/background/trees_v.png" id="left_tree">
+            <img src="./images/background/trees_v.png" id="right_tree">
+            
+            <img src="./images/background/trees_h.png" id="down_tree">
+        </div>
+        <div id="lives" class="lives-container">
+            <img src="./images/background/hearts.png" id="l1">
+            <img src="./images/background/hearts.png" id="l2">
+            <img src="./images/background/hearts.png" id="l3">
+            <img src="./images/background/hearts.png" id="l4">
+            <img src="./images/background/hearts.png" id="l5">
+            <img src="./images/background/hearts.png" id="l6">
+            <img src="./images/background/hearts.png" id="l7">
+            <img src="./images/background/hearts.png" id="l8">
+            <img src="./images/background/hearts.png" id="l9">
+            <img src="./images/background/hearts.png" id="l10">
+
+        </div>
+        <div id="instructions">
+            <div id="textprompt">
+                <div id="heading">
+                    <label>Instructions:<br></label><br>
+                </div>
+                <br>
+                <ul>
+                    <li>use WASD to move</li>
+                    <li>collect the garabge lying on the ground</li>
+                    <li>throw the garbage by pointing towards the direction</li>
+                    <li>throw the garbage according to its type</li>
+
+
+                </ul>
+                <button id="start"></button>
+                <button id="reset"></button>
+
+            </div>
+        </div>
+        <div id="game_data">
+            <p id="timer">00:00</p>
+            <p id="score">0</p>
+            <div id="game_Setting_posn">
+                <button id="settings"> </button>
+                <div id="game_settings" class="game_settings-container">
+                    <div id="shift_down">
+                        <button id="play_audio"></button>
+                        <button id="stop_audio"></button>
+                        <button id="reset2"></button>
+                        <button id="quit"></button>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+        
+    </div>
+    
+    
+    
+    <script src="trash_toss_player.js"></script>
+
+</body>
+</html>
