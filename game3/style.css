@@ -125,7 +125,7 @@ body {
 }
 #game_data{
     position:absolute;
-    top:60px;
+    top:30px;
     left:81.2vw;
     font-family: 'Gill Sans';
     font-size: 60px;
@@ -241,4 +241,32 @@ body {
     width:150%;
     height:150%;
 }
+@keyframes up-down {
+    0% { transform: translate(0px, 0.5px); }
+    10% { transform: translate(0px, 1px); }
+    20% { transform: translate(0px, 2px); }
+    30% { transform: translate(0px, 4px); }
+    40% { transform: translate(0px, 8px); }
+    50% { transform: translate(0px, 16px); }
+    60% { transform: translate(0px, 8px); }
+    70% { transform: translate(0px, 4px); }
+    80% { transform: translate(0px, 2px); }
+    90% { transform: translate(0px, 1px); }
+    100% { transform: translate(0px, 0.5px); }
+  }
+#arrow{
+    position:absolute;
+    top:100px;
+    left:100px;
+    height:40px;
+    width:40px;
+    background-image: url("./images/misclaneous/arrow.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    visibility: hidden;
+    animation: up-down 0.5s ease-in-out;
+    animation-iteration-count: infinite;
 
+}

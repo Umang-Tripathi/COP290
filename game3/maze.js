@@ -39,8 +39,9 @@ let quit=document.getElementById("quit")
 let reset2=document.getElementById("reset2")
 game_settings.style.visibility="hidden"
 
-const settings=document.getElementById("settings")
 
+const settings=document.getElementById("settings")
+const arrow=document.getElementById("arrow");
 var maze=[];
 var visit=[]
 let create_trash_timeout;
@@ -404,6 +405,7 @@ window.addEventListener("keydown",(value)=>{
                 let pp=document.getElementById("score");
                 pp.innerHTML=points;
                 createtrash();
+                //arrow.style.visibility="hiddens";
                 console.log("r1");
                 
                 
@@ -440,8 +442,9 @@ function createtrash(){
         trash_img.src="./images/trash/garb"+gg+".png";
         trash.style.top=(trashy*60+0)+"px";
         trash.style.left=(trashx*60+width)+"px";
-        trash_img.style.animation="blink normal 2s infinite ease-in-out";
-        
+        arrow.style.top=(trashy*60-30)+"px";
+        arrow.style.left=(trashx*60+width)+"px";
+        arrow.style.visibility="visible";
         trash.appendChild(trash_img);
         monsters.appendChild(trash);
         counter=5;
@@ -739,8 +742,9 @@ function change_timer(){
     
     
 
-    if(counter<=0){
+    if(counter<=1){
         //document.getElementById("timer").innerHTML=0;
+        arrow.style.visibility="hidden";
         timer_hourglass.src="./images/misclaneous/1.png";
     }
     else{
