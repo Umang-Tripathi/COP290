@@ -3,7 +3,8 @@ let name
 const player1=document.getElementById("player1");
 
 document.getElementById("start").addEventListener("click",()=>{
-
+    start_noise.play();
+    playBackground_Music()
     timerplayer2=setInterval(move_player2,10);
     timerball=setInterval(move_ball,10);
     timerplayer1=setInterval(move_player1,10);
@@ -36,6 +37,20 @@ var timerball=null;
 var points2=0;
 var points1=0;
 var current_rotation=0;
+const Background_Music = new Audio('./audio_files/crowd.mp3');
+const Hit1 = new Audio('./audio_files/hit1.mp3');
+const Hit2 = new Audio('./audio_files/hit2.mp3');
+const Hit3 = new Audio('./audio_files/hit3.mp3');
+const start_noise = new Audio('./audio_files/start.mp3');
+const colide = new Audio("./audio_files/colide.mp3");
+const run1 = new Audio("./audio_files/run.mp3");
+const run2= new Audio("./audio_files/run.mp3");
+function playBackground_Music() {
+    Background_Music.play();
+
+    Background_Music.loop = true;
+
+}
 function new_match(){
     clearInterval(timerplayer2);
     clearInterval(timerplayer1);
@@ -48,7 +63,7 @@ function update_match(){
     document.getElementById("ballImg").src="./images/trash/can"+(Math.floor(Math.random()*10+1))+"-removebg-preview.png";
     current_rotation=0
     document.getElementById("ballImg").style.rotate=(current_rotation)+"deg";
-
+    start_noise.play();
     timerplayer2=setInterval(move_player2,10);
     timerball=setInterval(move_ball,10);
     timerplayer1=setInterval(move_player1,10);
@@ -78,12 +93,12 @@ function update_match(){
 document.addEventListener("keydown",(value)=>{
     console.log(value.key)
     if(value.key=="a"){
-        
+        run1.play();
         move1=true;
 
     }
     if(value.key=="l"){
-
+        run2.play();
         move2=true;
 
     }
@@ -91,12 +106,12 @@ document.addEventListener("keydown",(value)=>{
 })
 document.addEventListener("keyup",(value)=>{
     if(value.key=="a"){
-
+        run1.pause();
         move1=false;
 
     }
     if(value.key=="l"){
-
+        run2.pause();
         move2=false;
 
     }
@@ -112,33 +127,38 @@ function move_player1(){
         x1+=speed1*Math.cos(rotation_player1*Math.PI/180);
         y1+=speed1*Math.sin(rotation_player1*Math.PI/180);
         if(Math.abs(x1-x2)<2 && Math.abs(y1-y2)<2){
-            speed1=-Math.min(0.3,speed1);
+            speed1=-0.3
+            colide.play();
         }
         if(x1<0){
-            speed1=-Math.min(0.3,speed1);
+            speed1=-Math.max(Math.min(0.3,speed1),0.1);
             x1=0;
-            rotation_player1+=10;
-            player1.style.transform="rotate("+rotation_player1+"deg)";
+            //colide.play();
+            /* rotation_player1+=10;
+            player1.style.transform="rotate("+rotation_player1+"deg)"; */
 
         }
         else if(x1>78){
-            speed1=-Math.min(0.3,speed1);
+            speed1=-Math.max(Math.min(0.3,speed1),0.1);
             x1=78;
-            rotation_player1+=10;
-            player1.style.transform="rotate("+rotation_player1+"deg)";
+            colide.play();
+            /* rotation_player1+=10;
+            player1.style.transform="rotate("+rotation_player1+"deg)"; */
         }
         if(y1<0){
-            speed1=-Math.min(0.3,speed1);
+            speed1=-Math.max(Math.min(0.3,speed1),0.1);
             y1=0;
-            rotation_player1+=10;
-            player1.style.transform="rotate("+rotation_player1+"deg)";
+            colide.play();
+            /* rotation_player1+=10;
+            player1.style.transform="rotate("+rotation_player1+"deg)"; */
 
         }
         else if(y1>76){
-            speed1=-Math.min(0.3,speed1)
+            speed1=-Math.max(Math.min(0.3,speed1),0.1);
             y1=76;
-            rotation_player1+=10;
-            player1.style.transform="rotate("+rotation_player1+"deg)";
+            colide.play();
+            /* rotation_player1+=10;
+            player1.style.transform="rotate("+rotation_player1+"deg)"; */
         }
         player1.style.top=y1+"vh";
         player1.style.left=x1+"vw";
@@ -164,32 +184,37 @@ function move_player2(){
         x2+=speed2*Math.cos(rotation_player2*Math.PI/180);
         y2+=speed2*Math.sin(rotation_player2*Math.PI/180);
         if(Math.abs(x1-x2)<2 && Math.abs(y1-y2)<2){
-            speed2=-Math.min(0.3,speed2);
+            speed2=-0.3;
+            colide.play();
         }
         if(x2<0){
-            speed2=-Math.min(0.3,speed2);
+            speed2=-Math.max(Math.min(0.3,speed2),0.1);
             x2=0;
             rotation_player2+=10;
+            colide.play();
             player2.style.transform="rotate("+rotation_player2+"deg)";
 
         }
         else if(x2>78){
-            speed2=-Math.min(0.3,speed2);
+            speed2=-Math.max(Math.min(0.3,speed2),0.1);
             x2=78;
             rotation_player2+=10;
+            colide.play();
             player2.style.transform="rotate("+rotation_player2+"deg)";
         }
         if(y2<0){
-            speed2=-Math.min(0.3,speed2);
+            speed2=-Math.max(Math.min(0.3,speed2),0.1);
             y2=0;
             rotation_player2+=10;
+            colide.play();
             player2.style.transform="rotate("+rotation_player2+"deg)";
 
         }
         else if(y2>76){
-            speed2=-Math.min(0.3,speed2)
+            speed2=-Math.max(Math.min(0.3,speed2),0.1);
             y2=76;
             rotation_player2+=10;
+            colide.play();
             player2.style.transform="rotate("+rotation_player2+"deg)";
         }
         player2.style.top=y2+"vh";
@@ -221,18 +246,22 @@ function move_ball(){
         ball_speed=0;
         document.getElementById("points1").innerHTML=points1;
         new_match();
-        
+        colide.play();
         //ball_posn_x=-5;
         ball_dir_x=-ball_dir_x;
     }
     else if(ball_posn_x<0){
         if(ball_posn_y<30){
             ball_posn_x=0;
+            ball_speed-=0.01;
             ball_dir_x=-ball_dir_x;
+            colide.play();
         }
         else if(ball_posn_y>50){
             ball_posn_x=0;
+            ball_speed-=0.01;
             ball_dir_x=-ball_dir_x;
+            colide.play();
         }
         else if(ball_speed==0){
             points1+=1;
@@ -248,19 +277,27 @@ function move_ball(){
     else if(ball_posn_x>86){
         points2+=1;
         ball_speed=0;
+        
         document.getElementById("points2").innerHTML=points2;
         new_match();
         //ball_posn_x=86;
         ball_dir_x=-ball_dir_x;
+        colide.play();
     }
     else if(ball_posn_x>76){
         if(ball_posn_y<30){
             ball_posn_x=76;
+            ball_speed-=0.01;
+
             ball_dir_x=-ball_dir_x;
+            colide.play();
         }
         else if(ball_posn_y>50){
             ball_posn_x=76;
+            ball_speed-=0.01;
+
             ball_dir_x=-ball_dir_x;
+            colide.play();
         }
         else if(ball_speed==0){
             points1+=1;
@@ -280,16 +317,25 @@ function move_ball(){
 
     if(ball_posn_y<0){
         ball_posn_y=0;
+        ball_speed-=0.01;
+
         ball_dir_y=-ball_dir_y;
+        colide.play();
     }
     else if(ball_posn_y<30){
         if(ball_posn_x<0){
             ball_posn_y=30;
+            ball_speed-=0.01;
+
             ball_dir_y=-ball_dir_y;
+            colide.play();
         }
         if(ball_posn_x>76){
             ball_posn_y=30;
+            ball_speed-=0.01;
+
             ball_dir_y=-ball_dir_y;
+            colide.play();
         }
         
         
@@ -297,16 +343,25 @@ function move_ball(){
     }
     else if(ball_posn_y>76){
         ball_posn_y=76;
+        ball_speed-=0.01;
+
         ball_dir_y=-ball_dir_y;
+        colide.play();
     }
     else if(ball_posn_y>50){
         if(ball_posn_x<0){
             ball_posn_y=50;
+            ball_speed-=0.01;
+
             ball_dir_y=-ball_dir_y;
+            colide.play();
         }
         if(ball_posn_x>76){
             ball_posn_y=50;
+            ball_speed-=0.01;
+
             ball_dir_y=-ball_dir_y;
+            colide.play();
         }
     } 
     if(ball_posn_x!=temp_ball_posn_x || ball_posn_y!=temp_ball_posn_y){
@@ -323,7 +378,16 @@ function collision(){
             ball_speed=2*speed1;
             
             speed1=-Math.min(0.1,1);
-            
+            let p=Math.floor(Math.random()*3)
+            if(p==0){
+                Hit1.play();
+            }
+            else if(p==1){
+                Hit2.play();
+            }
+            else{
+                Hit3.play();
+            }
             ball_dir_x=Math.cos(rotation_player1*Math.PI/180);
             ball_dir_y=Math.sin(rotation_player1*Math.PI/180);
         }
@@ -332,6 +396,16 @@ function collision(){
             speed2=-Math.min(0.1,1);
             ball_dir_x=Math.cos(rotation_player2*Math.PI/180);
             ball_dir_y=Math.sin(rotation_player2*Math.PI/180);
+            let p=Math.floor(Math.random()*3)
+            if(p==0){
+                Hit1.play();
+            }
+            else if(p==1){
+                Hit2.play();
+            }
+            else{
+                Hit3.play();
+            }
         }
     }
     else{
@@ -342,12 +416,32 @@ function collision(){
             
             ball_dir_x=Math.cos(rotation_player1*Math.PI/180);
             ball_dir_y=Math.sin(rotation_player1*Math.PI/180);
+            let p=Math.floor(Math.random()*3)
+            if(p==0){
+                Hit1.play();
+            }
+            else if(p==1){
+                Hit2.play();
+            }
+            else{
+                Hit3.play();
+            }
         }
         else if(Math.abs(x2-ball_posn_x)<2 && Math.abs(y2-ball_posn_y)<2){
             ball_speed=max(2,ball_speed);
             speed2=-Math.min(0.1,1);
             ball_dir_x=(Math.cos(rotation_player2*Math.PI/180)-ball_dir_x)/2;
             ball_dir_y=(Math.sin(rotation_player2*Math.PI/180)-ball_dir_y)/2;
+            let p=Math.floor(Math.random()*3)
+            if(p==0){
+                Hit1.play();
+            }
+            else if(p==1){
+                Hit2.play();
+            }
+            else{
+                Hit3.play();
+            }
         }
     }
 }
