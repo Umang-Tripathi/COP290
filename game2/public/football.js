@@ -1,44 +1,126 @@
-
+let name_of_player;
+name_of_player = prompt("Enter your name ");
+let opponent_name;
+let i_am_player1=false;
+let i_am_player2=false;
 const socket = io();
-
+socket.emit('name', name_of_player);
 
 socket.on('moving_player', (move_who) => {
-    if(move_who=="player1"){
+    let names=move_who.split("/")
+    let name1=names[0];
+    let name2=names[1];
+    if(i_am_player1){
+        if(name1=="player1" && name2==name_of_player){
         
-        run1.play();
-        move1=true;
-        
+            run1.play();
+            move1=true;
+            
+        }
+        else if(name2==opponent_name){
+            
+            run2.play();
+            move2=true;
+            
+        }
     }
     else{
+        if(name1=="player1" && name2==opponent_name){
         
-        run2.play();
-        move2=true;
-        
+            run1.play();
+            move1=true;
+            
+        }
+        else if(name2==name_of_player){
+            
+            run2.play();
+            move2=true;
+            
+        }
     }
+    
 });
 socket.on("stop_player",(stop_who)=>{
-    if(stop_who=="player1"){
+    let names=stop_who.split("/")
+    let name1=names[0];
+    let name2=names[1];
+    if(i_am_player1){
         
-        run1.pause();
-        move1=false;
+        if(name1=="player1" && name2==name_of_player){
         
+            run1.pause();
+            move1=false;
+            
+        }
+        else if(name2==opponent_name){
+            
+            run2.pause();
+            move2=false;
+            
+        }
     }
     else{
+        if(name1=="player1" && name2==opponent_name){
         
-        run2.pause();
-        move2=false;
-        
+            run1.pause();
+            move1=false;
+            
+        }
+        else if(name2==name_of_player){
+            
+            run2.pause();
+            move2=false;
+            
+        }
     }
 })
+/* socket.on("connecting players 1",(total_name)=>{
+    let names=total_name.split("/")
+    let name1=names[0];
+    let name2=names[1];
+    console.log(":",name1,name2);
 
+    if(name1==name_of_player){
+        i_am_player1=true;
+        opponent_name=name2;
+        console.log("?",opponent_name);
+
+    }
+    if(name2==name_of_player){
+        i_am_player2=true;
+        opponent_name=name1;
+        console.log("?",opponent_name);
+    }
+    console.log("my name",name_of_player);
+    console.log("opponent name",opponent_name);
+}) */
+socket.on("connecting players 2",(total_name)=>{
+    let names=total_name.split("/")
+    let name1=names[0];
+    let name2=names[1];
+    console.log(":",name1,name2);
+    if(name1==name_of_player){
+        i_am_player2=true;
+        opponent_name=name2;
+        console.log("?",opponent_name);
+    }
+    if(name2==name_of_player){
+        i_am_player1=true;
+        opponent_name=name1;
+        console.log("?",opponent_name);
+    }
+    console.log("my name",name_of_player);
+    console.log("opponent name",opponent_name);
+})
 document.addEventListener("keydown",(value)=>{
-    console.log(value.key)
+    //console.log(value.key)
     if(value.key==" "){
         if(i_am_player1){
-            socket.emit('moving_player', "player1");
+            
+            socket.emit("moving_player","player1/"+name_of_player);
         }
         else if(i_am_player2){
-            socket.emit('moving_player', "player2");
+            socket.emit('moving_player', "player2/"+name_of_player);
         }
         
 
@@ -48,24 +130,25 @@ document.addEventListener("keydown",(value)=>{
 document.addEventListener("keyup",(value)=>{
     if(value.key==" "){
         if(i_am_player1){
-            socket.emit('stop_player', "player1");
+            socket.emit('stop_player', "player1/"+name_of_player);
         }
         else if(i_am_player2){
-            socket.emit('stop_player', "player2");
+            socket.emit('stop_player', "player2/"+name_of_player);
         }
         
 
     }
     
 })
-i_am_player1=false;
-i_am_player2=false;
+
 
 const player1=document.getElementById("player1");
 
 document.getElementById("start").addEventListener("click",()=>{
+    
+    
     start_noise.play();
-    playBackground_Music()
+    playBackground_Music();
     timerplayer2=setInterval(move_player2,10);
     timerball=setInterval(move_ball,10);
     timerplayer1=setInterval(move_player1,10);
