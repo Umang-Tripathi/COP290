@@ -1,10 +1,10 @@
 let name_of_player;
-name_of_player = prompt("Enter your name ");
+
 let opponent_name;
 let i_am_player1=false;
 let i_am_player2=false;
 const socket = io();
-socket.emit('name', name_of_player);
+
 
 socket.on('moving_player1', (move_who) => {
 
@@ -63,7 +63,6 @@ socket.on('moving_player2', (move_who) => {
     
     
 });
-
 socket.on("connecting players 2",(total_name)=>{
     let names=total_name.split("/")
     let name1=names[0];
@@ -120,22 +119,32 @@ document.addEventListener("keyup",(value)=>{
     
 })
 
-
 const player1=document.getElementById("player1");
 
 document.getElementById("start").addEventListener("click",()=>{
-    
-    
+    name_of_player=document.getElementById("username").value;
+
+    socket.emit('name', name_of_player);
+    document.getElementById("start").style.visibility="hidden";
     start_noise.play();
     playBackground_Music();
     
 })
+document.addEventListener("DOMContentLoaded", function() {
+    var inputField = document.getElementById("username");
+  
+    inputField.addEventListener("input", function(event) {
+      var inputValue = event.target.value;
+      var alphabetsOnly = inputValue.replace(/[^A-Za-z]/g, '');
+      inputField.value = alphabetsOnly;
+    });
+  });
 function start_the_game(){
     
     timerplayer2=setInterval(move_player2,10);
     timerball=setInterval(move_ball,10);
     timerplayer1=setInterval(move_player1,10);
-    document.getElementById("start").style.visibility="hidden";
+    document.getElementById("username").style.visibility="hidden";
     document.getElementById("INSTRUCTION").style.visibility="hidden";
     document.getElementById("ball").style.visibility="visible";
 }
