@@ -78,8 +78,8 @@ var trashx=0;
 var trashy=0;
 var NOT_died=true;
 
-const Background_Music = new Audio('../static/maze_audio/game_bg_game_back4.mp3');
-const end_game_Music = new Audio('../static/maze_audio/game_over2.mp3');
+const Background_Music = new Audio('./audio_files/game_bg_game_back4.mp3');
+const end_game_Music = new Audio('./audio_files/game_over2.mp3');
 function playBackground_Music() {
     Background_Music.play();
     Background_Music.setAttribute('autoplay', 'autoplay');
@@ -107,9 +107,6 @@ stop_audio.addEventListener("click",()=>{
 reset2.addEventListener("click",()=>{
     NOT_died=true;
     window.location.reload();
-})
-quit.addEventListener("click",()=>{
-    window.location.href = "/home";
 })
 
 
@@ -146,7 +143,7 @@ for(let i=0;i<size_of_maze;i++){
         element.id="("+i+","+j+")";
         let img_element=document.createElement("img");
         img_element.id="("+i+","+j+")"+"img";
-        img_element.src='../static/maze_images/walls/tree.png';
+        img_element.src='./images/walls/tree.png';
         element.appendChild(img_element);
         mazeArea.appendChild(element);
         
@@ -166,7 +163,7 @@ for(let i=0;i<size_of_maze;i++){
         
         let img_element=document.createElement("img");
         img_element.id="V("+i+","+j+")"+"img";
-        img_element.src='../static/maze_images/walls/tree.png';
+        img_element.src='./images/walls/tree.png';
         element.appendChild(img_element);
         mazeArea.appendChild(element);
     }
@@ -183,7 +180,7 @@ for(let i=0;i<size_of_maze-1;i++){
         element.id="H("+i+","+j+")";
         let img_element=document.createElement("img");
         img_element.id="H("+i+","+j+")"+"img";
-        img_element.src='../static/maze_images/walls/tree.png';
+        img_element.src='./images/walls/tree.png';
         element.appendChild(img_element);
         
         mazeArea.appendChild(element);
@@ -201,7 +198,7 @@ for(let i=0;i<size_of_maze-1;i++){
         element.id="B("+i+","+j+")";
         let img_element=document.createElement("img");
         img_element.id="B("+i+","+j+")"+"img";
-        img_element.src='../static/maze_images/walls/tree.png';
+        img_element.src='./images/walls/tree.png';
         element.appendChild(img_element);
         
         mazeArea.appendChild(element);
@@ -442,7 +439,7 @@ function createtrash(){
         let trash_img=document.createElement("img");
         trash_img.id="trash("+trashx+","+trashy+")"+"_img";
         let gg=Math.floor(Math.random()*4)
-        trash_img.src="../static/maze_images/trash/garb"+gg+".png";
+        trash_img.src="./images/trash/garb"+gg+".png";
         trash.style.top=(trashy*60+0)+"px";
         trash.style.left=(trashx*60+width)+"px";
         arrow.style.top=(trashy*60-30)+"px";
@@ -481,7 +478,7 @@ function createmonster(){
         monster.style.left=(monsterY[monsterNumber-1]*60+width)+"px";
         let mm = document.createElement("img");
         mm.id="IMGmonster"+monsterNumber;
-        mm.src="../static/maze_images/monster/monster.png";
+        mm.src="./images/monster/monster.png";
         
         monster.appendChild(mm);
         monsters.appendChild(monster);
@@ -555,7 +552,7 @@ function updateMaze(){
                 }
                 let log_image=document.createElement('img');
                 log_image.id="H("+newmaze[i][0]+","+newmaze[i][1]+")img_log";
-                log_image.src="../static/maze_images/walls/log.png";
+                log_image.src="./images/walls/log.png";
                 let temp2=document.getElementById("H("+newmaze[i][0]+","+newmaze[i][1]+")");
                 temp2.appendChild(log_image);
 
@@ -582,7 +579,7 @@ function updateMaze(){
                 
                 let log_image=document.createElement('img');
                 log_image.id="H("+(newmaze[i][0]-1)+","+newmaze[i][1]+")img_log";
-                log_image.src="../static/maze_images/walls/log.png";
+                log_image.src="./images/walls/log.png";
                 let temp2=document.getElementById("H("+(newmaze[i][0]-1)+","+newmaze[i][1]+")");
                 temp2.appendChild(log_image);
             adj[newmaze[i][0]][newmaze[i][1]].push(newmaze[i][0]-1+newmaze[i][1]*size_of_maze);
@@ -607,7 +604,7 @@ function updateMaze(){
                 }
                 let log_image=document.createElement('img');
                 log_image.id="V("+newmaze[i][0]+","+(newmaze[i][1]-1)+")img_log";
-                log_image.src="../static/maze_images/walls/log.png";
+                log_image.src="./images/walls/log.png";
                 let temp2=document.getElementById("V("+newmaze[i][0]+","+(newmaze[i][1]-1)+")");
                 temp2.appendChild(log_image);
                 adj[newmaze[i][0]][newmaze[i][1]].push(newmaze[i][0]+(newmaze[i][1]-1)*size_of_maze);
@@ -632,7 +629,7 @@ function updateMaze(){
                 }
                 let log_image=document.createElement('img');
                 log_image.id="V("+newmaze[i][0]+","+newmaze[i][1]+")img_log";
-                log_image.src="../static/maze_images/walls/log.png";
+                log_image.src="./images/walls/log.png";
                 let temp2=document.getElementById("V("+newmaze[i][0]+","+newmaze[i][1]+")");
                 temp2.appendChild(log_image);
                 adj[newmaze[i][0]][newmaze[i][1]].push(newmaze[i][0]+(newmaze[i][1]+1)*size_of_maze);
@@ -731,28 +728,6 @@ function check_kill(){
             
             //mazeArea.style.backgroundColor="#FFCCCB"
 
-
-            fetch('/maze', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ score: points }),   /// here!!!
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Handle success if needed
-                    console.log('Score sent successfully');
-                } else {
-                    // Handle error if needed
-                    console.error('Failed to send score');
-                }
-            })
-            .catch(error => {
-                // Handle error if needed
-                console.error('Error:', error);
-            });
-
             return;
 
         }
@@ -770,10 +745,10 @@ function change_timer(){
     if(counter<=1){
         //document.getElementById("timer").innerHTML=0;
         arrow.style.visibility="hidden";
-        timer_hourglass.src="../static/maze_images/misclaneous/1.png";
+        timer_hourglass.src="./images/misclaneous/1.png";
     }
     else{
-        timer_hourglass.src="../static/maze_images/misclaneous/"+counter+".png";
+        timer_hourglass.src="./images/misclaneous/"+counter+".png";
         //document.getElementById("timer").innerHTML=counter;
         counter-=1;
         

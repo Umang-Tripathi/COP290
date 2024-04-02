@@ -13,20 +13,50 @@
         <div class="info">
           
           <p id="data">
-            Hello , {{str}} ! 
+            Hello, {{ str }}! 
             <br>
             <br>
-            Below is your History of transaction
-            
-
-            {{history|safe}}
-
-            
-            
           </p>
-          <p id="profit_total">
-            
+
+          <p id="max_score">
+            Your maximum score for Trash Toss is: {{ max_score1 }}
           </p>
+
+          <br>
+          <br>           
+
+          <p id="global_max_score">
+            Global maximum score for Trash Toss is: {{ global_max_score }}
+          </p>
+
+          <p id="top_users">
+            Top Scores for Trash Toss:
+            <ul>
+              {% for user, score in top_users %}
+                <li>{{ user }}: {{ score }}</li>
+              {% endfor %}
+            </ul>
+          </p>
+
+          <p id="max_score_maze">
+            Your maximum score for Maze  is: {{ max_score_maze }}
+          </p>
+
+
+          <p id="global_max_score_maze">
+            Global maximum score for Maze is: {{ global_max_score_maze }}
+          </p>
+
+          <p id="top_users_maze">
+            Top Scores for Maze :
+            <ul>
+              {% for user, score in top_users_maze %}
+                <li>{{ user }}: {{ score }}</li>
+              {% endfor %}
+            </ul>
+          </p>
+
+
 
         </div>
         <img class="vector" src="{{ url_for('static', filename='img/watermarklogo.png') }}" />

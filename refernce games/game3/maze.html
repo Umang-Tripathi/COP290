@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='maze_style.css') }}">
+    <link rel="stylesheet" href="maze_style.css">
 
 </head>
 <body >
@@ -15,10 +15,10 @@
             
             <div id="maze_area" class="maze-container"></div>
             <div id="hero" class="hero-container">
-                <img src="{{ url_for('static', filename='maze_images/hero/hero_w.png') }}" id="hero_w">
-                <img src="{{ url_for('static', filename='maze_images/hero/hero_a.png') }}" id="hero_a">
-                <img src="{{ url_for('static', filename='maze_images/hero/hero_s.png') }}" id="hero_s">
-                <img src="{{ url_for('static', filename='maze_images/hero/hero_d.png') }}" id="hero_d">
+                <img src="./images/hero/hero_w.png" id="hero_w">
+                <img src="./images/hero/hero_a.png" id="hero_a">
+                <img src="./images/hero/hero_s.png" id="hero_s">
+                <img src="./images/hero/hero_d.png" id="hero_d">
 
             </div>
             <div id="monsters" class ="monster-container">
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div id="game_data">
-                <img id="timer_hourglass" src="{{ url_for('static', filename='maze_images/misclaneous/1.png') }}"></img>
+                <img id="timer_hourglass" src="./images/misclaneous/1.png"></img>
                 <p id="score">0</p>
                 
 
@@ -65,6 +65,6 @@
         
         
     </div>
-    <script src="{{ url_for('static', filename='maze.js') }}"></script>
+    <script src="maze.js"></script>
 </body>
 </html>

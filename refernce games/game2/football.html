@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='football_style.css') }}">
+    <link rel="stylesheet" href="football_style.css">
 </head>
     <div id="arena">
         
-        <img src="{{ url_for('static', filename='football_images/audience.png') }}" id="audience">
+        <img src="./images/audience.png" id="audience">
         
         <div id="border"></div>
         
         <div id="ground">
-            <img src="{{ url_for('static', filename='football_images/ground.png') }}" id="groundImg">
+            <img src="./images/ground.png" id="groundImg">
             <div id="player1">
                 <div id="head"></div>
             </div>
@@ -22,16 +22,16 @@
 
             </div>
             <div id="ball">
-                <img src="{{ url_for('static', filename='football_images/ball.png') }}" id="ballImg">
+                <img src="./images/ball.png" id="ballImg">
             </div>
         </div>
         <div id="goalpost2">
             
-            <img src="{{ url_for('static', filename='football_images/goal.png') }}" id="net2">
+            <img src="./images/goal.png" id="net2">
             
         </div>
         <div id="goalpost1">
-            <img src="{{ url_for('static', filename='football_images/goal.png') }}" id="net1">
+            <img src="./images/goal.png" id="net1">
             
         </div>
         <p id="points2">0</p>;
@@ -56,7 +56,7 @@
 
     </div>
 
-    <script src="{{ url_for('static', filename='football.js') }}"></script>
+    <script src="football.js"></script>
     
 </body>
 </html>

@@ -26,7 +26,7 @@ var y2=38;
 var speed2=0;
 var move2=false;
 var timerplayer2=null;
-document.getElementById("ballImg").src="../static/football_images/trash/can"+(Math.floor(Math.random()*10+1))+"-removebg-preview.png";
+document.getElementById("ballImg").src="./images/trash/can"+(Math.floor(Math.random()*10+1))+"-removebg-preview.png";
 const ball=document.getElementById("ball");
 var ball_posn_x=39;
 var ball_posn_y=38;
@@ -44,14 +44,14 @@ let quit=document.getElementById("quit")
 let reset2=document.getElementById("reset2")
 game_settings.style.visibility="hidden"
 
-const Background_Music = new Audio('../static/football_audio/crowd.mp3');
-const Hit1 = new Audio('../static/football_audio/hit1.mp3');
-const Hit2 = new Audio('../static/football_audio/hit2.mp3');
-const Hit3 = new Audio('../static/football_audio/hit3.mp3');
-const start_noise = new Audio('../static/football_audio/start.mp3');
-const colide = new Audio("../static/football_audio/colide.mp3");
-const run1 = new Audio("../static/football_audio/run.mp3");
-const run2= new Audio("../static/football_audio/run.mp3");
+const Background_Music = new Audio('./audio_files/crowd.mp3');
+const Hit1 = new Audio('./audio_files/hit1.mp3');
+const Hit2 = new Audio('./audio_files/hit2.mp3');
+const Hit3 = new Audio('./audio_files/hit3.mp3');
+const start_noise = new Audio('./audio_files/start.mp3');
+const colide = new Audio("./audio_files/colide.mp3");
+const run1 = new Audio("./audio_files/run.mp3");
+const run2= new Audio("./audio_files/run.mp3");
 
 settings.addEventListener("click",()=>{
     if(game_settings.style.visibility=="hidden"){
@@ -88,9 +88,6 @@ stop_audio.addEventListener("click",()=>{
 reset2.addEventListener("click",()=>{
     window.location.reload();
 })
-quit.addEventListener("click",()=>{
-    window.location.href = "/home";
-})
 function playBackground_Music() {
     Background_Music.play();
     Background_Music.volume=0.7
@@ -108,7 +105,7 @@ function new_match(){
 }
 function update_match(){
     Background_Music.volume=0.7
-    document.getElementById("ballImg").src="../static/football_images/trash/can"+(Math.floor(Math.random()*10+1))+"-removebg-preview.png";
+    document.getElementById("ballImg").src="./images/trash/can"+(Math.floor(Math.random()*10+1))+"-removebg-preview.png";
     current_rotation=0
     document.getElementById("ballImg").style.rotate=(current_rotation)+"deg";
     start_noise.play();
