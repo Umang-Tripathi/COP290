@@ -6,121 +6,96 @@ let i_am_player2=false;
 const socket = io();
 socket.emit('name', name_of_player);
 
-socket.on('moving_player', (move_who) => {
+socket.on('moving_player1', (move_who) => {
+
     let names=move_who.split("/")
     let name1=names[0];
     let name2=names[1];
-    if(i_am_player1){
-        if(name1=="player1" && name2==name_of_player){
-        
-            run1.play();
-            move1=true;
-            
-        }
-        else if(name2==opponent_name){
-            
-            run2.play();
-            move2=true;
-            
-        }
+    if(name_of_player==name2){
+        x1=parseFloat(names[2]);
+        y1=parseFloat(names[3]);
+        rotation_player1=parseFloat(names[4]);
+        speed1=parseFloat(names[5]);
+        player1.style.top=y1+"vh";
+        player1.style.left=x1+"vw";
+        player1.style.rotate=(rotation_player1)+"deg";
     }
-    else{
-        if(name1=="player1" && name2==opponent_name){
-        
-            run1.play();
-            move1=true;
-            
-        }
-        else if(name2==name_of_player){
-            
-            run2.play();
-            move2=true;
-            
-        }
+    else if(opponent_name==name2){
+        x1=parseFloat(names[2]);
+        y1=parseFloat(names[3]);
+        rotation_player1=parseFloat(names[4]);
+        speed1=parseFloat(names[5]);
+        player1.style.top=y1+"vh";
+        player1.style.left=x1+"vw";
+        player1.style.rotate=(rotation_player1)+"deg";
     }
     
+
+    
 });
-socket.on("stop_player",(stop_who)=>{
-    let names=stop_who.split("/")
+socket.on('moving_player2', (move_who) => {
+    let names=move_who.split("/")
     let name1=names[0];
     let name2=names[1];
-    if(i_am_player1){
+    if(name_of_player==name2){
+        x2=parseFloat(names[2]);
+        y2=parseFloat(names[3]);
+        rotation_player2=parseFloat(names[4]);
+        speed2=parseFloat(names[5]);
         
-        if(name1=="player1" && name2==name_of_player){
-        
-            run1.pause();
-            move1=false;
-            
-        }
-        else if(name2==opponent_name){
-            
-            run2.pause();
-            move2=false;
-            
-        }
+        player2.style.top=y2+"vh";
+        player2.style.left=x2+"vw";
+        player2.style.rotate=(180+rotation_player2)+"deg";
+        //console.log(x2,y2,rotation_player2,speed2)
     }
-    else{
-        if(name1=="player1" && name2==opponent_name){
+    else if(opponent_name==name2){
+        x2=parseFloat(names[2]);
+        y2=parseFloat(names[3]);
+        rotation_player2=parseFloat(names[4]);
+        speed2=parseFloat(names[5]);
         
-            run1.pause();
-            move1=false;
-            
-        }
-        else if(name2==name_of_player){
-            
-            run2.pause();
-            move2=false;
-            
-        }
+        player2.style.top=y2+"vh";
+        player2.style.left=x2+"vw";
+        player2.style.rotate=(180+rotation_player2)+"deg";
+        //console.log(x2,y2,rotation_player2,speed2)
     }
-})
-/* socket.on("connecting players 1",(total_name)=>{
-    let names=total_name.split("/")
-    let name1=names[0];
-    let name2=names[1];
-    console.log(":",name1,name2);
+    
+    
+    
+});
 
-    if(name1==name_of_player){
-        i_am_player1=true;
-        opponent_name=name2;
-        console.log("?",opponent_name);
-
-    }
-    if(name2==name_of_player){
-        i_am_player2=true;
-        opponent_name=name1;
-        console.log("?",opponent_name);
-    }
-    console.log("my name",name_of_player);
-    console.log("opponent name",opponent_name);
-}) */
 socket.on("connecting players 2",(total_name)=>{
     let names=total_name.split("/")
     let name1=names[0];
     let name2=names[1];
     console.log(":",name1,name2);
     if(name1==name_of_player){
-        i_am_player2=true;
+        i_am_player1=true;
         opponent_name=name2;
         console.log("?",opponent_name);
     }
     if(name2==name_of_player){
-        i_am_player1=true;
+        i_am_player2=true;
         opponent_name=name1;
         console.log("?",opponent_name);
     }
     console.log("my name",name_of_player);
     console.log("opponent name",opponent_name);
+    setTimeout(start_the_game,2000);
+    
 })
 document.addEventListener("keydown",(value)=>{
     //console.log(value.key)
     if(value.key==" "){
         if(i_am_player1){
+            run1.play();
+            move1=true;
             
-            socket.emit("moving_player","player1/"+name_of_player);
+
         }
         else if(i_am_player2){
-            socket.emit('moving_player', "player2/"+name_of_player);
+            run2.play();
+            move2=true;
         }
         
 
@@ -130,10 +105,14 @@ document.addEventListener("keydown",(value)=>{
 document.addEventListener("keyup",(value)=>{
     if(value.key==" "){
         if(i_am_player1){
-            socket.emit('stop_player', "player1/"+name_of_player);
+            run1.pause();
+            move1=false;
+            
+
         }
         else if(i_am_player2){
-            socket.emit('stop_player', "player2/"+name_of_player);
+            run2.pause();
+            move2=false;
         }
         
 
@@ -149,14 +128,17 @@ document.getElementById("start").addEventListener("click",()=>{
     
     start_noise.play();
     playBackground_Music();
+    
+})
+function start_the_game(){
+    
     timerplayer2=setInterval(move_player2,10);
     timerball=setInterval(move_ball,10);
     timerplayer1=setInterval(move_player1,10);
     document.getElementById("start").style.visibility="hidden";
     document.getElementById("INSTRUCTION").style.visibility="hidden";
     document.getElementById("ball").style.visibility="visible";
-})
-
+}
 var rotation_player1=0;
 var x1=32;
 var y1=38;
@@ -187,7 +169,6 @@ let stop_audio=document.getElementById("stop_audio")
 let quit=document.getElementById("quit")
 let reset2=document.getElementById("reset2")
 game_settings.style.visibility="hidden"
-
 const Background_Music = new Audio('./audio_files/crowd.mp3');
 const Hit1 = new Audio('./audio_files/hit1.mp3');
 const Hit2 = new Audio('./audio_files/hit2.mp3');
@@ -278,7 +259,7 @@ function update_match(){
 
 }
 function move_player1(){
-    if(move1){
+    if(move1 && i_am_player1){
         
         speed1+=0.007;
         speed1=Math.min(2.6,speed1);
@@ -319,25 +300,24 @@ function move_player1(){
             /* rotation_player1+=10;
             player1.style.transform="rotate("+rotation_player1+"deg)"; */
         }
-        player1.style.top=y1+"vh";
-        player1.style.left=x1+"vw";
-
+        
+        socket.emit("moving_player1","player1/"+name_of_player+"/"+x1+"/"+y1+"/"+rotation_player1+"/"+speed1);
 
 
 
 
     }
-    else if(i_am_player1 || i_am_player2){
+    else if(i_am_player1){
         
         speed1=0
         rotation_player1+=1.5;
+        socket.emit("moving_player1","player1/"+name_of_player+"/"+x1+"/"+y1+"/"+rotation_player1+"/"+speed1);
 
-        player1.style.transform="rotate("+rotation_player1+"deg)";
 
     }
 }
 function move_player2(){
-    if(move2){
+    if(move2 && i_am_player2){
         speed2+=0.007;
         speed2=Math.min(2.6,speed2);
 
@@ -377,19 +357,18 @@ function move_player2(){
             colide.play();
             //player2.style.transform="rotate("+rotation_player2+"deg)";
         }
-        player2.style.top=y2+"vh";
-        player2.style.left=x2+"vw";
-
+       
+        socket.emit("moving_player2","player2/"+name_of_player+"/"+x2+"/"+y2+"/"+rotation_player2+"/"+speed2);
 
 
 
 
     }
-    else if(i_am_player1 || i_am_player2){
+    else if(i_am_player2){
         speed2=0
         rotation_player2+=1.5;
+        socket.emit("moving_player2","player2/"+name_of_player+"/"+x2+"/"+y2+"/"+rotation_player2+"/"+speed2);
 
-        player2.style.transform="rotate("+rotation_player2+"deg)";
 
     }
 }
