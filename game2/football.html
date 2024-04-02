@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+    <div id="arena">
+        
+        <img src="./images/audience.png" id="audience">
+        
+        <div id="border"></div>
+        
+        <div id="ground">
+            <img src="./images/ground.png" id="groundImg">
+            <div id="player1">
+                <div id="head"></div>
+            </div>
+            <div id="player2">
+                <div id="head"></div>
+
+            </div>
+            <div id="ball">
+                <img src="./images/ball.png" id="ballImg">
+            </div>
+        </div>
+        <div id="goalpost2">
+            
+            <img src="./images/goal.png" id="net2">
+            
+        </div>
+        <div id="goalpost1">
+            <img src="./images/goal.png" id="net1">
+            
+        </div>
+        <p id="points2">0</p>;
+        <p id="points1">0</p>;
+        <P ID="INSTRUCTION">USE A TO MOVE BLUE PLAYER <br>AND L TO MOVE RED PLAYER</P>
+        <button id="start"></button>
+        <div id="game_data">
+
+            <button id="settings"> </button>
+            <div id="game_settings" class="game_settings-container">
+                <div id="shift_down">
+                    <button id="play_audio"></button>
+                    <button id="stop_audio"></button>
+                    <button id="reset2"></button>
+                    <button id="quit"></button>
+                </div>
+            </div>
+            
+
+        </div>
+        
+
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="football.js"></script>
+    
+</body>
+</html>
