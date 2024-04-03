@@ -81,11 +81,18 @@ io.on('connection', (socket) => {
         //console.log(name);
         io.emit('moving_player2', name);
     });
+    socket.on('moving_ball',(ball)=>{
+        io.emit('moving_ball',ball);
+    })
     
 
 });
-server.listen(3000, () => {
-  console.log('server running at http://localhost:3000');
+const port = process.env.PORT || 3000;
+server.listen(port, '0.0.0.0', () => {
+   
+    console.log('server running at port :'+port);
+    console.log("get IP adress of the server");
+
 });
 function assign_room(name1,name2){
     let total_name1=name1+"/"+name2;

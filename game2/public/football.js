@@ -63,6 +63,20 @@ socket.on('moving_player2', (move_who) => {
     
     
 });
+socket.on('moving_ball',(ballz)=>{
+    let b=ballz.split("/");
+    ball_posn_x=parseFloat(b[0]);
+    ball_posn_y=parseFloat(b[1]);
+    ball_dir_x=parseFloat(b[2]);
+    ball_dir_y=parseFloat(b[3]);
+    ball_speed=parseFloat(b[4]);
+    current_rotation=parseFloat(b[5]);
+    ball.style.top=ball_posn_y+"vh";
+    ball.style.left=ball_posn_x+"vw";
+    document.getElementById("ballImg").style.rotate=(current_rotation)+"deg";
+
+    
+})
 socket.on("connecting players 2",(total_name)=>{
     if(!i_am_player1 && !i_am_player2){
         let names=total_name.split("/")
@@ -526,10 +540,10 @@ function move_ball(){
     } 
     if(ball_posn_x!=temp_ball_posn_x || ball_posn_y!=temp_ball_posn_y){
         current_rotation+=10*ball_speed;
-        document.getElementById("ballImg").style.rotate=(current_rotation)+"deg";
+        
     }
-    ball.style.top=ball_posn_y+"vh";
-    ball.style.left=ball_posn_x+"vw";
+    socket.emit('moving_ball',ball_posn_x+"/"+ball_posn_y+"/"+ball_dir_x+"/"+ball_dir_y+"/"+ball_speed+"/"+current_rotation);
+    
 
 }
 function collision(){
