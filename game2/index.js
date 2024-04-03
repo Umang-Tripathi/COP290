@@ -18,29 +18,58 @@ io.on('connection', (socket) => {
     console.log('a user connected');
     socket.on('disconnect', () => {
 
-
+        for(let pl=0;pl<rooms.length;pl++){
+            if(rooms[pl].length==0){
+                rooms.splice(pl,1);
+            }
+            if(rooms[pl].length==1){
+                rooms.splice(pl,1);
+            }
+            else{
+                if(socket.username==rooms[pl][0]){
+                    rooms[pl].splice(0,1);
+                    io.emit('win_by_technicality',rooms[pl][0]);
+                    
+                    break;
+    
+                }   
+                else if(socket.username==rooms[pl][1]){
+                    rooms[pl].splice(1,1);
+                    io.emit('win_by_technicality',rooms[pl][0]);
+                    break;
+                }
+            }
+            
+        }
         
-        console.log('user disconnected');
+        console.log("user ",socket.username," disconnected");
     });
     socket.on('name',(name)=>{
         
-        if(rooms.length!=0 && name!=null){
-            if(rooms[rooms.length-1].length==1){
-                rooms[rooms.length-1].push(name);
-                //console.log(name,rooms[rooms.length-1][0])
-                console.log(rooms)
-                assign_room(name,rooms[rooms.length-1][0]);
+        if(name!=null){
+            socket.username=name;
+            no_room_clear=true;
+            for(let pl=0;pl<rooms.length;pl++){
+                if(rooms[pl].length==1 && name!=rooms[pl][0]){
+                    
+                    rooms[pl].push(name);
+                    //console.log(name,rooms[rooms.length-1][0])
+                    console.log(rooms)
+                    assign_room(name,rooms[pl][0]);
+                    no_room_clear=false;
+                    break;
+
+                    
+                }
             }
-            else{
-                
+            if(no_room_clear){
+                        
                 rooms.push([name]);
                 console.log(rooms)
             }
+            
         }
-        else if(name!=null){
-            rooms.push([name]);
-            console.log(rooms)
-        }
+        
     })
 
     

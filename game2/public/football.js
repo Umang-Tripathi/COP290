@@ -64,23 +64,26 @@ socket.on('moving_player2', (move_who) => {
     
 });
 socket.on("connecting players 2",(total_name)=>{
-    let names=total_name.split("/")
-    let name1=names[0];
-    let name2=names[1];
-    console.log(":",name1,name2);
-    if(name1==name_of_player){
-        i_am_player1=true;
-        opponent_name=name2;
-        console.log("?",opponent_name);
+    if(!i_am_player1 && !i_am_player2){
+        let names=total_name.split("/")
+        let name1=names[0];
+        let name2=names[1];
+        console.log(":",name1,name2);
+        if(name1==name_of_player){
+            i_am_player1=true;
+            opponent_name=name2;
+            console.log("?",opponent_name);
+        }
+        if(name2==name_of_player){
+            i_am_player2=true;
+            opponent_name=name1;
+            console.log("?",opponent_name);
+        }
+        console.log("my name",name_of_player);
+        console.log("opponent name",opponent_name);
+        setTimeout(start_the_game,2000);
     }
-    if(name2==name_of_player){
-        i_am_player2=true;
-        opponent_name=name1;
-        console.log("?",opponent_name);
-    }
-    console.log("my name",name_of_player);
-    console.log("opponent name",opponent_name);
-    setTimeout(start_the_game,2000);
+    
     
 })
 document.addEventListener("keydown",(value)=>{
@@ -118,7 +121,12 @@ document.addEventListener("keyup",(value)=>{
     }
     
 })
-
+socket.on('win_by_technicality', (name) => {
+    console.log(name," opponents disconnected")
+    if(name==name_of_player){
+        won_beacuse_left();
+    }
+})
 const player1=document.getElementById("player1");
 
 document.getElementById("start").addEventListener("click",()=>{
@@ -135,8 +143,10 @@ document.addEventListener("DOMContentLoaded", function() {
   
     inputField.addEventListener("input", function(event) {
       var inputValue = event.target.value;
-      var alphabetsOnly = inputValue.replace(/[^A-Za-z]/g, '');
+      var alphabetsOnly = inputValue.replace(/[^A-Za-z]/g,"");
       inputField.value = alphabetsOnly;
+    
+
     });
   });
 function start_the_game(){
@@ -596,5 +606,11 @@ function collision(){
     }
 }
 
-
-
+function won_beacuse_left(){
+    document.getElementById("INSTRUCTION").style.visibility="visible";
+    document.getElementById("INSTRUCTION").innerHTML="PLAYER 2 LEFT , <br> YOU WON !!!";
+    setTimeout(reload_page,5000);
+}
+function reload_page(){
+    window.location.reload();
+}
