@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="football_style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
     <div id="arena">
         
@@ -36,8 +36,9 @@
         </div>
         <p id="points2">0</p>;
         <p id="points1">0</p>;
-        <P ID="INSTRUCTION">USE A TO MOVE BLUE PLAYER <br>AND L TO MOVE RED PLAYER</P>
+        <P ID="INSTRUCTION">PRESS SPACEBAR TO MOVE PLAYER </P>
         <button id="start"></button>
+        <input id="username" type="text" placeholder="Enter Name">
         <div id="game_data">
 
             <button id="settings"> </button>
@@ -55,7 +56,7 @@
         
 
     </div>
-
+    <script src="/socket.io/socket.io.js"></script>
     <script src="football.js"></script>
     
 </body>
