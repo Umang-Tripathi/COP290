@@ -1,5 +1,5 @@
 let name_of_player;
-
+let name_typed;
 let opponent_name;
 let i_am_player1=false;
 let i_am_player2=false;
@@ -131,7 +131,8 @@ const player1=document.getElementById("player1");
 
 document.getElementById("start").addEventListener("click",()=>{
     name_of_player=document.getElementById("username").value;
-
+    name_typed=name_of_player;
+    name_of_player=name_of_player+Math.floor(Math.random()*1000000000);
     socket.emit('name', name_of_player);
     document.getElementById("start").style.visibility="hidden";
     start_noise.play();
