@@ -81,7 +81,8 @@ socket.on("connecting players 2",(total_name)=>{
         }
         console.log("my name",name_of_player);
         console.log("opponent name",opponent_name);
-        setTimeout(start_the_game,2000);
+        setTimeout(start_the_game,1000);
+        start_noise.play();
     }
     
     
@@ -197,7 +198,7 @@ const start_noise = new Audio('./audio_files/start.mp3');
 const colide = new Audio("./audio_files/colide.mp3");
 const run1 = new Audio("./audio_files/run.mp3");
 const run2= new Audio("./audio_files/run.mp3");
-
+const cheer= new Audio("./audio_files/cheer.m4a");
 settings.addEventListener("click",()=>{
     if(game_settings.style.visibility=="hidden"){
         game_settings.style.visibility="visible"
@@ -243,13 +244,13 @@ function new_match(){
     clearInterval(timerplayer2);
     clearInterval(timerplayer1);
     clearInterval(timerball);
-
-    Background_Music.volume=1
+    cheer.play();
+    cheer.volume=0.5;
     setTimeout(update_match,5000);
 
 }
 function update_match(){
-    Background_Music.volume=0.7
+    Background_Music.volume=1
     document.getElementById("ballImg").src="./images/trash/can"+(Math.floor(Math.random()*10+1))+"-removebg-preview.png";
     current_rotation=0
     document.getElementById("ballImg").style.rotate=(current_rotation)+"deg";
@@ -608,6 +609,7 @@ function collision(){
 }
 
 function won_beacuse_left(){
+    cheer.play();
     document.getElementById("INSTRUCTION").style.visibility="visible";
     document.getElementById("INSTRUCTION").innerHTML="PLAYER 2 LEFT , <br> YOU WON !!!";
     setTimeout(reload_page,5000);
