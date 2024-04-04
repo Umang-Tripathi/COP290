@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>PROFILE</title>
-    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='profile_screen.css') }}"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='profile2.css') }}">
   </head>
   <body>
     <div class="element">
@@ -13,53 +13,69 @@
         <div class="info">
           
           <p id="data">
-            Hello, {{ str }}! 
+            Hi ! , {{ str }} Let's see how you are performing
             <br>
             <br>
           </p>
 
-          <p id="max_score">
-            Your maximum score for Trash Toss is: {{ max_score1 }}
+          <p id="TT">
+              Trash_Toss  
           </p>
 
-          <br>
-          <br>           
-
-          <p id="global_max_score">
-            Global maximum score for Trash Toss is: {{ global_max_score }}
+          <p id="max_score_tt">
+             Your Maximum score : {{ max_score1 }}
           </p>
 
-          <p id="top_users">
-            Top Scores for Trash Toss:
-            <ul>
+          <p id="global_max_score_tt">
+            Global Maximum Score : {{ global_max_score }}
+          </p>
+
+          <p id = "head_leaderboard_tt">
+            Top Scores for Trash_Toss:
+          </p>
+
+            <ul style="list-style-type: none" id ="top_users_tt ul">
+              <li id="column_headings"><strong>Username</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Max Score</strong></li>
               {% for user, score in top_users %}
-                <li>{{ user }}: {{ score }}</li>
+              <br>
+              <li id ="top_users_tt ul li">{{ user }} &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;{{ score }}</li>
               {% endfor %}
-            </ul>
+          </ul>
+
+
+          <p id="TM">
+            Trash in Maze  
           </p>
+
 
           <p id="max_score_maze">
-            Your maximum score for Maze  is: {{ max_score_maze }}
+            Your maximum score : {{ max_score_maze }}
           </p>
 
 
           <p id="global_max_score_maze">
-            Global maximum score for Maze is: {{ global_max_score_maze }}
+            Global maximum score : {{ global_max_score_maze }}
           </p>
 
+          <p id = "head_leaderboard_maze">
+            Top Scores for Trash_in_Maze:
+          </p>
+
+
           <p id="top_users_maze">
-            Top Scores for Maze :
-            <ul>
+            <ul style="list-style-type: none">
+              <li id="column_headings"><strong>Username</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Max Score</strong></li>
               {% for user, score in top_users_maze %}
-                <li>{{ user }}: {{ score }}</li>
+              <br>
+              <li id ="top_users_tt ul li">{{ user }} &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;{{ score }}</li>
               {% endfor %}
             </ul>
           </p>
 
-
+          <!-- src="{{ url_for('static', filename='img/watermarklogo.png') }}" -->
 
         </div>
-        <img class="vector" src="{{ url_for('static', filename='img/watermarklogo.png') }}" />
+        <img class="vector"  />
         <div class="NAV-BAR">
 
           <img class="profile_image" src="{{ url_for('static', filename='img/profile.png') }}"  />
@@ -74,16 +90,8 @@
             </div>
             
 
-            <a href="/home">
-            <img class="logo_image" src="{{ url_for('static', filename='img/logo.png') }}" />
-            </a>
-            
-            <a href="/stocks">
-            <img class="vector-2" src="{{ url_for('static', filename='img/stock.png') }}" />
-            </a>
-
-            <a href="/compare">
-            <img class="vector-3" src="{{ url_for('static', filename='img/compare.png') }}" />
+            <a href="/home" id="exit">
+            <img class="logo_image" src="{{ url_for('static', filename='img/exit.png') }}" />
             </a>
 
           </div>

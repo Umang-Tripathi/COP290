@@ -1,0 +1,203 @@
+body {
+    overflow-x: hidden;
+    /* background-color: #191919; */
+    background-image: url("./img/Bg2.jpg");
+    background-size: cover; /* Cover the entire background */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+    margin: 0; /* Reset default margin */
+    font-family: "Roboto", sans-serif; /* Use Roboto font */
+  }
+
+  .exit{
+    width:10px;
+    height: 10px;
+  }
+  
+
+  .logo_image {
+    width: 250px;
+    height: 80px; /* Adjust the height as desired */
+}
+
+
+  .element {
+    position: relative;
+    margin: 0 auto; /* Center the element horizontally */
+    max-width: 1440px; /* Set maximum width */
+    height: auto; /* Allow height to adjust based on content */
+  }
+  
+  .text-wrapper {
+    margin-top: 100px; /* Adjust spacing from top */
+    text-align: center; /* Center align text */
+    color: rgb(13, 239, 13); /* White text color */
+    border-radius: 5px;
+    font-size: 70px; /* Increase font size */
+
+    letter-spacing: 1px; /* Add letter spacing */
+  }
+  
+  .info {
+    margin-top: 40px; 
+    background-color: rgb(7, 182, 127,0.2); 
+    border-radius: 12px;
+    border: 2px solid;
+    padding: 40px; 
+    font-weight: 600;
+    left: 90px;
+    color: #d4d4d4;
+    text-align: center;
+    font-family: "Roboto-SemiBold", Helvetica;
+    font-size: 32px;
+    line-height: normal;
+    white-space: nowrap;
+
+
+
+  }
+  
+  #data {
+    text-align: center;
+    color: white; /* White text color */
+    border-radius: 3px;
+    font-size: 50px; /* Reduce font size */
+    margin-bottom: 20px; /* Add spacing between paragraphs */
+    position: center;
+  }
+  
+  #TT {
+    color: greenyellow /* Blue color */;
+    font-size: 56px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  #max_score_tt,
+  #global_max_score_tt
+   {
+    color: white; /* Dark gray color */
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+  }
+
+  #head_leaderboard_tt {
+    color: white; /* Dark gray color */
+    text-align: center;
+    font-size: 44px;
+    margin-top: 20px;
+  }
+  
+  #TM {
+    color: greenyellow /* Blue color */;
+    font-size: 56px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  #max_score_maze,
+  #global_max_score_maze
+   {
+    color: white; /* Dark gray color */
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+  }
+
+  #head_leaderboard_maze {
+    color: white; /* Dark gray color */
+    text-align: center;
+    font-size: 44px;
+    margin-top: 20px;
+  }
+  
+  #profit_total {
+    color: #ffffff; /* White text color */
+    font-size: 24px; /* Reduce font size */
+  }
+  
+  .vector {
+    position: absolute;
+    top: 20%; /* Adjust vertical position */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+  }
+  
+  .NAV-BAR {
+    position: fixed; /* Fixed positioning */
+    top: 0; /* Stick to the top */
+    left: 0; /* Stick to the left */
+    width: 100%; /* Full width */
+    height: 52px; /* Adjust height */
+    background-color: #1f1f1f;
+    border: 2px solid #ffffff05; /* Light border color */
+  }
+  
+  .logo_image,
+  .profile_image,
+  .vector-2,
+  .vector-3 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* Center vertically */
+  }
+  
+  .logo_image {
+    left: 20px; /* Adjust left position */
+  }
+  
+  .profile_image {
+    right: 20px; /* Adjust right position */
+  }
+  
+  .vector-2 {
+    right: 80px; /* Adjust right position */
+  }
+  
+  .vector-3 {
+    right: 140px; /* Adjust right position */
+  }
+  
+  #profile_button {
+    background: transparent;
+    border: none;
+    cursor: pointer; /* Change cursor to pointer */
+  }
+  
+  .dropdown {
+    position: relative; /* Relative positioning */
+    display: inline-block;
+    margin-right: 20px; /* Add spacing between elements */
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* Position below dropdown */
+    right: 0; /* Align right */
+    width: 100px; /* Adjust width */
+    background-color: #CA9849;
+    border: 2px solid #ffffff05; /* Light border color */
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown-content a {
+    display: block;
+    color: #1f1f1f;
+    padding: 5px 0; /* Add vertical padding */
+    text-decoration: none;
+    font-size: 14px; /* Increase font size */
+    text-align: center; /* Center align text */
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #1F1F1F;
+    color: #CA9849;
+  }

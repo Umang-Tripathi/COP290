@@ -44,14 +44,14 @@ with app.app_context():
 
 @app.route('/')
 def index():
-    return render_template('login_page.html')
+    return render_template('login2.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     try:
 
         if request.method == 'POST':
-            username = request.form['username']
+            username = request.form['email']
             password = request.form['password']
             hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
@@ -60,18 +60,18 @@ def register():
             db.session.commit()
             
             flash('Registration successful! Please login.')
-            return render_template('login_page.html')
+            return render_template('login2.html')
 
-        return render_template('register_page.html')
+        return render_template('register2.html')
     except:
 
         flash('You have already registered, Please login.')
-        return render_template('register_page.html')
+        return render_template('register2.html')
 
 @app.route('/login', methods=['POST'])
 def login():
-    username = request.form['username']
-    password = request.form['password']
+    username = request.form['email']
+    password = request.form['password']  
     user = User.query.filter_by(username=username).first()
 
     if user and check_password_hash(user.password_hash, password):
@@ -80,8 +80,8 @@ def login():
        
         global UserName
         UserName=user.username
-        return render_template('home_page.html')
-        return render_template('home_page.html')
+        return render_template('home2.html')
+        return render_template('home2.html')
         
     else:
         flash('Invalid username or password')
@@ -98,13 +98,13 @@ def logout():
 @app.route('/home')
 def home_page():
     if 'user_id' in session:
-        return render_template('home_page.html')
+        return render_template('home2.html')
     else:
         return redirect(url_for('index'))
 
 @app.route('/login',methods = ['GET', 'POST'])
 def login_page():
-    return render_template('login_page.html')
+    return render_template('login2.html')
 
 
 
