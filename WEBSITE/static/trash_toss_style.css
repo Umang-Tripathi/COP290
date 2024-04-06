@@ -1,5 +1,7 @@
 body {
     overflow: hidden; /* Hide scrollbars */
+    cursor: crosshair;
+    
 }
 
     
@@ -9,7 +11,8 @@ body {
     top:-10px;
     left: -10px;
     width :102vw;
-    height:102vh
+    height:102vh;
+    user-select: none;
 }
 .flex-container {
     display: flex;
@@ -53,16 +56,19 @@ body {
     top : -20px;
     left: -20px;
     user-select: none;
+ 
 }
 #lives{
     position :absolute;
     top:10px;
     left:20px;
+    user-select: none;
 }
 .lives-container img {
     position :relative;
     height: 40px;
     width: 40px;
+    user-select: none;
     user-select: none;
     
 }
@@ -70,6 +76,7 @@ body {
     position: absolute;
     top:0px;
     left:0px;
+    user-select: none;
     
 }
 #up_tree{
@@ -77,6 +84,7 @@ body {
     top:-5vh;
     left:-10px;
     height:100px;
+    user-select: none;
     
 
 }
@@ -85,6 +93,7 @@ body {
     top:90vh;
     left:-10px;
     height:100px;
+    user-select: none;
     
 
 }
@@ -93,6 +102,7 @@ body {
     left:-1vw;
     top:10px;
     width:80px;
+    user-select: none;
     
 
 }
@@ -101,6 +111,7 @@ body {
     left:96vw;
     top:10px;
     width:80px;
+    user-select: none;
     
 
 }
@@ -113,10 +124,11 @@ body {
     position :absolute;
     height: 150%;
     width: 150%;
-    top : -20px;
+    top : -2dd0px;
     left: -20px;
     user-select: none;
     visibility: 0.5;
+    user-select: none;
 }
 
 

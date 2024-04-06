@@ -325,7 +325,7 @@ function update_game(){
         m.style.position="absolute";
         m.style.height="80px";
         m.style.width="80px";
-        m.style.border="1px solid"
+        
         let xx=0;
         let yy=0;
         if(Math.random()>0.5){
@@ -470,6 +470,7 @@ function update_game(){
         prev_hearts=hearts;
         for(let i=prev_hearts+1;i<=10;i++){
             let hr = document.getElementById("l"+i);
+            
             hr.style.visibility="hidden";
         }
     }
