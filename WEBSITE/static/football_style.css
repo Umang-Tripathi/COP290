@@ -1,3 +1,6 @@
+body{
+    cursor:pointer;
+}
 #border{
     position: absolute;
     height:80vh;

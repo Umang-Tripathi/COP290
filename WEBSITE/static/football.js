@@ -52,7 +52,7 @@ const start_noise = new Audio('../static/football_audio/start.mp3');
 const colide = new Audio("../static/football_audio/colide.mp3");
 const run1 = new Audio("../static/football_audio/run.mp3");
 const run2= new Audio("../static/football_audio/run.mp3");
-
+const cheer= new Audio("../static/football_audio/cheer.m4a");
 settings.addEventListener("click",()=>{
     if(game_settings.style.visibility=="hidden"){
         game_settings.style.visibility="visible"
@@ -72,6 +72,7 @@ play_audio.addEventListener("click",()=>{
     start_noise.volume=1;
     run1.volume=1;
     run2.volume=1;
+    cheer.volume=1;
     
 
 })
@@ -84,6 +85,7 @@ stop_audio.addEventListener("click",()=>{
     start_noise.volume=0;
     run1.volume=0;
     run2.volume=0;
+    cheer.volume=0;
 })
 reset2.addEventListener("click",()=>{
     window.location.reload();
@@ -101,7 +103,8 @@ function new_match(){
     clearInterval(timerplayer2);
     clearInterval(timerplayer1);
     clearInterval(timerball);
-
+    cheer.play();
+    cheer.volume=0.5;
     Background_Music.volume=1
     setTimeout(update_match,5000);
 
@@ -116,6 +119,7 @@ function update_match(){
     timerball=setInterval(move_ball,10);
     timerplayer1=setInterval(move_player1,10);
     rotation_player1=0;
+    ball.style.visibility="visible";
     x1=32;
     y1=38;
     speed1=0;
@@ -289,7 +293,7 @@ function move_ball(){
     let temp_ball_posn_y=ball_posn_y;
     ball_posn_x+=(ball_dir_x)*ball_speed;
     ball_posn_y+=(ball_dir_y)*ball_speed;
-    if(ball_posn_x<-5){
+    if(ball_posn_x<-4){
         points1+=1;
         ball_speed=0;
         document.getElementById("points1").innerHTML=points1;
@@ -298,88 +302,96 @@ function move_ball(){
         //ball_posn_x=-5;
         ball_dir_x=-ball_dir_x;
     }
-    else if(ball_posn_x<0){
-        if(ball_posn_y<30){
+    else if(ball_posn_x<=0){
+        if(ball_posn_y<25){
             ball_posn_x=0;
             ball_speed-=0.01;
             ball_dir_x=-ball_dir_x;
             colide.play();
         }
-        else if(ball_posn_y>50){
+        else if(ball_posn_y>55){
             ball_posn_x=0;
             ball_speed-=0.01;
             ball_dir_x=-ball_dir_x;
             colide.play();
         }
-        else if(ball_speed==0){
+        else{
             points1+=1;
             ball_speed=0;
             document.getElementById("points1").innerHTML=points1;
             ball_posn_x=39;
             ball_posn_y=38;
+            ball.style.visibility="hidden";
             new_match();
 
         }
         
     }
-    else if(ball_posn_x>86){
-        points2+=1;
-        ball_speed=0;
-        
-        document.getElementById("points2").innerHTML=points2;
-        new_match();
-        //ball_posn_x=86;
-        ball_dir_x=-ball_dir_x;
-        colide.play();
-    }
-    else if(ball_posn_x>76){
-        if(ball_posn_y<30){
+    else if(ball_posn_x>=76){
+        if(ball_posn_y<25){
+            ball_posn_x=76;
+            ball_speed-=0.01;
+            
+
+            ball_dir_x=-ball_dir_x;
+            colide.play();
+        }
+        else if(ball_posn_y>51){
             ball_posn_x=76;
             ball_speed-=0.01;
 
             ball_dir_x=-ball_dir_x;
             colide.play();
         }
-        else if(ball_posn_y>50){
-            ball_posn_x=76;
-            ball_speed-=0.01;
-
-            ball_dir_x=-ball_dir_x;
-            colide.play();
-        }
-        else if(ball_speed==0){
+        else{
             points1+=1;
             ball_speed=0;
             document.getElementById("points2").innerHTML=points2;
             new_match();
             ball_posn_x=39;
             ball_posn_y=38;
-
+            ball.style.visibility="hidden";
         }
         
+    }
+    else{
+        if(ball_posn_y<=0){
+            ball_posn_y=0;
+            ball_speed-=0.01;
+    
+            ball_dir_y=-ball_dir_y;
+            colide.play();
+        }
+        else if(ball_posn_y>=76){
+            ball_posn_y=76;
+            ball_speed-=0.01;
+    
+            ball_dir_y=-ball_dir_y;
+            colide.play();
+        }
     }
     
     
 
 
 
-    if(ball_posn_y<0){
+    /* if(ball_posn_y<=0){
         ball_posn_y=0;
         ball_speed-=0.01;
 
         ball_dir_y=-ball_dir_y;
         colide.play();
     }
-    else if(ball_posn_y<30){
+    else if(ball_posn_y<=25){
         if(ball_posn_x<0){
-            ball_posn_y=30;
+            ball_posn_y=25;
             ball_speed-=0.01;
 
             ball_dir_y=-ball_dir_y;
             colide.play();
         }
-        if(ball_posn_x>76){
-            ball_posn_y=30;
+        if(ball_posn_x>=80){
+            ball_posn_y=25;
             ball_speed-=0.01;
 
             ball_dir_y=-ball_dir_y;
@@ -389,29 +401,23 @@ function move_ball(){
         
 
     }
-    else if(ball_posn_y>76){
-        ball_posn_y=76;
-        ball_speed-=0.01;
-
-        ball_dir_y=-ball_dir_y;
-        colide.play();
-    }
-    else if(ball_posn_y>50){
-        if(ball_posn_x<0){
-            ball_posn_y=50;
+    
+    else if(ball_posn_y>=55){
+        if(ball_posn_x<=0){
+            ball_posn_y=55;
             ball_speed-=0.01;
 
             ball_dir_y=-ball_dir_y;
             colide.play();
         }
-        if(ball_posn_x>76){
-            ball_posn_y=50;
+        if(ball_posn_x>=80){
+            ball_posn_y=55;
             ball_speed-=0.01;
 
             ball_dir_y=-ball_dir_y;
             colide.play();
         }
-    } 
+    }  */
     if(ball_posn_x!=temp_ball_posn_x || ball_posn_y!=temp_ball_posn_y){
         current_rotation+=10*ball_speed;
         document.getElementById("ballImg").style.rotate=(current_rotation)+"deg";
