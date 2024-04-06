@@ -346,7 +346,9 @@ start.addEventListener("click",()=>{
     
 
 })
+
 window.addEventListener("keydown",(value)=>{
+
     if(NOT_died){
         let defaultx=x;
         let defaulty=y;
