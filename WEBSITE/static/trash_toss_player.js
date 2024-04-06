@@ -208,6 +208,7 @@ function update_game(){
         m.style.position="absolute";
         m.style.height="20px";
         m.style.width="20px";
+        //m.style.border="1px solid";
         let xx=Math.floor(Math.random()*(width*0.9))+width*0.05;
         let yy=Math.floor(Math.random()*(height*0.9))+height*0.05;
         //console.log(xx,yy);
@@ -231,7 +232,7 @@ function update_game(){
             //console.log("./trash/glass/glass"+choose)
             kk.id=new_trash_id+"img"
             var temp_trash= {posn_x : xx , posn_y : yy,trash_id :new_trash_id,dir_x:1,dir_y:1,speed:0,type:0,holded:false,angle:0}
-        
+            
             trash.push(temp_trash);
             trash_container.appendChild(m);
             m.appendChild(kk);
@@ -322,8 +323,9 @@ function update_game(){
         
         let m=document.createElement("div");
         m.style.position="absolute";
-        m.style.height="40px";
-        m.style.width="40px";
+        m.style.height="80px";
+        m.style.width="80px";
+        m.style.border="1px solid"
         let xx=0;
         let yy=0;
         if(Math.random()>0.5){
@@ -728,7 +730,21 @@ function check_collison_monster_with_trash(){
 
     for(let i=0;i<monster.length;i++){
         for(let j=0;j<trash.length;j++){
-            if(trash[j].speed!=0 && Math.abs(trash[j].posn_x-monster[i].posn_x)<20 && Math.abs(trash[j].posn_y-monster[i].posn_y)<20){
+            let do_it=false;
+            if(trash[j].posn_x>=monster[i].posn_x && trash[j].posn_y>=monster[i].posn_y && trash[j].posn_x-monster[i].posn_x<70 && trash[j].posn_y-monster[i].posn_y<70){
+                do_it=true;
+            }
+            if(trash[j].posn_x>=monster[i].posn_x && trash[j].posn_y<=monster[i].posn_y && trash[j].posn_x-monster[i].posn_x<70 && -trash[j].posn_y+monster[i].posn_y<10){
+                do_it=true;
+            }
+            if(trash[j].posn_x<=monster[i].posn_x && trash[j].posn_y>=monster[i].posn_y && -trash[j].posn_x+monster[i].posn_x<10 && trash[j].posn_y-monster[i].posn_y<70){
+                do_it=true;
+            }
+            if(trash[j].posn_x<=monster[i].posn_x && trash[j].posn_y<=monster[i].posn_y && -trash[j].posn_x+monster[i].posn_x<10 && -trash[j].posn_y+monster[i].posn_y<10){
+                do_it=true;
+            }
+            if(trash[j].speed!=0 && do_it){
+                
                 if(trash[j].type!=monster[i].type){
                     playheart_reduce_Sound();
                     hearts-=1;
