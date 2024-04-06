@@ -344,7 +344,7 @@ function move_ball(){
             colide.play();
         }
         else{
-            points1+=1;
+            points2+=1;
             ball_speed=0;
             document.getElementById("points2").innerHTML=points2;
             new_match();
