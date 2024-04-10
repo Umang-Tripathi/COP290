@@ -1,0 +1,332 @@
+body {
+    overflow: hidden; /* Hide scrollbars */
+    cursor: crosshair;
+    
+}
+
+    
+
+#background{
+    position: absolute;
+    top:-10px;
+    left: -10px;
+    width :102vw;
+    height:102vh;
+    user-select: none;
+}
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#hero{
+    position:absolute;
+    height: 20px;
+    width:  20px;
+    top:49vh;
+    left:49vw;
+    
+
+}
+#helper{
+    position:absolute;
+    left:50px;
+    visibility: hidden;
+    top:-50px;
+    width:40px;
+    height:40px;
+}
+.hero-container img {
+    position :absolute;
+    height: 300%;
+    width: 300%;
+    top : -20px;
+    left: -20px;
+    user-select: none;
+}
+#trash{
+    position:absolute;
+    top:0px;
+    left:0px;
+}
+.trash-container div > img {
+    position :absolute;
+    height: 300%;
+    width: 300%;
+    top : -20px;
+    left: -20px;
+    user-select: none;
+ 
+}
+#lives{
+    position :absolute;
+    top:10px;
+    left:20px;
+    user-select: none;
+}
+.lives-container img {
+    position :relative;
+    height: 40px;
+    width: 40px;
+    user-select: none;
+    user-select: none;
+    
+}
+#trees{
+    position: absolute;
+    top:0px;
+    left:0px;
+    user-select: none;
+    
+}
+#up_tree{
+    position: absolute;
+    top:-5vh;
+    left:-10px;
+    height:100px;
+    user-select: none;
+    
+
+}
+#down_tree{
+    position: absolute;
+    top:90vh;
+    left:-10px;
+    height:100px;
+    user-select: none;
+    
+
+}
+#left_tree{
+    position: absolute;
+    left:-1vw;
+    top:10px;
+    width:80px;
+    user-select: none;
+    
+
+}
+#right_tree{
+    position: absolute;
+    left:96vw;
+    top:10px;
+    width:80px;
+    user-select: none;
+    
+
+}
+#monster{
+    position:absolute;
+    top:0px;
+    left:0px;
+}
+.monsters-container div > img {
+    position :absolute;
+    height: 150%;
+    width: 150%;
+    top : -2dd0px;
+    left: -20px;
+    user-select: none;
+    visibility: 0.5;
+    user-select: none;
+}
+
+
+
+
+@keyframes shake {
+    0% { transform: translate(0.5px, 0.5px) rotate(0deg); }
+    10% { transform: translate(-0.5px, -1px) rotate(-0.5deg); }
+    20% { transform: translate(-1.5px, 0px) rotate(0.5deg); }
+    30% { transform: translate(1.5px, 1px) rotate(0deg); }
+    40% { transform: translate(0.5px, -0.5px) rotate(0.5deg); }
+    50% { transform: translate(-0.5px, 1px) rotate(-0.5deg); }
+    60% { transform: translate(-1.5px, 0.5px) rotate(0deg); }
+    70% { transform: translate(1.5px, 0.5px) rotate(-0.5deg); }
+    80% { transform: translate(-0.5px, -0.5px) rotate(0.5deg); }
+    90% { transform: translate(0.5px, 1px) rotate(0deg); }
+    100% { transform: translate(0.5px, -1px) rotate(-0.5deg); }
+}
+.shake-image {
+    animation: shake 1s ease-in-out;
+}
+#instructions{
+    font-size: 20px;
+    
+    color:rgb(3, 3, 255);
+    position:absolute;
+    top:30vh;
+    left:41vw;
+    height:10vh;
+    width:20vw;
+    
+    
+    
+    
+    align-items: center;
+
+}
+#textprompt{
+    font-size: 20px;
+    color:rgb(255, 255, 255);
+    position:absolute;
+    
+    
+    height:40vh;
+    width:250px;
+    
+    border-color: black;
+    background-color: rgba(100, 100, 100, 0.615);
+    
+    
+    align-items: center;
+    
+}
+#heading{
+    position:absolute;
+    top:0px;
+    left:0px;
+    height:100px;
+    width:250px;
+    text-align: center;
+}
+#start{
+    position: absolute;
+    top:250px;
+    left:80px;
+    height:40px;
+    width:100px;
+    background-image: url("./new_trash_toss_images/misclaneous/start.png");
+    background-size: 100% 100%;
+    border-radius: 30px;
+    background-color: transparent;
+    border-color: transparent;
+    user-select: none;
+
+}
+#reset{
+    position: absolute;
+    top:150px;
+    left:80px;
+    height:40px;
+    width:100px;
+    background-image: url("./new_trash_toss_images/misclaneous/reset.png");
+    background-size: 100% 100%;
+    border-radius: 30px;
+    background-color: transparent;
+    border-color: transparent;
+    user-select: none;
+}
+#game_data{
+    position: absolute;
+    top:-30px;
+    left:0px;
+    font-size: 40px;
+    color: rgb(250, 250, 250);
+    
+    
+
+}
+#score{
+    position: absolute;
+    top:0vh;
+    left:85vw;
+}
+#timer{
+    position:absolute;
+    top:0vh;
+    left:47vw;
+}
+#game_Setting_posn{
+    position :absolute;
+    top:5vh;
+    left:88vw;
+}   
+#settings{
+    position: absolute;
+    height:60px;
+    width:130px;
+    top:0px;
+    left:0px;
+
+    background-image: url("./new_trash_toss_images/misclaneous/settings.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+#game_settings{
+    position: absolute;
+    top:90px;
+    left:0px;
+    height:270px;
+    width:150px;
+
+    background-color: transparent;
+
+
+}
+#shift_down{
+    position:absolute;
+    top:30px;
+    left:0px;
+    height:240px;
+    width:150px;
+
+    background-color: transparent;
+
+}
+#play_audio{
+    height:60px;
+    width:60px;
+    top:330px;
+    left:15px;
+
+    background-image: url("./new_trash_toss_images/misclaneous/play_audio.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+#stop_audio{
+    height:60px;
+    width:60px;
+    top:320px;
+    left:15px;
+
+    background-image: url("./new_trash_toss_images/misclaneous/stop_audio.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+#reset2{
+    height:60px;
+    width:130px;
+    top:300px;
+    left:15px;
+
+    background-image: url("./new_trash_toss_images/misclaneous/reset.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+#quit{
+    height:60px;
+    width:130px;
+    top:300px;
+    left:15px;
+
+    background-image: url("./new_trash_toss_images/misclaneous/quit.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+  

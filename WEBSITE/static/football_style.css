@@ -1,0 +1,290 @@
+body{
+    cursor:pointer;
+}
+#border{
+    position: absolute;
+    height:80vh;
+    width:80vw;
+    top:9vh;
+    left:9.5vw;
+    
+}
+#arena{
+    height:100vh;
+    width:100vW;
+    position:absolute;
+   
+    top:0px;
+    left:0px;
+    background-color: aqua;
+}
+#ground{
+    position: absolute;
+    top:10vh;
+    left:10vw;
+    height:80vh;
+    width:80vw;
+    
+    background-color: lightgreen;
+}
+#groundImg{
+    height:80vh;
+    width:80vw;
+}
+#audience{
+    position: absolute;
+    top:0vh;
+    left:0vw;
+    height:100vh;
+    width:100vw;
+
+}
+#goalpost1{
+    position: absolute;
+    top:35vh;
+    left:1vw;
+    height:20vh;
+    width:5vw;
+    
+    
+
+}
+#goalpost2{
+    position: absolute;
+    top:35vh;
+    left:89.5vw;
+    height:20vh;
+    width:5vw;
+   
+
+}
+#net2{
+    position: absolute;
+    top:0vh;
+    left:0vw;
+    height:30vh;
+    width:10vw;
+    
+    
+    
+}
+#net1{
+    position: absolute;
+    top:0vh;
+    left:0vw;
+    height:30vh;
+    width:10vw;
+    rotate:180deg;
+    
+    
+}
+#player1{
+    position:absolute;
+    height:4vh;
+    width:2vh;
+    border:2px solid;
+    border-color: black;
+    border-radius: 1vh;
+    background-color: blue;
+    top:38vh;
+    left:32vw;
+
+
+}
+#player2{
+    position:absolute;
+    height:4vh;
+    width:2vh;
+    border-radius: 1vh;
+    border:2px solid;
+    border-color: black;
+    background-color: red;
+    top:38vh;
+    left:46.2vw;
+    transform: rotate(180deg);
+
+
+}
+#head{
+    position:absolute;
+    height:2vh;
+    width:2vh;
+    top:1vh;
+    left:1vh;
+    
+    border-radius: 1vh;
+    background-color: palegoldenrod;
+}
+#ball{
+    position:absolute;
+    height:4vh;
+    width:4vh;
+    border-radius:2vh;
+    top:38vh;
+    left:39vw;
+    visibility: hidden;
+   
+}
+#ballImg{
+    position:absolute;
+    height:4vh;
+    width:4vh;
+
+}
+
+#points1{
+    position: absolute;
+    top:-2vh;
+    left:50vw;
+    height:20vh;
+    width:5vw;
+    text-align: center;
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+
+}
+#points2{
+    position: absolute;
+    top:-2vh;
+    left:45vw;
+    height:20vh;
+    width:5vw;
+    text-align: center;
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+
+}
+#INSTRUCTION{
+    position: absolute;
+    top:20vh;
+    left :32vw;
+    font-size:40px;
+    visibility: visible;
+    color :rgb(255, 255, 255)
+    
+}
+#start{
+    position: absolute;
+    top:43vh;
+    left :41.3vw;
+    height:13vh;
+    width:17.5vw;
+    visibility: visible;
+    background-image: url("football_images/misclaneous/start.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border: 0px solid;
+}
+#game_data{
+    position: absolute;
+    top:2vh;
+    left:80vw;
+    font-size: 40px;
+    color: rgb(250, 250, 250);
+    
+    
+
+}
+#score{
+    position: absolute;
+    top:0vh;
+    left:85vw;
+}
+#timer{
+    position:absolute;
+    top:0vh;
+    left:47vw;
+}
+#game_Setting_posn{
+    position :absolute;
+    top:5vh;
+    left:88vw;
+}   
+#settings{
+    position: absolute;
+    height:60px;
+    width:130px;
+    top:0px;
+    left:0px;
+
+    background-image: url("football_images/misclaneous/settings.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+#game_settings{
+    position: absolute;
+    top:90px;
+    left:0px;
+    height:270px;
+    width:150px;
+
+    background-color: transparent;
+
+
+}
+#shift_down{
+    position:absolute;
+    top:30px;
+    left:0px;
+    height:240px;
+    width:150px;
+
+    background-color: transparent;
+
+}
+#play_audio{
+    height:60px;
+    width:60px;
+    top:330px;
+    left:15px;
+
+    background-image: url("football_images/misclaneous/play_audio.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+#stop_audio{
+    height:60px;
+    width:60px;
+    top:320px;
+    left:15px;
+
+    background-image: url("football_images/misclaneous/stop_audio.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+#reset2{
+    height:60px;
+    width:130px;
+    top:300px;
+    left:15px;
+
+    background-image: url("football_images/misclaneous/reset.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+#quit{
+    height:60px;
+    width:130px;
+    top:300px;
+    left:15px;
+
+    background-image: url("football_images/misclaneous/quit.png");
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-color: transparent;
+    border: 0px solid;
+    user-select: none;
+}
+  

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROFILE</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='profile2.css') }}">
+  </head>
+  <body id="top">
+
+    <header class="header">
+
+      <div class="header-bottom skewBg" data-header>
+        <div class="container">
+  
+          <a href="#" class="logo">YOUR PROFILE</a>
+  
+          <nav class="navbar" data-navbar>
+            <ul class="navbar-list">
+  
+              <li class="navbar-item">
+                <a href="/home" class="navbar-link skewBg" data-nav-link>HOME</a>
+              </li>
+  
+            </ul>
+          </nav>
+  
+        </div>
+      </div>
+  
+    </header>
+
+    <div class="element">
+      <div class="div">
+        <div class="text-wrapper">
+            Basic Details
+        </div>
+        <div class="info">
+          
+          <p id="data">
+            Hi ! , {{ str }} Let's see how you are performing !!
+            <br>
+            <br>
+          </p>
+
+          <p id="TT">
+              Trash_Toss  
+          </p>
+          <br>
+
+          <p id="max_score_tt">
+             Your Maximum score : {{ max_score1 }}
+          </p>
+
+          <p id="global_max_score_tt">
+            Global Maximum Score : {{ global_max_score }}
+          </p>
+          <br>
+
+          <p id = "head_leaderboard_tt">
+            Top Scores for Trash_Toss:
+          </p>
+          <br>
+
+            <ul style="list-style-type: none" id ="top_users_tt ul">
+              <li id="column_headings"><strong>Username</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Max Score</strong></li>
+              {% for user, score in top_users %}
+              <br>
+              <li id ="top_users_tt ul li">{{ user }} &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;{{ score }}</li>
+              {% endfor %}
+          </ul>
+
+
+          <p id="TM">
+            Trash in Maze  
+          </p>
+          <br>
+
+
+          <p id="max_score_maze">
+            Your maximum score : {{ max_score_maze }}
+          </p>
+
+
+          <p id="global_max_score_maze">
+            Global maximum score : {{ global_max_score_maze }}
+          </p>
+          <br>
+
+          <p id = "head_leaderboard_maze">
+            Top Scores for Trash_in_Maze:
+          </p>
+          <br>
+
+
+          <p id="top_users_maze">
+            <ul style="list-style-type: none">
+              <li id="column_headings"><strong>Username</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Max Score</strong></li>
+              {% for user, score in top_users_maze %}
+              <br>
+              <li id ="top_users_tt ul li">{{ user }} &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;{{ score }}</li>
+              {% endfor %}
+            </ul>
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>

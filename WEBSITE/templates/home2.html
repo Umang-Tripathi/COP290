@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css_home/style.css') }}">
+
+</head>
+
+<body id="top">
+
+
+  <header class="header">
+
+    <div class="header-bottom skewBg" data-header>
+      <div class="container">
+
+        <a href="#" class="logo">HOME</a>
+
+        <nav class="navbar" data-navbar>
+          <ul class="navbar-list">
+
+            <li class="navbar-item">
+              <a href="/profile" class="navbar-link skewBg" data-nav-link>Profile</a>
+            </li>
+
+            <li class="navbar-item">
+              <a href="/logout" class="navbar-link skewBg" data-nav-link>Exit</a>
+            </li>
+
+          </ul>
+        </nav>
+
+      </div>
+    </div>
+
+  </header>
+
+  <main>
+    <article>
+
+      <section class="section hero" id="home" aria-label="home"
+        style="background-image: url('../static/images_home/environment.jpg')">
+        <div class="container">
+
+          <div class="hero-content">
+
+            <p class="hero-subtitle">World Of Gaming</p>
+
+            <h1 class="h1 hero-title">
+              Lets <span class="span">Protect</span> the nature together
+            </h1>
+
+            <p class="hero-text">
+              Amidst the whirlwind of technology and the fervor of humanity, a battle rages on: the fight to safeguard our environment. Here, amidst the clash of innovation and the resilience of the human spirit, lies the epicenter of our struggle to preserve the Earth's fragile ecosystems.
+            </p>
+
+
+          </div>
+          
+          <figure class="hero-banner img-holder" style="--width: 700; --height: 700;">
+            <img src="../static/images_home/hero-banner.png" width="700" height="700" alt="hero banner" class="w-100">
+          </figure>
+
+        </div>
+      </section>
+
+
+      <div class="section-wrapper">
+
+        <section class="section top-game" aria-label="top game">
+          <div class="container">
+
+            <p class="section-subtitle">Top Games</p>
+
+            <h2 class="h2 section-title">
+              Play & <span class="span">Protect The Nature</span>
+            </h2>
+
+            <ul class="has-scrollbar">
+
+              <li class="scrollbar-item">
+                <div class="top-game-card">
+                  
+                  <figure class="card-banner img-holder" style="--width: 700; --height: 770;">
+                    <img src="../static/images_home/Game1.jpg" width="700" height="770" loading="lazy"
+                       class="img-cover">
+                  </figure>
+
+                  <div class="card-content">
+
+                    <a href="#" class="card-badge skewBg">Arcade</a>
+
+                    <h3 class="h3">
+                      <a href="/trash_toss" class="card-title">Trash_Toss<span class="span"></span></a>
+                      
+                    </h3>
+                </div>
+                </div>
+                <br>
+                <p class="h4">
+                  Dive into the valley, dodge incoming attacks, and match trash with the right colored bins in this fast-paced, trash-tossing adventure!
+                </p>
+              </li>
+              
+              <li class="scrollbar-item">
+                <div class="top-game-card">
+                  
+                  <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
+                    <img src="../static/images_home/Maze_game_logo.png" width="400" height="470" loading="lazy"
+                      class="img-cover">
+                  </figure>
+
+                  <div class="card-content">
+
+                    <a href="#" class="card-badge skewBg">Puzzle</a>
+
+                    <h3 class="h3">
+                      <a href="/maze" class="card-title">Trash in Maze</a>
+                    </h3>
+
+                    
+                  </div>
+
+                </div>
+                <br>
+                <p class="h4">
+                  Navigate through intricate mazes, clean up scattered trash before it turns into deadly germs!
+                </p>
+              </li>
+             
+
+             
+              <li class="scrollbar-item">
+                <div class="top-game-card">
+                  
+                  <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
+                    <img src="../static/images_home/football_game_logo.png" width="400" height="470" loading="lazy"
+                       class="img-cover">
+                  </figure>
+
+                  <div class="card-content">
+                    <a href="#" class="card-badge skewBg">Sports</a>
+
+                    <h3 class="h3">
+                      <a href="/football" class="card-title">Soccer with Trash</a>
+                    </h3>
+
+                  </div>
+
+
+                </div>
+                <br>
+                <p class="h4">
+                  Kick it up a notch as trash cans across the field, aiming to score big by netting them into oversized trash bins in the classic soccer!
+                </p>
+              </li>
+              
+              <li class="scrollbar-item">
+                <div class="top-game-card">
+                  
+                  <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
+                    <img src="../static/images_home/football_game_logo.png" width="400" height="470" loading="lazy"
+                       class="img-cover">
+                  </figure>
+
+                  <div class="card-content">
+
+                    <a href="#" class="card-badge skewBg">Online Sports</a>
+
+                    <h3 class="h3">
+                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"  class="card-title" > Online Soccer </a>
+                    </h3>        
+                  </div>
+                </div>
+                <br>
+                <p class="h4">
+                  Challenge opponents worldwide in an exhilarating online multiplayer experience, where you kick, pass, and score with trash cans!
+                </p>
+              </li>
+            </ul>
+
+          </div>
+        </section>
+
+        <section class="section live-video" id="live" aria-label="live video">
+          <div class="container">
+
+            <h2 class="h2 section-title">
+              Watch our Prime Minister guiding us to <span class="span">Save the nature</span>
+            </h2>
+
+            
+            <figure class="live-video-banner img-holder" style="--width: 1300; --height: 800;"> 
+              <video width="1300" height="800" controls autoplay loop muted playsinline class="img-cover">
+                <source src="../static/images_home/modi_video.mp4" type="video/mp4">
+              </video>
+            </figure>
+
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+
+      <section class="section blog" id="blog" aria-label="blog">
+        <div class="container">
+
+          <h2 class="h2 section-title">
+            Latest News & <span class="span">Articles</span>
+          </h2>
+
+          <p class="section-text">
+            Read and Learn about the Nature
+          </p>
+
+          <ul class="blog-list">
+
+            <li>
+              <div class="blog-card">
+                
+                <figure class="card-banner img-holder" style="--width: 400; --height: 290;">
+                  <img src="../static/images_home/news1_3.avif" width="400" height="290" loading="lazy"
+                     class="img-cover">
+                </figure>
+
+                <div class="card-content">
+
+                  <h3>
+                    <a href="https://en.wikipedia.org/wiki/Waste_management" class="card-title" target="_blank">Waste Management</a>
+                  </h3>
+
+                  <p class="card-text">
+                    Learn about how to efficiently manage your waste.
+                  </p>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+
+              <div class="blog-card">
+                
+                <figure class="card-banner img-holder" style="--width: 400; --height: 290;">
+                  <img src="../static/images_home/news2_2.webp" width="400" height="290" loading="lazy" alt="The Walking Dead"
+                    class="img-cover">
+                </figure>
+
+                <div class="card-content">
+
+                  <h3>
+                    <a href="https://en.wikipedia.org/wiki/Cleanliness" target="_blank" class="card-title">Cleanliness</a>
+                  </h3>
+
+                  <p class="card-text">
+                    Learn more about cleanliness .
+                  </p>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="blog-card">
+                
+                <figure class="card-banner img-holder" style="--width: 400; --height: 290;">
+                  <img src="../static/images_home/news3.jpg" width="400" height="290" loading="lazy"
+                    alt="Defense Of The Ancients" class="img-cover">
+                </figure>
+
+                <div class="card-content">
+
+                  <h3>
+                    <a href="https://en.wikipedia.org/wiki/Sanitation" target="_blank" class="card-title">Sanitation</a>
+                  </h3>
+
+                  <p class="card-text">
+                    Learn about the effective methods of Sanitation.
+                  </p>
+
+                </div>
+
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+      </section>
+      
+
+</body>
+</html>
