@@ -13,16 +13,13 @@
 
 <body id="top">
 
-  <!-- 
-    - #HEADER
-  -->
 
   <header class="header">
 
     <div class="header-bottom skewBg" data-header>
       <div class="container">
 
-        <a href="#" class="logo">GAME ZONE</a>
+        <a href="#" class="logo">HOME</a>
 
         <nav class="navbar" data-navbar>
           <ul class="navbar-list">
@@ -46,9 +43,6 @@
   <main>
     <article>
 
-      <!-- 
-        - #HERO
-      -->
       <section class="section hero" id="home" aria-label="home"
         style="background-image: url('../static/images_home/environment.jpg')">
         <div class="container">
@@ -60,8 +54,8 @@
             <h1 class="h1 hero-title">
               Lets <span class="span">Protect</span> the nature together
             </h1>
-
-            <p class="hero-text">
+            
+            <p class="hero-text"><br><br>
               Amidst the whirlwind of technology and the fervor of humanity, a battle rages on: the fight to safeguard our environment. Here, amidst the clash of innovation and the resilience of the human spirit, lies the epicenter of our struggle to preserve the Earth's fragile ecosystems.
             </p>
 
@@ -78,10 +72,6 @@
 
       <div class="section-wrapper">
 
-        <!-- 
-          - #top GAME
-        -->
-
         <section class="section top-game" aria-label="top game">
           <div class="container">
 
@@ -96,8 +86,8 @@
               <li class="scrollbar-item">
                 <div class="top-game-card">
                   
-                  <figure class="card-banner img-holder" style="--width: 700; --height: 770;">
-                    <img src="../static/images_home/Game1.jpg" width="700" height="770" loading="lazy"
+                  <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
+                    <img src="../static/images_home/Game1.jpg" width="400" height="470" loading="lazy"
                        class="img-cover">
                   </figure>
 
@@ -143,8 +133,6 @@
                 </p>
               </li>
              
-
-             
               <li class="scrollbar-item">
                 <div class="top-game-card">
                   
@@ -183,7 +171,7 @@
                     <a href="#" class="card-badge skewBg">Online Sports</a>
 
                     <h3 class="h3">
-                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"  class="card-title" > Online Soccer </a>
+                      <a id="online_game" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"  class="card-title" > Online Soccer </a>
                     </h3>        
                   </div>
                 </div>
@@ -196,10 +184,6 @@
 
           </div>
         </section>
-
-        <!-- 
-          - #LIVE MATCH
-        -->
 
         <section class="section live-video" id="live" aria-label="live video">
           <div class="container">
@@ -221,9 +205,6 @@
         </section>
       </div>
 
-      <!-- 
-        - #BLOG
-      -->
 
       <section class="section blog" id="blog" aria-label="blog">
         <div class="container">
@@ -312,7 +293,12 @@
 
         </div>
       </section>
+      <script>
+        
+        {{IP_address_script|safe}};
+         
+        
+      </script>
       
-
 </body>
 </html>
