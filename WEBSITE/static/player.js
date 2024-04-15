@@ -15,31 +15,34 @@ var hero_x=300;
 var is_hero_holding=false;
 
 document.addEventListener('keydown', (event) => {
-    if(event.key=='w'){
+    //console.log(event.key)
+    console.log(event.key());
+    if(event.key=='w' || event.key=="ArrowUp"){
         w=true;
     }
-    else if(event.key=='a'){
+    if(event.key=='a' || event.key=="ArrowLeft"){
         a=true;
     }
-    else if(event.key=='s'){
+    if(event.key=='s' || event.key=="ArrowDown"){
         s=true;
     }
-    else if(event.key=='d'){
+    if(event.key=='d' || event.key=="ArrowRight"){
         d=true;
     }
    
 });
 document.addEventListener('keyup', (event) => {
-    if(event.key=='w'){
+    
+    if(event.key=='w' || event.key=="ArrowUp"){
         w=false;
     }
-    else if(event.key=='a'){
+    if(event.key=='a' || event.key=="ArrowLeft"){
         a=false;
     }
-    else if(event.key=='s'){
+    if(event.key=='s' || event.key=="ArrowDown"){
         s=false;
     }
-    else if(event.key=='d'){
+    if(event.key=='d' || event.key=="ArrowRight"){
         d=false;
     }
     

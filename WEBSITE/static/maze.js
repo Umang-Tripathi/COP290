@@ -352,7 +352,7 @@ window.addEventListener("keydown",(value)=>{
     if(NOT_died){
         let defaultx=x;
         let defaulty=y;
-        if(value.key=='w'){
+        if(value.key=='w' || value.key=="ArrowUp"){
             let a1=document.getElementById("hero_w");
             a1.style.visibility="visible";
             let a2=document.getElementById("hero_a");
@@ -365,7 +365,7 @@ window.addEventListener("keydown",(value)=>{
             y-=60;
             
         }
-        else if(value.key=='a'){
+        else if(value.key=='a' || value.key=="ArrowLeft"){
             let a1=document.getElementById("hero_w");
             a1.style.visibility="hidden";
             let a2=document.getElementById("hero_a");
@@ -376,7 +376,7 @@ window.addEventListener("keydown",(value)=>{
             a4.style.visibility="hidden";
             x-=60;
         }
-        else if(value.key=='s'){
+        else if(value.key=='s' || value.key=="ArrowDown"){
             let a1=document.getElementById("hero_w");
             a1.style.visibility="hidden";
             let a2=document.getElementById("hero_a");
@@ -387,7 +387,7 @@ window.addEventListener("keydown",(value)=>{
             a4.style.visibility="hidden";
             y+=60;
         }
-        else if(value.key=='d'){
+        else if(value.key=='d' || value.key=="ArrowRight"){
             let a1=document.getElementById("hero_w");
             a1.style.visibility="hidden";
             let a2=document.getElementById("hero_a");
