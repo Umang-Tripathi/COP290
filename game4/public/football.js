@@ -1,6 +1,8 @@
 let name_of_player;
 let name_typed;
 let opponent_name;
+let opponent_actual_name="";
+
 let i_am_player1=false;
 let i_am_player2=false;
 const socket = io();
@@ -90,15 +92,29 @@ socket.on("connecting players 2",(total_name)=>{
         if(name1==name_of_player){
             i_am_player1=true;
             opponent_name=name2;
+
+            for(let i=0;i<opponent_name.length;i++){
+                if(opponent_name[i].charCodeAt(0)>47 && opponent_name[i].charCodeAt(0)<58){
+                    break;
+                }
+                opponent_actual_name+=opponent_name[i];
+            }
             console.log("?",opponent_name);
         }
         if(name2==name_of_player){
             i_am_player2=true;
             opponent_name=name1;
+            for(let i=0;i<opponent_name.length;i++){
+                if(opponent_name[i].charCodeAt(0)>47 && opponent_name[i].charCodeAt(0)<58){
+                    break;
+                }
+                opponent_actual_name+=opponent_name[i];
+            }
             console.log("?",opponent_name);
         }
-        console.log("my name",name_of_player);
+        console.log("my name",name_typed);
         console.log("opponent name",opponent_name);
+
         setTimeout(start_the_game,1000);
         start_noise.play();
     }
@@ -142,15 +158,21 @@ document.addEventListener("keyup",(value)=>{
 })
 socket.on('win_by_technicality', (name) => {
     console.log(name," opponents disconnected")
+    
     if(name==name_of_player){
+        socket.emit('disconnectPlayer');
         won_beacuse_left();
     }
 })
+socket.on('disconnectPlayer', () => {
+    socket.disconnect();
+});
 const player1=document.getElementById("player1");
 
 document.getElementById("start").addEventListener("click",()=>{
     name_of_player=document.getElementById("username").value;
     name_typed=name_of_player;
+
     name_of_player=name_of_player+Math.floor(Math.random()*1000000000);
     socket.emit('name', name_of_player);
     document.getElementById("start").style.visibility="hidden";
@@ -170,13 +192,24 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 function start_the_game(){
-    
-    timerplayer2=setInterval(move_player2,10);
-    timerball=setInterval(move_ball,10);
-    timerplayer1=setInterval(move_player1,10);
-    document.getElementById("username").style.visibility="hidden";
-    document.getElementById("INSTRUCTION").style.visibility="hidden";
-    document.getElementById("ball").style.visibility="visible";
+    if(i_am_player1 || i_am_player2){
+        timerplayer2=setInterval(move_player2,10);
+        timerball=setInterval(move_ball,10);
+        timerplayer1=setInterval(move_player1,10);
+        document.getElementById("points1").style.visibility="visible";
+        document.getElementById("points2").style.visibility="visible";
+        if(i_am_player1){
+            document.getElementById("points1").innerHTML="0 : "+opponent_actual_name;
+            document.getElementById("points2").innerHTML=name_typed+" : 0";
+        }
+        else if(i_am_player2){
+            document.getElementById("points2").innerHTML=opponent_actual_name+" : 0";
+            document.getElementById("points1").innerHTML="0 : "+name_typed;
+        }
+        document.getElementById("username").style.visibility="hidden";
+        document.getElementById("INSTRUCTION").style.visibility="hidden";
+        document.getElementById("ball").style.visibility="visible";
+    }
 }
 var rotation_player1=0;
 var x1=32;
@@ -438,7 +471,13 @@ function move_ball(){
         else{
             points1+=1;
             ball_speed=0;
-            document.getElementById("points1").innerHTML=points1;
+            if(i_am_player1){
+                document.getElementById("points1").innerHTML=points1+" : "+opponent_actual_name;
+            }
+            else if(i_am_player2){
+
+                document.getElementById("points1").innerHTML=points1+" : "+name_typed;
+            }
             ball_posn_x=39;
             ball_posn_y=38;
             ball.style.visibility="hidden";
@@ -466,7 +505,12 @@ function move_ball(){
         else{
             points2+=1;
             ball_speed=0;
-            document.getElementById("points2").innerHTML=points2;
+            if(i_am_player1){
+                document.getElementById("points2").innerHTML=name_typed+" : "+points2;
+            }
+            else if(i_am_player2){
+                document.getElementById("points2").innerHTML=opponent_actual_name+" : "+points2;
+            }
             new_match();
             ball_posn_x=39;
             ball_posn_y=38;
@@ -580,7 +624,7 @@ function collision(){
 function won_beacuse_left(){
     cheer.play();
     document.getElementById("INSTRUCTION").style.visibility="visible";
-    document.getElementById("INSTRUCTION").innerHTML="PLAYER 2 LEFT , <br> YOU WON !!!";
+    document.getElementById("INSTRUCTION").innerHTML=opponent_actual_name+" LEFT , <br> YOU WON !!!";
     setTimeout(reload_page,5000);
 }
 function reload_page(){

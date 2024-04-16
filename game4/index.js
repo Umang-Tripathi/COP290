@@ -22,20 +22,20 @@ io.on('connection', (socket) => {
             if(rooms[pl].length==0){
                 rooms.splice(pl,1);
             }
-            if(rooms[pl].length==1){
-                rooms.splice(pl,1);
-            }
             else{
                 if(socket.username==rooms[pl][0]){
                     rooms[pl].splice(0,1);
-                    io.emit('win_by_technicality',rooms[pl][0]);
                     
+                    io.emit('win_by_technicality',rooms[pl][0]);
+                    rooms[pl].splice(0,1);
                     break;
     
                 }   
                 else if(socket.username==rooms[pl][1]){
                     rooms[pl].splice(1,1);
+                    
                     io.emit('win_by_technicality',rooms[pl][0]);
+                    rooms[pl].splice(0,1);
                     break;
                 }
             }

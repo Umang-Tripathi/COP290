@@ -122,31 +122,31 @@ function playpoint_scored_Sound() {
 }
 document.addEventListener('keydown', (event) => {
     //console.log(event.key)
-    if(event.key=='w'){
+    if(event.key=='w' || event.key=="ArrowUp"){
         w=true;
     }
-    else if(event.key=='a'){
+    if(event.key=='a' || event.key=="ArrowLeft"){
         a=true;
     }
-    else if(event.key=='s'){
+    if(event.key=='s' || event.key=="ArrowDown"){
         s=true;
     }
-    else if(event.key=='d'){
+    if(event.key=='d' || event.key=="ArrowRight"){
         d=true;
     }
    
 });
 document.addEventListener('keyup', (event) => {
-    if(event.key=='w'){
+    if(event.key=='w' || event.key=="ArrowUp"){
         w=false;
     }
-    else if(event.key=='a'){
+    if(event.key=='a' || event.key=="ArrowLeft"){
         a=false;
     }
-    else if(event.key=='s'){
+    if(event.key=='s' || event.key=="ArrowDown"){
         s=false;
     }
-    else if(event.key=='d'){
+    if(event.key=='d' || event.key=="ArrowRight"){
         d=false;
     }
     
