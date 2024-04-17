@@ -133,10 +133,10 @@
 #points1{
     position: absolute;
     top:-2vh;
-    left:50vw;
+    left:55vw;
     height:20vh;
-    width:5vw;
-    text-align: center;
+    width:100vw;
+    text-align: left;
     font-size: 40px;
     color: rgb(255, 255, 255);
 
@@ -144,10 +144,10 @@
 #points2{
     position: absolute;
     top:-2vh;
-    left:45vw;
+    right:55vw;
     height:20vh;
-    width:5vw;
-    text-align: center;
+    width:100vw;
+    text-align: right;
     font-size: 40px;
     color: rgb(255, 255, 255);
 

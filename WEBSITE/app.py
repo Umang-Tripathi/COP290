@@ -1,3 +1,6 @@
+IP=input("please enter the IP address of the server wifi ") 
+IP="document.getElementById('online_game').setAttribute('href', 'http://"+IP+":3000');"
+
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -80,8 +83,8 @@ def login():
        
         global UserName
         UserName=user.username
-        return render_template('home2.html')
-        return render_template('home2.html')
+        return render_template('home2.html', IP_address_script=IP)
+    
         
     else:
         flash('Invalid username or password')
@@ -98,7 +101,9 @@ def logout():
 @app.route('/home')
 def home_page():
     if 'user_id' in session:
-        return render_template('home2.html')
+        global script
+
+        return render_template('home2.html', IP_address_script=IP)
     else:
         return redirect(url_for('index'))
 

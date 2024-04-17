@@ -86,12 +86,14 @@ html {
   font-family: var(--font2);
   font-size: 10px;
   scroll-behavior: smooth;
+  scrollbar-color: var(--color8) #61616114;
 }
 
 body {
   background-color: var(--color3);
   font-size: 1.6rem;
   line-height: 1.5;
+  
 }
 
 :focus-visible { outline-offset: 4px; }
@@ -107,6 +109,7 @@ body {
   font-family: var(--font1);
   font-weight: var(--size13);
   line-height: 1;
+  
 }
 
 .h1 {
@@ -316,8 +319,10 @@ body {
 .hero-title { margin-block: 15px 12px; }
 
 .hero-text {
+  position :relative;
   color: var(--color6);
   margin-block-end: 45px;
+  left:-20px;
 }
 
 .section-wrapper {
