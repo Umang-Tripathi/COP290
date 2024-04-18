@@ -1,3 +1,6 @@
+.body{
+    overflow: hidden;
+}
 #border{
     position: absolute;
     height:80vh;
@@ -8,8 +11,9 @@
 }
 
 #arena{
+    overflow: hidden;
     height:100vh;
-    width:100vW;
+    width:100vw;
     position:absolute;
    
     top:0px;

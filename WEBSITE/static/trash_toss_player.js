@@ -724,10 +724,23 @@ function update_position_of_monsters(){
 }
 function check_collison_monster_with_hero(){
     for(let i=0;i<monster.length;i++){
-        if(Math.abs(hero_x-monster[i].posn_x)<20 && Math.abs(hero_y-monster[i].posn_y)<20){
+        if(hero_x>=monster[i].posn_x && hero_y>=monster[i].posn_y && hero_x-monster[i].posn_x<70 && hero_y-monster[i].posn_y<70){
             end_game();
             return ;
         }
+        if(hero_x>=monster[i].posn_x && hero_y<=monster[i].posn_y && hero_x-monster[i].posn_x<70 && -hero_y+monster[i].posn_y<10){
+            end_game();
+            return ;
+        }
+        if(hero_x<=monster[i].posn_x && hero_y>=monster[i].posn_y && -hero_x+monster[i].posn_x<10 && hero_y-monster[i].posn_y<70){
+            end_game();
+            return ;
+        }
+        if(hero_x<=monster[i].posn_x && hero_y<=monster[i].posn_y && -hero_x+monster[i].posn_x<10 && -hero_y+monster[i].posn_y<10){
+            end_game();
+            return ;
+        }
+       
     }
 }
 function check_collison_monster_with_trash(){
